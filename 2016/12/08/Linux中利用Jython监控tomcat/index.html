@@ -1,0 +1,913 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CentOS,Jython,Python,tomcat,JMX," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon_piggy02.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="最近需要在scollector中添加对tomcat的监控，因此需要添加自定义脚本，虽然scollector支持一切可执行程序作为监控脚本，与开发语言无关，但python是我写脚本的第一选择，那么问题来了，怎么用Python监控tomcat？答案就是：Jython！">
+<meta name="keywords" content="CentOS,Jython,Python,tomcat,JMX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux中利用Jython监控tomcat">
+<meta property="og:url" content="http://hw2007.com/2016/12/08/Linux中利用Jython监控tomcat/index.html">
+<meta property="og:site_name" content="萝卜姓胡">
+<meta property="og:description" content="最近需要在scollector中添加对tomcat的监控，因此需要添加自定义脚本，虽然scollector支持一切可执行程序作为监控脚本，与开发语言无关，但python是我写脚本的第一选择，那么问题来了，怎么用Python监控tomcat？答案就是：Jython！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/XxbR2Zl.jpg">
+<meta property="og:image" content="http://i.imgur.com/eUfJzgE.jpg">
+<meta property="og:image" content="http://i.imgur.com/z3xYFGl.jpg">
+<meta property="og:image" content="http://i.imgur.com/ytFpvOc.jpg">
+<meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
+<meta property="og:updated_time" content="2017-08-20T10:58:18.039Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux中利用Jython监控tomcat">
+<meta name="twitter:description" content="最近需要在scollector中添加对tomcat的监控，因此需要添加自定义脚本，虽然scollector支持一切可执行程序作为监控脚本，与开发语言无关，但python是我写脚本的第一选择，那么问题来了，怎么用Python监控tomcat？答案就是：Jython！">
+<meta name="twitter:image" content="http://i.imgur.com/XxbR2Zl.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    root: '/',
+    algolia: {
+        applicationID: 'UH9KXPVVBW',
+        apiKey: '24b06abc0bbc2df99a5b86549e257b19',
+        indexName: 'hexo_search',
+        hits: {"per_page":10},
+        labels: {"input_placeholder":"搜索...","hits_empty":"未发现与 「${query}」相关的内容","hits_stats":"${hits} 条相关条目，使用了 ${time} 毫秒"}
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://hw2007.com/2016/12/08/Linux中利用Jython监控tomcat/"/>
+
+
+  <title> Linux中利用Jython监控tomcat | 萝卜姓胡 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a662bfc3e569bb59a332a1b44dd6dcd7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  
+    
+
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
+  
+  
+  <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+  
+  
+
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><script src="//cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/src/algolia.js?v=5.0.2"></script>
+<div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">萝卜姓胡</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="algolia-popup popup">
+  <div class="algolia-search">
+    <div class="algolia-search-input-icon">
+      <i class="fa fa-search"></i>
+    </div>
+    <div class="algolia-search-input" id="algolia-search-input"></div>
+  </div>
+  <div class="algolia-results">
+    <div id="algolia-stats"></div>
+    <div id="algolia-hits"></div>
+    <div id="algolia-pagination" class="algolia-pagination"></div>
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux中利用Jython监控tomcat
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-08T20:27:44+08:00" content="2016-12-08">
+              2016-12-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/监控管理/" itemprop="url" rel="index">
+                    <span itemprop="name">监控管理</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/08/Linux中利用Jython监控tomcat/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/08/Linux中利用Jython监控tomcat/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/08/Linux中利用Jython监控tomcat/" class="leancloud_visitors" data-flag-title="Linux中利用Jython监控tomcat">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近需要在scollector中添加对tomcat的监控，因此需要添加自定义脚本，虽然scollector支持一切可执行程序作为监控脚本，与开发语言无关，但python是我写脚本的第一选择，那么问题来了，怎么用Python监控tomcat？答案就是：Jython！</p>
+<a id="more"></a>
+<p>我们知道Python底层是用C实现的，而Jython是Python语言的JAVA实现，运行在JAVA虚拟机上，它实现了Python和JAVA之间的相互调用，因此我可以通过Jython脚本调用JMX接口，从而获取tomcat的状态信息。</p>
+<p>前提：</p>
+<blockquote>
+<p>确保JDK已经正确安装</p>
+</blockquote>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>从<a href="http://www.jython.org/" target="_blank" rel="external">官网</a>下载最新的Jython 2.7.0发行版：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://search.maven.org/remotecontent?filepath=org/python/jython-installer/2.7.0/jython-installer-2.7.0.jar</div></pre></td></tr></table></figure>
+<p>执行安装命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar jython_installer-2.7.0.jar</div></pre></td></tr></table></figure>
+<p>然后根据提示，一步一步往下（包括选择安装路径等步骤），比较简单，这里不再赘述。</p>
+<p>为了方便使用<code>jython</code>命令，将jython的bin目录加入环境变量PATH中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/profile</div></pre></td></tr></table></figure>
+<p>在文件末尾加入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/jython/bin</div></pre></td></tr></table></figure>
+<p>查看Jython版本（注意<code>V</code>大写）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jython -V</div></pre></td></tr></table></figure>
+<p>如果显示：</p>
+<blockquote>
+<p>Jython 2.7.0</p>
+</blockquote>
+<p>则安装成功</p>
+<h2 id="开启Tomcat的JMX监控"><a href="#开启Tomcat的JMX监控" class="headerlink" title="开启Tomcat的JMX监控"></a>开启Tomcat的JMX监控</h2><p>在<code>tomcat_home/bin/catalina.sh</code>开头加入（<code>tomcat_home</code>为本机tomcat的安装目录）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># JMX配置</span></div><div class="line">CATALINA_OPTS=<span class="string">"<span class="variable">$CATALINA_OPTS</span> -Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=192.168.56.103 -</span></div><div class="line"><span class="string">Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=12345"</span></div></pre></td></tr></table></figure>
+<ul>
+<li>Djava.rmi.server.hostname：tomcat所在主机的IP</li>
+<li>Dcom.sun.management.jmxremote.port：访问JMX的端口</li>
+</ul>
+<p>然后去<a href="http://crawler.archive.org/cmdline-jmxclient/downloads.html" target="_blank" rel="external">这里</a>下载cmdline-jmxclient-0.10.3.jar：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://crawler.archive.org/cmdline-jmxclient/cmdline-jmxclient-0.10.3.jar</div></pre></td></tr></table></figure>
+<p>重启tomcat后，执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar cmdline-jmxclient-0.10.3.jar - 192.168.56.103:12345 java.lang:type=Memory NonHeapMemoryUsage</div></pre></td></tr></table></figure>
+<p>如果没有报错，输出结果类似于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">12/11/2016 21:23:33 +0800 org.archive.jmx.Client NonHeapMemoryUsage: </div><div class="line">committed: 27525120</div><div class="line">init: 2555904</div><div class="line">max: 38497536</div><div class="line">used: 26497536</div></pre></td></tr></table></figure>
+<p>则说明配置成功</p>
+<h2 id="编写监控脚本"><a href="#编写监控脚本" class="headerlink" title="编写监控脚本"></a>编写监控脚本</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env jython</span></div><div class="line"><span class="comment">#coding=utf8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.management.remote.JMXConnector;</div><div class="line"><span class="keyword">import</span> javax.management.remote.JMXConnectorFactory;</div><div class="line"><span class="keyword">import</span> javax.management.remote.JMXServiceURL;</div><div class="line"><span class="keyword">import</span> javax.management.ObjectName <span class="keyword">as</span> ObjectName;</div><div class="line"><span class="keyword">import</span> java.lang.management.ManagementFactory;</div><div class="line"><span class="keyword">import</span> sys, cmd, socket, optparse, time</div><div class="line"><span class="keyword">from</span> urlparse <span class="keyword">import</span> urljoin</div><div class="line"><span class="keyword">from</span> cmd <span class="keyword">import</span> Cmd</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_connection</span><span class="params">(host, port)</span>:</span></div><div class="line">    serviceURL = str()</div><div class="line">    serviceURL = <span class="string">"service:jmx:rmi:///jndi/rmi://"</span></div><div class="line">    serviceURL = serviceURL + host + <span class="string">":"</span> + str(port) + <span class="string">"/jmxrmi"</span></div><div class="line">    url =  javax.management.remote.JMXServiceURL(serviceURL)</div><div class="line">    connector = javax.management.remote.JMXConnectorFactory.connect(url)</div><div class="line">    <span class="keyword">global</span> remote</div><div class="line">    remote = connector.getMBeanServerConnection()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_domain_list</span><span class="params">()</span>:</span></div><div class="line">    domainList = []</div><div class="line">    get_connection(<span class="string">'192.168.56.103'</span>, <span class="number">12345</span>)</div><div class="line">    domainList = remote.getDomains()</div><div class="line">    <span class="keyword">return</span> domainList</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_domain_objects</span><span class="params">(domain)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_attribute</span><span class="params">(mbean,attribute)</span>:</span></div><div class="line">    <span class="comment"># &lt;domain&gt;:type=&lt;type&gt;</span></div><div class="line">    obn = javax.management.ObjectName(mbean)</div><div class="line">    <span class="comment"># &lt;attribute&gt; ie: HeapMemoryUsage</span></div><div class="line">    <span class="keyword">return</span> remote.getAttribute(obn, attribute)</div><div class="line"></div><div class="line">prefix_tomcat = <span class="string">'test.tomcat.'</span></div><div class="line">prefix_jvm = <span class="string">'test.jvm.'</span></div><div class="line">now = int(time.time())</div><div class="line">get_domain_list()</div><div class="line">heapMemoryUsage = get_attribute(<span class="string">"java.lang:type=Memory"</span>,<span class="string">"HeapMemoryUsage"</span>)</div><div class="line">usedHeapMemory = int(heapMemoryUsage.get(<span class="string">"used"</span>))</div><div class="line"><span class="comment"># JVM已用堆内存</span></div><div class="line">usedHeapMemory_name = <span class="string">'used_heapmemory'</span></div><div class="line">print(<span class="string">'%s%s %d %d'</span> % (prefix_jvm, usedHeapMemory_name, now, usedHeapMemory))</div><div class="line"></div><div class="line"><span class="comment"># tomcat线程总数</span></div><div class="line">currentThreadCount = int(get_attribute(<span class="string">"Catalina:type=ThreadPool,name=\"http-nio-8080\""</span>,<span class="string">"currentThreadCount"</span>))</div><div class="line">currentThreadCount_name = <span class="string">'current_thread_count'</span></div><div class="line">print(<span class="string">'%s%s %d %d'</span> % (prefix_tomcat, currentThreadCount_name, now, currentThreadCount))</div><div class="line"><span class="comment"># tomcat繁忙线程数</span></div><div class="line">currentThreadsBusy = int(get_attribute(<span class="string">"Catalina:type=ThreadPool,name=\"http-nio-8080\""</span>,<span class="string">"currentThreadsBusy"</span>))</div><div class="line">currentThreadsBusy_name = <span class="string">'current_threads_busy'</span></div><div class="line">print(<span class="string">'%s%s %d %d'</span> % (prefix_tomcat, currentThreadsBusy_name, now, currentThreadsBusy))</div><div class="line"><span class="comment"># tomcat最大线程数</span></div><div class="line">maxThreads = int(get_attribute(<span class="string">"Catalina:type=ThreadPool,name=\"http-nio-8080\""</span>,<span class="string">"maxThreads"</span>))</div><div class="line">maxThreads_name = <span class="string">'max_threads'</span></div><div class="line">print(<span class="string">'%s%s %d %d'</span> % (prefix_tomcat, maxThreads_name, now, maxThreads))</div><div class="line"><span class="comment"># tomcat发送字节数</span></div><div class="line">bytesSent = int(get_attribute(<span class="string">"Catalina:type=GlobalRequestProcessor,name=\"http-nio-8080\""</span>,<span class="string">"bytesSent"</span>))</div><div class="line">bytesSent_name = <span class="string">'bytes_sent'</span></div><div class="line">print(<span class="string">'%s%s %d %d'</span> % (prefix_tomcat, bytesSent_name, now, bytesSent))</div></pre></td></tr></table></figure>
+<p>将其放入<code>scollector/collectors/15</code>目录下，启动scollector，可以在Bosun的页面上查到脚本中输出的一系列metric（当接收到OpenTSDB中还没有的metric数据时，Bosun会自动在OpenTSDB中创建对应的metric，存入OpenTSDB中，并对其进行监控）：</p>
+<p><img src="http://i.imgur.com/XxbR2Zl.jpg" alt=""><br><img src="http://i.imgur.com/eUfJzgE.jpg" alt=""></p>
+<p>2016.12.19更新</p>
+<hr>
+<p>JDK中自带了一个Java性能监控工具，叫做<em>jconsole</em>，它的.exe可执行程序0就在<code>%JAVA_HOME%/bin/</code>目录下，双击打开，选择远程进程，输入远程主机的IP和上文在<code>tomcat_home/bin/catalina.sh</code>文件中配置的端口号，用户名和口令不需要输，点击连接：</p>
+<p><img src="http://i.imgur.com/z3xYFGl.jpg" alt=""></p>
+<p>成功连接后，选择窗口上方的 MBean 标签页，就可以在左侧导航栏 Catalina 目录下查看tomcat所有的MBean，可以选择需要监控的属性加入的上文的代码中~</p>
+<p><img src="http://i.imgur.com/ytFpvOc.jpg" alt=""></p>
+<hr>
+<p>版权声明</p>
+<p><img src="http://i.imgur.com/fYrbApI.png" alt=""></p>
+<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2016/12/08/Linux中利用Jython监控tomcat/">http://hw2007.com/2016/12/08/Linux中利用Jython监控tomcat/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CentOS/" rel="tag">#CentOS</a>
+          
+            <a href="/tags/Jython/" rel="tag">#Jython</a>
+          
+            <a href="/tags/Python/" rel="tag">#Python</a>
+          
+            <a href="/tags/tomcat/" rel="tag">#tomcat</a>
+          
+            <a href="/tags/JMX/" rel="tag">#JMX</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/02/用scollector监控进程/" rel="next" title="用scollector监控进程">
+                <i class="fa fa-chevron-left"></i> 用scollector监控进程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/09/利用Pandoc将markdown文档转换为word格式/" rel="prev" title="利用Pandoc将Markdown文档转换为Word格式">
+                利用Pandoc将Markdown文档转换为Word格式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/08/Linux中利用Jython监控tomcat/"
+           data-title="Linux中利用Jython监控tomcat" data-url="http://hw2007.com/2016/12/08/Linux中利用Jython监控tomcat/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar_Teddy.jpg"
+               alt="萝卜姓胡" />
+          <p class="site-author-name" itemprop="name">萝卜姓胡</p>
+          <p class="site-description motion-element" itemprop="description">If you really want it！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装"><span class="nav-number">1.</span> <span class="nav-text">下载安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启Tomcat的JMX监控"><span class="nav-number">2.</span> <span class="nav-text">开启Tomcat的JMX监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写监控脚本"><span class="nav-number">3.</span> <span class="nav-text">编写监控脚本</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">萝卜姓胡</span>
+</div>
+
+<div class="powered-by">  
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+
+<div class="theme-info">
+    <span id="busuanzi_container_site_pv">
+        &nbsp; | &nbsp; Total visited <span id="busuanzi_value_site_pv"></span> times.
+    </span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wsszh"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("72cFjAylbVbzsh9SAOVcrm93-gzGzoHsz", "MYdbmBGVETkoOFgUsRAUnYTF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</body>
+</html>
