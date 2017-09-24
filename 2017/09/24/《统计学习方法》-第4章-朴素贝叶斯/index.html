@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Go,GitHub," />
+  <meta name="keywords" content="Machine Learning," />
 
 
 
@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="关于GOROOT和GOPATHGOROOT很好理解，就是本地保存Golang源码的根目录。但GOPATH之前我一直没有很好地理解，查了很多资料，加上今天的实际操作，终于差不多搞懂了。GOPATH下的src目录是开发程序的主要目录，一般合理的做法是，每次要新建一个应用或者代码包时，就在src下新建一个文件夹，当然也允许多级目录，例如： 目录 %GOPATH%/src/Hello（%GOPATH%表示">
-<meta name="keywords" content="Go,GitHub">
+<meta name="description" content="基本方法训练数据：$T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$由$P(x,y)$独立同分布产生. 先验概率：$P(Y=c_k),k=1,2,…,K$ 条件概率分布：$P(X=x|Y=c_k)=P(X^{(1)}=x^{(1)},X^{(2)}=x^{(2)},…,X^{(n)}=x^{(n)}|Y=c_k)$ 算法由公式$P(X,Y)=P(X|Y)P(Y)$学习到训练">
+<meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="本地获取github上的go项目并编译安装">
-<meta property="og:url" content="http://hw2007.com/2016/10/19/本地获取github上的go项目并编译安装/index.html">
+<meta property="og:title" content="《统计学习方法》- 第4章 朴素贝叶斯">
+<meta property="og:url" content="http://hw2007.com/2017/09/24/《统计学习方法》-第4章-朴素贝叶斯/index.html">
 <meta property="og:site_name" content="萝卜姓胡">
-<meta property="og:description" content="关于GOROOT和GOPATHGOROOT很好理解，就是本地保存Golang源码的根目录。但GOPATH之前我一直没有很好地理解，查了很多资料，加上今天的实际操作，终于差不多搞懂了。GOPATH下的src目录是开发程序的主要目录，一般合理的做法是，每次要新建一个应用或者代码包时，就在src下新建一个文件夹，当然也允许多级目录，例如： 目录 %GOPATH%/src/Hello（%GOPATH%表示">
+<meta property="og:description" content="基本方法训练数据：$T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$由$P(x,y)$独立同分布产生. 先验概率：$P(Y=c_k),k=1,2,…,K$ 条件概率分布：$P(X=x|Y=c_k)=P(X^{(1)}=x^{(1)},X^{(2)}=x^{(2)},…,X^{(n)}=x^{(n)}|Y=c_k)$ 算法由公式$P(X,Y)=P(X|Y)P(Y)$学习到训练">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
-<meta property="og:updated_time" content="2017-08-20T10:58:18.039Z">
+<meta property="og:updated_time" content="2017-09-24T15:37:13.321Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="本地获取github上的go项目并编译安装">
-<meta name="twitter:description" content="关于GOROOT和GOPATHGOROOT很好理解，就是本地保存Golang源码的根目录。但GOPATH之前我一直没有很好地理解，查了很多资料，加上今天的实际操作，终于差不多搞懂了。GOPATH下的src目录是开发程序的主要目录，一般合理的做法是，每次要新建一个应用或者代码包时，就在src下新建一个文件夹，当然也允许多级目录，例如： 目录 %GOPATH%/src/Hello（%GOPATH%表示">
+<meta name="twitter:title" content="《统计学习方法》- 第4章 朴素贝叶斯">
+<meta name="twitter:description" content="基本方法训练数据：$T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$由$P(x,y)$独立同分布产生. 先验概率：$P(Y=c_k),k=1,2,…,K$ 条件概率分布：$P(X=x|Y=c_k)=P(X^{(1)}=x^{(1)},X^{(2)}=x^{(2)},…,X^{(n)}=x^{(n)}|Y=c_k)$ 算法由公式$P(X,Y)=P(X|Y)P(Y)$学习到训练">
 <meta name="twitter:image" content="http://i.imgur.com/fYrbApI.png">
 
 
@@ -126,10 +126,10 @@
 
 
 
-  <link rel="canonical" href="http://hw2007.com/2016/10/19/本地获取github上的go项目并编译安装/"/>
+  <link rel="canonical" href="http://hw2007.com/2017/09/24/《统计学习方法》-第4章-朴素贝叶斯/"/>
 
 
-  <title> 本地获取github上的go项目并编译安装 | 萝卜姓胡 </title>
+  <title> 《统计学习方法》- 第4章 朴素贝叶斯 | 萝卜姓胡 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -331,7 +331,7 @@
             
             
               
-                本地获取github上的go项目并编译安装
+                《统计学习方法》- 第4章 朴素贝叶斯
               
             
           </h1>
@@ -343,8 +343,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-19T23:44:48+08:00" content="2016-10-19">
-              2016-10-19
+            <time itemprop="dateCreated" datetime="2017-09-24T21:39:00+08:00" content="2017-09-24">
+              2017-09-24
             </time>
           </span>
 
@@ -357,8 +357,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Golang/" itemprop="url" rel="index">
-                    <span itemprop="name">Golang</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -374,8 +374,8 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 
-                  <a href="/2016/10/19/本地获取github上的go项目并编译安装/#SOHUCS" itemprop="discussionUrl">
-                    <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/10/19/本地获取github上的go项目并编译安装/" itemprop="commentsCount"></span>
+                  <a href="/2017/09/24/《统计学习方法》-第4章-朴素贝叶斯/#SOHUCS" itemprop="discussionUrl">
+                    <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/09/24/《统计学习方法》-第4章-朴素贝叶斯/" itemprop="commentsCount"></span>
                   </a>
                       
               </span>
@@ -386,7 +386,7 @@
 
           
           
-             <span id="/2016/10/19/本地获取github上的go项目并编译安装/" class="leancloud_visitors" data-flag-title="本地获取github上的go项目并编译安装">
+             <span id="/2017/09/24/《统计学习方法》-第4章-朴素贝叶斯/" class="leancloud_visitors" data-flag-title="《统计学习方法》- 第4章 朴素贝叶斯">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -408,34 +408,22 @@
       
 
       
-        <h2 id="关于GOROOT和GOPATH"><a href="#关于GOROOT和GOPATH" class="headerlink" title="关于GOROOT和GOPATH"></a>关于GOROOT和GOPATH</h2><p>GOROOT很好理解，就是本地保存Golang源码的根目录。但GOPATH之前我一直没有很好地理解，查了很多资料，加上今天的实际操作，终于差不多搞懂了。GOPATH下的src目录是开发程序的主要目录，一般合理的做法是，每次要新建一个应用或者代码包时，就在src下新建一个文件夹，当然也允许多级目录，例如：</p>
-<p>目录 <code>%GOPATH%/src/Hello</code>（%GOPATH%表示windows系统环境变量中定义的GOPATH的值）<br>代表有一个go项目叫做Hello，可能是应用包或者可执行应用，这个根据package是main还是其他来决定，main的话就是可执行应用，其他的话就是应用包。（这个有待后续了解）</p>
-<a id="more"></a>
-<p>目录 <code>%GOPATH%/src/github.com/MyGO/Hello</code><br>代表包的路径为 <code>github.com/MyGO/Hello</code>（即src后的路径）<br>如果别的go项目要引用其中的包，那么就要写：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span>(</div><div class="line">	<span class="string">"github.com/MyGO/Hello/XXX"</span></div><div class="line">)</div></pre></td></tr></table></figure>
-<p>XXX表示具体的包名，可以看到，import调用包的路径是相对于 <code>%GOPATH%/src</code> 而言，而这也是GOPATH非常要的一个作用，可以告诉任意一个go项目可以引用的所有的包都放在 <code>%GOPATH%/src</code> 目录下，可以类比JAVA，想象成JAVA项目中需要的所有类库的根目录都相同，只需要知道相对于这个根目录的路径就可以进行引用。</p>
-<p>GOPATH也可以一次性设置多个，但不建议这么做。</p>
-<p>具体参考：<a href="http://www.kancloud.cn/wizardforcel/go-web-programming/101470" target="_blank" rel="external">GOPATH与工作空间</a></p>
-<h2 id="从github上获取项目"><a href="#从github上获取项目" class="headerlink" title="从github上获取项目"></a>从github上获取项目</h2><h3 id="方法一：直接利用go-get"><a href="#方法一：直接利用go-get" class="headerlink" title="方法一：直接利用go get"></a>方法一：直接利用go get</h3><p>win + R 打开cmd，以我要获取的项目为例，输入命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go get github.com/kubernetes/heapster</div></pre></td></tr></table></figure>
-<blockquote>
-<p>go get -u 参数可以自动更新包，且go get时能自动获取该包依赖的第三方包</p>
-</blockquote>
-<p>就可以将项目到GOPATH的src目录下，如果项目可以直接进行编译安装，那么在GOPATH的pkg和bin中也会分别生成相应的中间文件和可执行文件，对应的本地代码结构如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$GOPATH</div><div class="line">  src</div><div class="line">  |--github.com</div><div class="line">     |-kubernetes</div><div class="line">       |-heapster</div><div class="line">  pkg</div><div class="line">  |--运行平台环境（如windows_amd64）</div><div class="line">     |-github.com</div><div class="line">       |-kubernetes</div><div class="line">         |-heapster</div><div class="line">           |-xxx.a（相应的中间文件）</div></pre></td></tr></table></figure>
-<p>go get本质上可以理解为先利用源码工具（支持github、googlecode、bitbucket、Launchpad）将代码clone到src下，然后执行go install。但是如果含有main函数的 .go 文件并没有在项目根目录下，并不能成功执行go install命令，这时就应该尝试下面的方法二。</p>
-<h3 id="方法二：创建目录，clone代码，编译安装"><a href="#方法二：创建目录，clone代码，编译安装" class="headerlink" title="方法二：创建目录，clone代码，编译安装"></a>方法二：创建目录，clone代码，编译安装</h3><p>先手动在src下创建保存项目源码的目录，这个目录不是随便创建的，要根据源码中的引用包的路径进行创建，比如heapster有main函数的heapster.go文件中，import部分代码为：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"crypto/tls"</span></div><div class="line">	<span class="string">"errors"</span></div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"net/http"</span></div><div class="line">	<span class="string">"net/url"</span></div><div class="line">	<span class="string">"os"</span></div><div class="line">	<span class="string">"runtime"</span></div><div class="line">	<span class="string">"strings"</span></div><div class="line">	<span class="string">"time"</span></div><div class="line"></div><div class="line">	<span class="string">"github.com/golang/glog"</span></div><div class="line">	<span class="string">"github.com/prometheus/client_golang/prometheus"</span></div><div class="line">	<span class="string">"github.com/spf13/pflag"</span></div><div class="line"></div><div class="line">	<span class="string">"k8s.io/heapster/common/flags"</span></div><div class="line">	kube_config <span class="string">"k8s.io/heapster/common/kubernetes"</span></div><div class="line">	<span class="string">"k8s.io/heapster/metrics/cmd/heapster-apiserver/app"</span></div><div class="line">	<span class="string">"k8s.io/heapster/metrics/core"</span></div><div class="line">	<span class="string">"k8s.io/heapster/metrics/manager"</span></div><div class="line">	<span class="string">"k8s.io/heapster/metrics/options"</span></div><div class="line">	<span class="string">"k8s.io/heapster/metrics/processors"</span></div><div class="line">	<span class="string">"k8s.io/heapster/metrics/sinks"</span></div><div class="line">	<span class="string">"k8s.io/heapster/metrics/sinks/metric"</span></div><div class="line">	<span class="string">"k8s.io/heapster/metrics/sources"</span></div><div class="line">	<span class="string">"k8s.io/heapster/version"</span></div><div class="line">	kube_api <span class="string">"k8s.io/kubernetes/pkg/api"</span></div><div class="line">	<span class="string">"k8s.io/kubernetes/pkg/client/cache"</span></div><div class="line">	kube_client <span class="string">"k8s.io/kubernetes/pkg/client/unversioned"</span></div><div class="line">	<span class="string">"k8s.io/kubernetes/pkg/fields"</span></div><div class="line">	<span class="string">"k8s.io/kubernetes/pkg/healthz"</span></div><div class="line">	<span class="string">"k8s.io/kubernetes/pkg/util/flag"</span></div><div class="line">	<span class="string">"k8s.io/kubernetes/pkg/util/logs"</span></div><div class="line">	<span class="string">"k8s.io/kubernetes/pkg/version/verflag"</span></div><div class="line">)</div></pre></td></tr></table></figure>
-<p>要区分引用的是本地包还是依赖的第三方包，我们创建的项目是根据引用本地包的路径来确定的。所以我们要先去github上了解项目的目录结构，通过查找确认，项目中存在”/metrics/<em>“（</em>代表子文件夹名字）这个路径，因此引用的是本地包，但不存在在其前面的”k8s.io/heapster”目录，这就需要我们在本地手动创建；而在vendor文件夹中才存在”k8s.io/kubernetes/*”这个路径，因此引用的是第三方包。由此可以确定，在”%GOPATH%/src/“目录下，我们需要手动创建”k8s.io/heapster”，再通过git bash将项目下载到”%GOPATH%/src/k8s.io/heapster”目录下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone github.com/kubernetes/heapster</div></pre></td></tr></table></figure>
-<p>这里注意不要直接用go get命令，因为这样的话会自动生成”github.com/kubernetes/heapster”目录，破坏刚刚我们手动创建的目录结构。</p>
-<p>上面提到项目中存在一个叫vendor的文件夹，在Golang1.5之后，Go提供了 GO15VENDOREXPERIMENT 环境变量，将值设置为1，用于将go build时的应用路径搜索调整成为”当前项目目录/vendor”目录方式。这也是Golang的一个项目依赖管理的工具govendor所用到的，在当前项目目录下执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">govendor init</div></pre></td></tr></table></figure></p>
-<p>如果项目目录下没有vendor文件夹，则会自动创建并在其中生成vendor.json；如果已经存在，则直接在vendor文件夹下生成vendor.json。这个 vendor.json 会类似 godep 工具中的描述文件版本的功能。接下来，执行命令将当前应用必须的文件包含进来（会在vendor.json中记录相关文件的信息）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">govendor add +external</div></pre></td></tr></table></figure></p>
-<p>但我从github上clone下来的项目的vendor文件夹中，已经包含了项目所需的文件，因此执行这个命令并没有产生什么效果。<br>有了本地代码，我们就需要找到含有main函数的 .go 文件所在路径（这一步是必须的，一开始我在项目根目录下尝试了 go install 多次都失败，就是因为含有main函数的 .go 文件找不到），然后进入相应目录下，打开cmd，执行go install，项目即编译安装成功！</p>
+        <h2 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h2><p>训练数据：$T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$由$P(x,y)$独立同分布产生.</p>
+<p>先验概率：$P(Y=c_k),k=1,2,…,K$</p>
+<p>条件概率分布：$P(X=x|Y=c_k)=P(X^{(1)}=x^{(1)},X^{(2)}=x^{(2)},…,X^{(n)}=x^{(n)}|Y=c_k)$</p>
+<p>算法由公式$P(X,Y)=P(X|Y)P(Y)$学习到训练数据的联合概率分布.</p>
+<p>但是，$x^{(j)}$可取值$S<em>j$个（$j=1,2,…,n$），$Y$可取值K个，得到参数个数为$K\prod\limits^n</em>{j=1}S_j$个，是指数级个，所以估计实际是不可行的.</p>
+<p>由此，作条件独立性假设，即分类的特征在类确定的条件下都是条件独立的，得到：<br>$$\begin{align}P(X=x|Y=c_k)&amp;=P(X^{(1)}=x^{(1)},X^{(2)}=x^{(2)},…,X^{(n)}=x^{(n)}|Y=c<em>k) \<br>&amp;=\prod\limits^n</em>{j=1}P(X^{(j)}=x^{(j)}|Y=c_k) \<br>\end{align}$$</p>
+<p>由贝叶斯定理$P(Y|X)=\frac{P(X|Y)P(Y)}{P(X)}$，得朴素贝叶斯分类的基本公式：<br>$$P(Y=c_k|X=x)=\frac{P(Y=c<em>k)\prod\limits^n</em>{j=1}P(X^{(j)}=x^{(j)}|Y=c<em>k)}{\sum</em>{k}{P(Y=c<em>k)\prod\limits^n</em>{j=1}P(X^{(j)}=x^{(j)}|Y=c_k)}}$$</p>
+<p>由此，朴素贝叶斯分类器可表示为：<br>$$\DeclareMathOperator*{\argmax}{arg max}y=f(x)=\argmax\limits_{c_k}\frac{P(Y=c<em>k)\prod\limits^n</em>{j=1}P(X^{(j)}=x^{(j)}|Y=c<em>k)}{\sum</em>{k}{P(Y=c<em>k)\prod\limits^n</em>{j=1}P(X^{(j)}=x^{(j)}|Y=c_k)}}$$</p>
+<p>又因为$P(X)={\sum_{k}{P(Y=c<em>k)\prod\limits^n</em>{j=1}P(X^{(j)}=x^{(j)}|Y=c_k)}}$对所有$c<em>k$都相同，所以朴素贝叶斯分类器可简化为：<br>$$\DeclareMathOperator*{\argmax}{arg max}y=f(x)=\argmax\limits</em>{c_k}{P(Y=c<em>k)\prod\limits^n</em>{j=1}P(X^{(j)}=x^{(j)}|Y=c_k)}$$</p>
+<h2 id="后验概率最大化的含义"><a href="#后验概率最大化的含义" class="headerlink" title="后验概率最大化的含义"></a>后验概率最大化的含义</h2><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化，证明如下：</p>
+<p>选择0-1损失函数：<br>$$L(Y,f(X))=\begin{cases} 1,&amp;\text{$Y \neq f(X)$} \ 0,&amp;\text{$Y=f(X)$} \end{cases}$$</p>
+<p>式中$f(X)$是分类决策函数，这时，期望风险函数（$f(X)$关于联合分布$P(X,Y)$的平均意义下的损失）为：<br>$$R_{exp}(f)=E[L(Y,f(X))]$$</p>
 <hr>
 <p>版权声明</p>
 <p><img src="http://i.imgur.com/fYrbApI.png" alt=""></p>
-<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2016/10/19/本地获取github上的go项目并编译安装/">http://hw2007.com/2016/10/19/本地获取github上的go项目并编译安装/</a></p>
+<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2017/09/24/《统计学习方法》-第4章-朴素贝叶斯/">http://hw2007.com/2017/09/24/《统计学习方法》-第4章-朴素贝叶斯/</a></p>
 
       
     </div>
@@ -458,9 +446,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Go/" rel="tag">#Go</a>
-          
-            <a href="/tags/GitHub/" rel="tag">#GitHub</a>
+            <a href="/tags/Machine-Learning/" rel="tag">#Machine Learning</a>
           
         </div>
       
@@ -469,17 +455,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/19/种下一棵树/" rel="next" title="种下一棵树">
-                <i class="fa fa-chevron-left"></i> 种下一棵树
+              <a href="/2017/01/09/利用Pandoc将markdown文档转换为word格式/" rel="next" title="利用Pandoc将Markdown文档转换为Word格式">
+                <i class="fa fa-chevron-left"></i> 利用Pandoc将Markdown文档转换为Word格式
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/07/CentOS 7部署OpenTSDB - RPM方式/" rel="prev" title="CentOS 7部署OpenTSDB - RPM方式">
-                CentOS 7部署OpenTSDB - RPM方式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -609,7 +591,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于GOROOT和GOPATH"><span class="nav-number">1.</span> <span class="nav-text">关于GOROOT和GOPATH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从github上获取项目"><span class="nav-number">2.</span> <span class="nav-text">从github上获取项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：直接利用go-get"><span class="nav-number">2.1.</span> <span class="nav-text">方法一：直接利用go get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：创建目录，clone代码，编译安装"><span class="nav-number">2.2.</span> <span class="nav-text">方法二：创建目录，clone代码，编译安装</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本方法"><span class="nav-number">1.</span> <span class="nav-text">基本方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后验概率最大化的含义"><span class="nav-number">2.</span> <span class="nav-text">后验概率最大化的含义</span></a></li></ol></div>
             
           </div>
         </section>
