@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8-041308-generic，却成了导致 VMware 创建虚拟机失败的罪魁祸首！ 下载安装安装依赖1sudo apt install build-es">
+<meta name="description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8，却成了导致 VMware 创建虚拟机失败的罪魁祸首！">
 <meta name="keywords" content="Ubuntu,VMware">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu 16.04 安装 VMware Workstation 14">
 <meta property="og:url" content="http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/index.html">
 <meta property="og:site_name" content="萝卜姓胡">
-<meta property="og:description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8-041308-generic，却成了导致 VMware 创建虚拟机失败的罪魁祸首！ 下载安装安装依赖1sudo apt install build-es">
+<meta property="og:description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8，却成了导致 VMware 创建虚拟机失败的罪魁祸首！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
-<meta property="og:updated_time" content="2017-11-14T16:08:51.709Z">
+<meta property="og:updated_time" content="2017-11-14T16:13:07.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu 16.04 安装 VMware Workstation 14">
-<meta name="twitter:description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8-041308-generic，却成了导致 VMware 创建虚拟机失败的罪魁祸首！ 下载安装安装依赖1sudo apt install build-es">
+<meta name="twitter:description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8，却成了导致 VMware 创建虚拟机失败的罪魁祸首！">
 <meta name="twitter:image" content="http://i.imgur.com/fYrbApI.png">
 
 
@@ -408,7 +408,8 @@
       
 
       
-        <p>最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了<code>4.13.8-041308-generic</code>，却成了导致 VMware 创建虚拟机失败的罪魁祸首！</p>
+        <p>最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了<code>4.13.8</code>，却成了导致 VMware 创建虚拟机失败的罪魁祸首！</p>
+<a id="more"></a>
 <h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install build-essential</div></pre></td></tr></table></figure>
 <h3 id="下载-VMware"><a href="#下载-VMware" class="headerlink" title="下载 VMware"></a>下载 VMware</h3><p>从<a href="http://www.vmware.com/go/tryworkstation-linux-64" target="_blank" rel="external">这里</a>下载，我下的是最新的 VMware Workstation 14.</p>
 <h3 id="安装-VMware"><a href="#安装-VMware" class="headerlink" title="安装 VMware"></a>安装 VMware</h3><p>转到存放 VMware 安装包的目录下</p>
@@ -418,7 +419,7 @@
 <blockquote>
 <p>Not enough physical memory is available to power on this virtual machine with its configured settings. To fix this problem, increase the amount of physical memory for all virtual machines to 1035 MB or adjust the additional memory settings to allow more virtual machine memory to be swapped.</p>
 </blockquote>
-<p>我的笔记本由16G的内存，不可能是因为物理内存不足的缘故，经过一番搜索，终于找到了解决方法，事实证明错误提示的内容没有任何指导性作用，因为这是因为内核版本过高(我的内核版本为<code>4.13.8</code>)，导致与 VMware Workstation 14 不兼容的缘故.</p>
+<p>我的笔记本由16G的内存，不可能是因为物理内存不足的缘故，经过一番搜索，终于找到了解决方法，事实证明错误提示的内容没有任何指导性作用，因为这是因为内核版本过高(我的内核版本为 <code>4.13.8</code>)，导致与 VMware Workstation 14 不兼容的缘故.</p>
 <p>解决方法就是根据<a href="https://github.com/mkubecek/vmware-host-modules/commit/770c7ffe611520ac96490d235399554c64e87d9f" target="_blank" rel="external">这里</a>的修改信息，修改本地源码，注意必须是仅仅修改有变动的地方，不能直接将整份代码copy过来，因为网上的代码据网友说仅仅适配 VMware Workstation 12.5. 具体操作如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/lib/vmware/modules/<span class="built_in">source</span></div><div class="line">tar xf vmmon.tar</div><div class="line"><span class="built_in">cd</span> vmmon-only/linux</div><div class="line">vim hostif.c <span class="comment"># 修改这个文件里的代码</span></div><div class="line"><span class="built_in">cd</span> ../..</div><div class="line">tar cf vmmon.tar vmmon-only</div><div class="line">rm -rf vmmon-only <span class="comment"># cleanup</span></div><div class="line"></div><div class="line"><span class="comment"># Lastly, we need to rebuild the patched module</span></div><div class="line">sudo vmware-modconfig --console --install-all</div></pre></td></tr></table></figure>
 <p>重新启动 VMware，就能顺利创建虚拟机了！</p>
