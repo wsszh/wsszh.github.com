@@ -330,6 +330,154 @@
             
               
                 
+                <a class="post-title-link" href="/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/" itemprop="url">
+                  Ubuntu 16.04 安装 VMware Workstation 14
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-14T23:32:35+08:00" content="2017-11-14">
+              2017-11-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Ubuntu/" itemprop="url" rel="index">
+                    <span itemprop="name">Ubuntu</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                
+                  <a href="/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/#SOHUCS" itemprop="discussionUrl">
+                    <span id="url::http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/" class="cy_cmt_count" data-xid="2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/" itemprop="commentsCount" ></span>
+                  </a>
+                      
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/" class="leancloud_visitors" data-flag-title="Ubuntu 16.04 安装 VMware Workstation 14">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了<code>4.13.8-041308-generic</code>，却成了导致 VMware 创建虚拟机失败的罪魁祸首！</p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install build-essential</div></pre></td></tr></table></figure>
+<h3 id="下载-VMware"><a href="#下载-VMware" class="headerlink" title="下载 VMware"></a>下载 VMware</h3><p>从<a href="http://www.vmware.com/go/tryworkstation-linux-64" target="_blank" rel="external">这里</a>下载，我下的是最新的 VMware Workstation 14.</p>
+<h3 id="安装-VMware"><a href="#安装-VMware" class="headerlink" title="安装 VMware"></a>安装 VMware</h3><p>转到存放 VMware 安装包的目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chmod +x VMware-Workstation-Full-14.0.0-6661328.x86_64.bundle</div><div class="line">sudo ./VMware-Workstation-Full-14.0.0-6661328.x86_64.bundle</div></pre></td></tr></table></figure>
+<p>根据提示完成安装即可，不过 VMware Workstation 是商业软件，激活需要 license key，请自行解决.</p>
+<h2 id="问题及解决方法"><a href="#问题及解决方法" class="headerlink" title="问题及解决方法"></a>问题及解决方法</h2><p>在创建 Ubuntu 虚拟机的过程中，出现了如下的错误提示：</p>
+<blockquote>
+<p>Not enough physical memory is available to power on this virtual machine with its configured settings. To fix this problem, increase the amount of physical memory for all virtual machines to 1035 MB or adjust the additional memory settings to allow more virtual machine memory to be swapped.</p>
+</blockquote>
+<p>我的笔记本由16G的内存，不可能是因为物理内存不足的缘故，经过一番搜索，终于找到了解决方法，事实证明错误提示的内容没有任何指导性作用，因为这是因为内核版本过高(我的内核版本为<code>4.13.8</code>)，导致与 VMware Workstation 14 不兼容的缘故.</p>
+<p>解决方法就是根据<a href="https://github.com/mkubecek/vmware-host-modules/commit/770c7ffe611520ac96490d235399554c64e87d9f" target="_blank" rel="external">这里</a>的修改信息，修改本地源码，注意必须是仅仅修改有变动的地方，不能直接将整份代码copy过来，因为网上的代码据网友说仅仅适配 VMware Workstation 12.5. 具体操作如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/lib/vmware/modules/<span class="built_in">source</span></div><div class="line">tar xf vmmon.tar</div><div class="line"><span class="built_in">cd</span> vmmon-only/linux</div><div class="line">vim hostif.c <span class="comment"># 修改这个文件里的代码</span></div><div class="line"><span class="built_in">cd</span> ../..</div><div class="line">tar cf vmmon.tar vmmon-only</div><div class="line">rm -rf vmmon-only <span class="comment"># cleanup</span></div><div class="line"></div><div class="line"><span class="comment"># Lastly, we need to rebuild the patched module</span></div><div class="line">sudo vmware-modconfig --console --install-all</div></pre></td></tr></table></figure>
+<p>重新启动 VMware，就能顺利创建虚拟机了！</p>
+<hr>
+<p>版权声明</p>
+<p><img src="http://i.imgur.com/fYrbApI.png" alt=""></p>
+<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/">http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/09/24/《统计学习方法》-第4章-朴素贝叶斯/" itemprop="url">
                   《统计学习方法》- 第4章 朴素贝叶斯
                 </a>
@@ -1509,140 +1657,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/19/CentOS 7部署OpenTSDB - 源码编译安装/" itemprop="url">
-                  CentOS 7部署OpenTSDB - 源码编译安装
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-19T14:50:30+08:00" content="2016-11-19">
-              2016-11-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/监控管理/" itemprop="url" rel="index">
-                    <span itemprop="name">监控管理</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                
-                  <a href="/2016/11/19/CentOS 7部署OpenTSDB - 源码编译安装/#SOHUCS" itemprop="discussionUrl">
-                    <span id="url::http://hw2007.com/2016/11/19/CentOS 7部署OpenTSDB - 源码编译安装/" class="cy_cmt_count" data-xid="2016/11/19/CentOS 7部署OpenTSDB - 源码编译安装/" itemprop="commentsCount" ></span>
-                  </a>
-                      
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/11/19/CentOS 7部署OpenTSDB - 源码编译安装/" class="leancloud_visitors" data-flag-title="CentOS 7部署OpenTSDB - 源码编译安装">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>上篇文章介绍了OpenTSDB的RPM安装方式，省时省力，但如果需要根据其源码进行二次开发，那么就必须手动将修改后的源码编译安装，因此介绍一下OpenTSDB的源码的编译安装过程</p>
-<p>安装JDK、其他需要用到的包和HBase的步骤请参考上篇文章<a href="https://wsszh.github.io/2016/11/07/CentOS7%E9%83%A8%E7%BD%B2OpenTSDB%20-%20RPM%E6%96%B9%E5%BC%8F/" target="_blank" rel="external">《CentOS7部署OpenTSDB - RPM方式》</a>，在这里默认已经完成</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/19/CentOS 7部署OpenTSDB - 源码编译安装/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1688,7 +1702,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1696,7 +1710,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1705,7 +1719,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
