@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Ubuntu,VMware," />
+  <meta name="keywords" content="Ubuntu,Kubernetes," />
 
 
 
@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8，却成了导致 VMware 创建虚拟机失败的罪魁祸首！">
-<meta name="keywords" content="Ubuntu,VMware">
+<meta name="description" content="第一次配置Kubernetes环境，坑还是挺多的，做个记录.">
+<meta name="keywords" content="Ubuntu,Kubernetes">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu 16.04 安装 VMware Workstation 14">
-<meta property="og:url" content="http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/index.html">
+<meta property="og:title" content="本地Ubuntu 16.04虚拟机中利用kubeadm安装kubernetes v1.10.0集群">
+<meta property="og:url" content="http://hw2007.com/2018/08/08/本地Ubuntu-16-04虚拟机中利用kubeadm安装kubernetes-v1-10-0集群/index.html">
 <meta property="og:site_name" content="萝卜姓胡">
-<meta property="og:description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8，却成了导致 VMware 创建虚拟机失败的罪魁祸首！">
+<meta property="og:description" content="第一次配置Kubernetes环境，坑还是挺多的，做个记录.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
-<meta property="og:updated_time" content="2017-11-14T16:13:07.195Z">
+<meta property="og:updated_time" content="2018-08-08T14:45:03.164Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu 16.04 安装 VMware Workstation 14">
-<meta name="twitter:description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8，却成了导致 VMware 创建虚拟机失败的罪魁祸首！">
+<meta name="twitter:title" content="本地Ubuntu 16.04虚拟机中利用kubeadm安装kubernetes v1.10.0集群">
+<meta name="twitter:description" content="第一次配置Kubernetes环境，坑还是挺多的，做个记录.">
 <meta name="twitter:image" content="http://i.imgur.com/fYrbApI.png">
 
 
@@ -126,10 +126,10 @@
 
 
 
-  <link rel="canonical" href="http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/"/>
+  <link rel="canonical" href="http://hw2007.com/2018/08/08/本地Ubuntu-16-04虚拟机中利用kubeadm安装kubernetes-v1-10-0集群/"/>
 
 
-  <title> Ubuntu 16.04 安装 VMware Workstation 14 | 萝卜姓胡 </title>
+  <title> 本地Ubuntu 16.04虚拟机中利用kubeadm安装kubernetes v1.10.0集群 | 萝卜姓胡 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -331,7 +331,7 @@
             
             
               
-                Ubuntu 16.04 安装 VMware Workstation 14
+                本地Ubuntu 16.04虚拟机中利用kubeadm安装kubernetes v1.10.0集群
               
             
           </h1>
@@ -343,8 +343,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-11-14T23:32:35+08:00" content="2017-11-14">
-              2017-11-14
+            <time itemprop="dateCreated" datetime="2018-08-08T21:35:41+08:00" content="2018-08-08">
+              2018-08-08
             </time>
           </span>
 
@@ -357,8 +357,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">Ubuntu</span>
+                  <a href="/categories/云计算/" itemprop="url" rel="index">
+                    <span itemprop="name">云计算</span>
                   </a>
                 </span>
 
@@ -374,8 +374,8 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 
-                  <a href="/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/#SOHUCS" itemprop="discussionUrl">
-                    <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/" itemprop="commentsCount"></span>
+                  <a href="/2018/08/08/本地Ubuntu-16-04虚拟机中利用kubeadm安装kubernetes-v1-10-0集群/#SOHUCS" itemprop="discussionUrl">
+                    <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/08/08/本地Ubuntu-16-04虚拟机中利用kubeadm安装kubernetes-v1-10-0集群/" itemprop="commentsCount"></span>
                   </a>
                       
               </span>
@@ -386,7 +386,7 @@
 
           
           
-             <span id="/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/" class="leancloud_visitors" data-flag-title="Ubuntu 16.04 安装 VMware Workstation 14">
+             <span id="/2018/08/08/本地Ubuntu-16-04虚拟机中利用kubeadm安装kubernetes-v1-10-0集群/" class="leancloud_visitors" data-flag-title="本地Ubuntu 16.04虚拟机中利用kubeadm安装kubernetes v1.10.0集群">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -408,25 +408,72 @@
       
 
       
-        <p>最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了<code>4.13.8</code>，却成了导致 VMware 创建虚拟机失败的罪魁祸首！</p>
-<a id="more"></a>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install build-essential</div></pre></td></tr></table></figure>
-<h3 id="下载-VMware"><a href="#下载-VMware" class="headerlink" title="下载 VMware"></a>下载 VMware</h3><p>从<a href="http://www.vmware.com/go/tryworkstation-linux-64" target="_blank" rel="external">这里</a>下载，我下的是最新的 VMware Workstation 14.</p>
-<h3 id="安装-VMware"><a href="#安装-VMware" class="headerlink" title="安装 VMware"></a>安装 VMware</h3><p>转到存放 VMware 安装包的目录下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chmod +x VMware-Workstation-Full-14.0.0-6661328.x86_64.bundle</div><div class="line">sudo ./VMware-Workstation-Full-14.0.0-6661328.x86_64.bundle</div></pre></td></tr></table></figure>
-<p>根据提示完成安装即可，不过 VMware Workstation 是商业软件，激活需要 license key，请自行解决.</p>
-<h2 id="问题及解决方法"><a href="#问题及解决方法" class="headerlink" title="问题及解决方法"></a>问题及解决方法</h2><p>在创建 Ubuntu 虚拟机的过程中，出现了如下的错误提示：</p>
+        <p>第一次配置Kubernetes环境，坑还是挺多的，做个记录.<br><a id="more"></a></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li><p>Ubuntu 16.04 64位系统的虚拟机至少2台.</p>
+</li>
+<li><p>有科学上网的能力.</p>
+</li>
+<li><p>下文中所有的安装包以及镜像都从<a href="链接: https://pan.baidu.com/s/1m-NrFBJBmYHB_8H3EVb93w">这里</a>下载，密码: aesw.</p>
+</li>
+</ul>
+<h2 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h2><p>简便起见，暂时先只配置两个节点.</p>
+<table>
+    <tr>
+        <th>hostname</th>
+        <th>IP</th>
+    </tr>
+    <tr>
+        <th>master</th>
+        <th>192.168.190.128</th>
+    </tr>
+    <tr>
+        <th>slave1</th>
+        <th>192.168.190.129</th>
+    </tr>
+</table>
+
+<h2 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h2><p>以下操作需要在所有的master和slave1节点上执行.</p>
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> k8s/dep/</div><div class="line">sudo dpkg -i *.deb</div></pre></td></tr></table></figure>
+<h3 id="安装-docker，kubeadm，kubectl，kubelet"><a href="#安装-docker，kubeadm，kubectl，kubelet" class="headerlink" title="安装 docker，kubeadm，kubectl，kubelet"></a>安装 docker，kubeadm，kubectl，kubelet</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> k8s/deb/</div><div class="line">sudo dpkg -i *.deb</div></pre></td></tr></table></figure>
+<p>如果有缺少依赖的情况，可以使用 <code>apt-get -f install</code> 命令修复依赖.</p>
+<h3 id="导入镜像"><a href="#导入镜像" class="headerlink" title="导入镜像"></a>导入镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> k8s/images/</div><div class="line">su</div><div class="line"><span class="keyword">for</span> images <span class="keyword">in</span> $(ls | grep img); <span class="keyword">do</span> docker load &lt; <span class="variable">$images</span>;<span class="keyword">done</span></div></pre></td></tr></table></figure>
+<h2 id="系统设置"><a href="#系统设置" class="headerlink" title="系统设置"></a>系统设置</h2><p>以下操作需要在所有的master和slave1节点上执行.</p>
+<h3 id="关闭swap"><a href="#关闭swap" class="headerlink" title="关闭swap"></a>关闭swap</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo swapoff -a</div></pre></td></tr></table></figure>
+<h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ufw <span class="built_in">disable</span></div></pre></td></tr></table></figure>
+<h2 id="初始化k8s集群"><a href="#初始化k8s集群" class="headerlink" title="初始化k8s集群"></a>初始化k8s集群</h2><p><strong>坑1</strong>：初始化前，必须确保终端是可以科学上网的，可以用 <code>curl www.google.com</code> 验证，具体实现参考<a href="http://notes.maxwi.com/2017/04/01/linux-proxy-ss/" target="_blank" rel="external">Linux设置命令行代理</a>，利用 polipo 转 socks 为 http. 否则执行下面的初始化命令后，会一直卡在 <code>[init] This might take a minute or longer if the control plane images have to be pulled.</code></p>
+<p>利用 <code>kubeadm</code> 初始化集群:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --kubernetes-version=v1.10.0</div></pre></td></tr></table></figure>
+<p><strong>坑2</strong>：必须加 <code>--kubernetes-version=v1.10.0</code> 这个参数，不然 <code>kubeadm</code> 会默认先去联网确认 Kubernetes 的版本(这一操作要科学上网，就算能科学上网，网速慢那也是浪费时间).</p>
+<p>成功执行后，需要记录最后一行形如 <code>kubeadm join ...</code> 的输出信息，后面 <code>slave1</code> 节点加入集群时会用到.</p>
+<p>然后根据输出信息中的提示，分别执行以下三句命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir -p <span class="variable">$HOME</span>/.kube</div><div class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</div><div class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</div></pre></td></tr></table></figure>
+<p>然后可以执行 <code>sudo kubectl get pods --all-namespaces</code> 命令查看 <code>pod</code> 信息:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">sudo kubectl get pods --all-namespaces</div><div class="line"></div><div class="line">类似这样</div><div class="line"></div><div class="line">NAMESPACE     NAME                                    READY     STATUS    RESTARTS   AGE</div><div class="line">kube-system   etcd-k8s-master-01                      1/1       Running   0          9m</div><div class="line">kube-system   kube-apiserver-k8s-master-01            1/1       Running   0          9m</div><div class="line">kube-system   kube-controller-manager-k8s-master-01   1/1       Running   0          9m</div><div class="line">kube-system   kube-dns-86f4d74b45-sbbfr               0/3       Pending   0          9m</div><div class="line">kube-system   kube-proxy-4n7bh                        1/1       Running   0          9m</div><div class="line">kube-system   kube-scheduler-k8s-master-01            1/1       Running   0          8m</div></pre></td></tr></table></figure>
+<p>可以看到 <code>kube-dns</code> 的 <code>READY</code> 状态为 0/3，这是因为 <code>kube-dns</code> 默认跑在 <code>slave1</code> 节点的. 用 <code>kubectl describe</code> 命令查看详细描述找到原因.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo kubectl describe -n kube-system pod kube-dns-86f4d74b45-sbbfr</div></pre></td></tr></table></figure>
+<h2 id="slave1节点加入集群"><a href="#slave1节点加入集群" class="headerlink" title="slave1节点加入集群"></a>slave1节点加入集群</h2><p>在 <code>slave1</code> 节点执行 <code>sudo kubeadm join ...</code> 命令，即上面记录的在成功初始化 <code>master</code> 节点后输出的最后一行.</p>
+<p>然后在 <code>master</code> 节点用 <code>sudo kubectl get nodes</code> 命令查看 <code>node</code> 信息:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NAME      STATUS       ROLES     AGE       VERSION</div><div class="line">master    NotReady     master    2h        v1.10.0</div><div class="line">slave1    NotReady     &lt;none&gt;    2h        v1.10.0</div></pre></td></tr></table></figure>
+<p>可以看到STATUS都是NotReady，这是因为还未安装pod network，<a href="https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/" target="_blank" rel="external">官方教程</a>中说明了这一点:</p>
 <blockquote>
-<p>Not enough physical memory is available to power on this virtual machine with its configured settings. To fix this problem, increase the amount of physical memory for all virtual machines to 1035 MB or adjust the additional memory settings to allow more virtual machine memory to be swapped.</p>
+<p>You MUST install a pod network add-on so that your pods can communicate with each other.</p>
+<p>The network must be deployed before any applications. Also, kube-dns, an internal helper service, will not start up before a network is installed. kubeadm only supports Container Network Interface (CNI) based networks (and does not support kubenet).</p>
 </blockquote>
-<p>我的笔记本由16G的内存，不可能是因为物理内存不足的缘故，经过一番搜索，终于找到了解决方法，事实证明错误提示的内容没有任何指导性作用，因为这是因为内核版本过高(我的内核版本为 <code>4.13.8</code>)，导致与 VMware Workstation 14 不兼容的缘故.</p>
-<p>解决方法就是根据<a href="https://github.com/mkubecek/vmware-host-modules/commit/770c7ffe611520ac96490d235399554c64e87d9f" target="_blank" rel="external">这里</a>的修改信息，修改本地源码，注意必须是仅仅修改有变动的地方，不能直接将整份代码copy过来，因为网上的代码据网友说仅仅适配 VMware Workstation 12.5. 具体操作如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/lib/vmware/modules/<span class="built_in">source</span></div><div class="line">tar xf vmmon.tar</div><div class="line"><span class="built_in">cd</span> vmmon-only/linux</div><div class="line">vim hostif.c <span class="comment"># 修改这个文件里的代码</span></div><div class="line"><span class="built_in">cd</span> ../..</div><div class="line">tar cf vmmon.tar vmmon-only</div><div class="line">rm -rf vmmon-only <span class="comment"># cleanup</span></div><div class="line"></div><div class="line"><span class="comment"># Lastly, we need to rebuild the patched module</span></div><div class="line">sudo vmware-modconfig --console --install-all</div></pre></td></tr></table></figure>
-<p>重新启动 VMware，就能顺利创建虚拟机了！</p>
+<h2 id="安装-pod-network"><a href="#安装-pod-network" class="headerlink" title="安装 pod network"></a>安装 pod network</h2><p>在 <code>master</code> 节点执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://docs.projectcalico.org/v3.0/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml</div></pre></td></tr></table></figure>
+<p>修改 calico.yaml 文件，将 <code>CALICO_IPV4POOL_CIDR</code> 的 <code>value</code> 修改为 <code>10.244.0.0/16</code>(<code>CALICO_IPV4POOL_CIDR</code> 的值必须与初始化 <code>master</code> 节点时的 <code>--pod-network-cidr</code> 值保持一致).</p>
+<p><strong>坑3</strong>：这里还需要查看 <code>quay.io/coreos/etcd:v3.1.10</code>, <code>quay.io/calico/node:v3.0.4</code>, <code>quay.io/calico/cni:v2.0.3</code>, <code>quay.io/calico/kube-controllers:v2.0.2</code>等对应的版本是否与之前加载的镜像的版本一致，不一致则修改.</p>
+<p>然后执行 <code>sudo kubectl apply -f calico.yaml</code> 安装 <code>pod network</code>.</p>
+<p>执行 <code>ifconfig</code> 命令后如果看到多了一个 <code>tunl0</code> 网卡，且IP符合 <code>10.244.0.0/16</code> 这个网段，则安装成功，<code>slave1</code> 节点同理.</p>
+<p>此时再执行 <code>kubectl get pods --all-namespaces</code> 可以看到 <code>kube-dns</code> 变成了 <code>READY:3/3</code>，正常启动了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">NAMESPACE     NAME                                      READY     STATUS    RESTARTS   AGE</div><div class="line">kube-system   calico-etcd-bfjj7                         1/1       Running   0          2h</div><div class="line">kube-system   calico-kube-controllers-5449fdfcd-ww7km   1/1       Running   0          2h</div><div class="line">kube-system   calico-node-mfhdd                         2/2       Running   0          2h</div><div class="line">kube-system   calico-node-vxqf8                         2/2       Running   0          2h</div><div class="line">kube-system   etcd-master                               1/1       Running   0          2h</div><div class="line">kube-system   kube-apiserver-master                     1/1       Running   0          2h</div><div class="line">kube-system   kube-controller-manager-master            1/1       Running   0          2h</div><div class="line">kube-system   kube-dns-86f4d74b45-97kbr                 3/3       Running   0          2h</div><div class="line">kube-system   kube-proxy-fvgxc                          1/1       Running   0          2h</div><div class="line">kube-system   kube-proxy-vd5mx                          1/1       Running   0          2h</div><div class="line">kube-system   kube-scheduler-master                     1/1       Running   0          2h</div></pre></td></tr></table></figure>
+<p>执行 <code>sudo kubectl get nodes</code> 可以看到 <code>master</code> 和 <code>slave1</code> 节点的 <code>STATUS</code> 都变成了 <code>Ready</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NAME      STATUS    ROLES     AGE       VERSION</div><div class="line">master    Ready     master    2h        v1.10.0</div><div class="line">slave1    Ready     &lt;none&gt;    2h        v1.10.0</div></pre></td></tr></table></figure>
 <hr>
 <p>版权声明</p>
 <p><img src="http://i.imgur.com/fYrbApI.png" alt=""></p>
-<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/">http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/</a></p>
+<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2018/08/08/本地Ubuntu-16-04虚拟机中利用kubeadm安装kubernetes-v1-10-0集群/">http://hw2007.com/2018/08/08/本地Ubuntu-16-04虚拟机中利用kubeadm安装kubernetes-v1-10-0集群/</a></p>
 
       
     </div>
@@ -451,7 +498,7 @@
           
             <a href="/tags/Ubuntu/" rel="tag">#Ubuntu</a>
           
-            <a href="/tags/VMware/" rel="tag">#VMware</a>
+            <a href="/tags/Kubernetes/" rel="tag">#Kubernetes</a>
           
         </div>
       
@@ -460,17 +507,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/24/《统计学习方法》-第4章-朴素贝叶斯/" rel="next" title="《统计学习方法》- 第4章 朴素贝叶斯">
-                <i class="fa fa-chevron-left"></i> 《统计学习方法》- 第4章 朴素贝叶斯
+              <a href="/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/" rel="next" title="Ubuntu 16.04 安装 VMware Workstation 14">
+                <i class="fa fa-chevron-left"></i> Ubuntu 16.04 安装 VMware Workstation 14
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/08/本地Ubuntu-16-04虚拟机中利用kubeadm安装kubernetes-v1-10-0集群/" rel="prev" title="本地Ubuntu 16.04虚拟机中利用kubeadm安装kubernetes v1.10.0集群">
-                本地Ubuntu 16.04虚拟机中利用kubeadm安装kubernetes v1.10.0集群 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -600,7 +643,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装"><span class="nav-number">1.</span> <span class="nav-text">下载安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装依赖"><span class="nav-number">1.1.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载-VMware"><span class="nav-number">1.2.</span> <span class="nav-text">下载 VMware</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-VMware"><span class="nav-number">1.3.</span> <span class="nav-text">安装 VMware</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题及解决方法"><span class="nav-number">2.</span> <span class="nav-text">问题及解决方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统环境"><span class="nav-number">2.</span> <span class="nav-text">系统环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装软件"><span class="nav-number">3.</span> <span class="nav-text">安装软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装依赖"><span class="nav-number">3.1.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-docker，kubeadm，kubectl，kubelet"><span class="nav-number">3.2.</span> <span class="nav-text">安装 docker，kubeadm，kubectl，kubelet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入镜像"><span class="nav-number">3.3.</span> <span class="nav-text">导入镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统设置"><span class="nav-number">4.</span> <span class="nav-text">系统设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭swap"><span class="nav-number">4.1.</span> <span class="nav-text">关闭swap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭防火墙"><span class="nav-number">4.2.</span> <span class="nav-text">关闭防火墙</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化k8s集群"><span class="nav-number">5.</span> <span class="nav-text">初始化k8s集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slave1节点加入集群"><span class="nav-number">6.</span> <span class="nav-text">slave1节点加入集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-pod-network"><span class="nav-number">7.</span> <span class="nav-text">安装 pod network</span></a></li></ol></div>
             
           </div>
         </section>
