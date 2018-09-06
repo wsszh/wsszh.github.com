@@ -417,10 +417,10 @@
 <p>也可以从GitHub的<a href="https://github.com/OpenTSDB/opentsdb/releases" target="_blank" rel="external">release</a>版本中选择一个下载源码的zip或者tar.gz格式的压缩包（推荐），然后再用FileZilla等软件传到虚拟机上，我这里选择下载OpenTSDB 2.2.1版本的opentsdb-2.2.1.tar.gz，执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar xfz opentsdb-2.2.1.tar.gz</div></pre></td></tr></table></figure></p>
 <h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3><p>执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> opentsdb-2.2.1</div><div class="line">./build.sh</div></pre></td></tr></table></figure></p>
 <p>最好能在网络环境良好的情况下进行这一步，不然会非常非常慢。。<br>build成功后，可以执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make install</div></pre></td></tr></table></figure></p>
-<p>将OpenTSDB安装到系统中，这是可选的操作，如果install成功，可以直接在opentsdb-2.2.1目录(必须在这个目录下，不然会报错)下执行tsdb相关的命令，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tsdb tsd</div></pre></td></tr></table></figure></p>
-<p>可以通过执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">whereis tsdb</div></pre></td></tr></table></figure></p>
+<p>将OpenTSDB安装到系统中，这是可选的操作，如果install成功，可以直接在opentsdb-2.2.1目录(必须在这个目录下，不然会报错)下执行tsdb相关的命令，如：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">tsdb tsd</span></div></pre></td></tr></table></figure></p>
+<p>可以通过执行：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">whereis tsdb</span></div></pre></td></tr></table></figure></p>
 <p>查看是否install成功</p>
-<h3 id="创建OpenTSDB相关表"><a href="#创建OpenTSDB相关表" class="headerlink" title="创建OpenTSDB相关表"></a>创建OpenTSDB相关表</h3><p>在opentsdb-2.2.1目录下，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">env COMPRESSION=NONE HBASE_HOME=/root/local/hbase-1.2.3 ./src/create_table.sh</div></pre></td></tr></table></figure></p>
+<h3 id="创建OpenTSDB相关表"><a href="#创建OpenTSDB相关表" class="headerlink" title="创建OpenTSDB相关表"></a>创建OpenTSDB相关表</h3><p>在opentsdb-2.2.1目录下，执行：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">env <span class="attribute">COMPRESSION</span>=NONE <span class="attribute">HBASE_HOME</span>=/root/local/hbase-1.2.3 ./src/create_table.sh</div></pre></td></tr></table></figure></p>
 <p>执行成功后，会在HBase中创建tsdb、tsdb-uid、tsdb-tree、tsdb-meta这4张表</p>
 <h3 id="配置opentsdb-conf"><a href="#配置opentsdb-conf" class="headerlink" title="配置opentsdb.conf"></a>配置opentsdb.conf</h3><p>如果是RPM安装方式，这一步是不需要的</p>
 <p>将 src/opentsdb.conf 拷贝到如下目录之一：</p>
@@ -438,11 +438,11 @@
 <li>tsd.core.auto_create_metrics = true</li>
 </ul>
 <p>配置项的含义请参考<a href="http://opentsdb.net/docs/build/html/user_guide/configuration.html" target="_blank" rel="external">官方文档</a></p>
-<h3 id="启动TSD"><a href="#启动TSD" class="headerlink" title="启动TSD"></a>启动TSD</h3><p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./build/tsdb tsd</div></pre></td></tr></table></figure></p>
-<p>或者如第2步所说，在 make install 成功的情况下，直接在opentsdb-2.2.1目录(必须在这个目录下，不然会报错)下执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tsdb tsd</div></pre></td></tr></table></figure></p>
+<h3 id="启动TSD"><a href="#启动TSD" class="headerlink" title="启动TSD"></a>启动TSD</h3><p>执行：<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./<span class="keyword">build/tsdb </span>tsd</div></pre></td></tr></table></figure></p>
+<p>或者如第2步所说，在 make install 成功的情况下，直接在opentsdb-2.2.1目录(必须在这个目录下，不然会报错)下执行：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">tsdb tsd</span></div></pre></td></tr></table></figure></p>
 <p>如果出现如下图所示的信息，则说明TSD启动成功<br><img src="http://i.imgur.com/dgGueE3.png" alt=""></p>
 <p>通过浏览器访问 <a href="http://x.x.x.x:4242" target="_blank" rel="external">http://x.x.x.x:4242</a> 查看是否安装成功（x.x.x.x为虚拟机IP，注意防火墙，我关了防火墙才能访问）</p>
-<p>在这一步我困惑了好几天，因为执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./build/tsdb tsd</div></pre></td></tr></table></figure></p>
+<p>在这一步我困惑了好几天，因为执行<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./<span class="keyword">build/tsdb </span>tsd</div></pre></td></tr></table></figure></p>
 <p>这个命令后，Xshell一直停留在输出上图信息后的界面，我一开始以为是启动因为出错卡住不动了，google了好久也没找到错误，感觉google也拯救不了的时候，想到去GitHub提issue，还因此有幸跟OpenTSDB成员之一直接交流，后来无意中看到官方文档明确说明出现上图信息就算启动成功了，赶紧打开浏览器进行访问，结果还真的成功了。。。原来我从一开始就是对的，只是第一次碰到执行完命令后停留在输出日志的界面，我等了好久还是没有动静，就直接 ctrl + c 退出了，退出之后相当于结束了TSD进程，真很巧地更加让我认定是自己哪里做错了，教训：认真仔细看官方文档！！！<br>总结起来就是还剩一个问题，如何在成功执行命令后，退出输出日志信息的界面且不会影响已经启动的进程在后台运行？</p>
 <p>2016.12.01更新</p>
 <hr>
