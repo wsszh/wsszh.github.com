@@ -497,8 +497,8 @@ pre,
   margin: 20px 0;
   padding: 15px;
   font-size: 13px;
-  color: #c5c8c6;
-  background: #1d1f21;
+  color: #90a4ae;
+  background: #f6f8fa;
   line-height: 1.6;
 }
 pre,
@@ -508,14 +508,14 @@ code {
 code {
   padding: 2px 4px;
   word-wrap: break-all;
-  color: #c5c8c6;
-  background: #1d1f21;
+  color: #90a4ae;
+  background: #f6f8fa;
   border-radius: 3px;
   font-size: 13px;
 }
 pre code {
   padding: 0;
-  color: #c5c8c6;
+  color: #90a4ae;
   background: none;
   text-shadow: none;
 }
@@ -535,7 +535,7 @@ pre code {
 }
 .highlight figcaption {
   font-size: 1em;
-  color: #c5c8c6;
+  color: #90a4ae;
   line-height: 1em;
   margin-bottom: 1em;
 }
@@ -549,10 +549,10 @@ pre code {
 }
 .highlight figcaption a {
   float: right;
-  color: #c5c8c6;
+  color: #90a4ae;
 }
 .highlight figcaption a:hover {
-  border-bottom-color: #c5c8c6;
+  border-bottom-color: #90a4ae;
 }
 .highlight .gutter pre {
   color: #666;
@@ -575,10 +575,10 @@ pre .addition {
   background: #800000;
 }
 pre .meta {
-  color: #b294bb;
+  color: #7c4dff;
 }
 pre .comment {
-  color: #969896;
+  color: rgba(144,164,174,0.565);
 }
 pre .variable,
 pre .attribute,
@@ -592,7 +592,7 @@ pre .html .doctype,
 pre .css .id,
 pre .css .class,
 pre .css .pseudo {
-  color: #c66;
+  color: #e53935;
 }
 pre .number,
 pre .preprocessor,
@@ -601,7 +601,7 @@ pre .literal,
 pre .params,
 pre .constant,
 pre .command {
-  color: #de935f;
+  color: #f76d47;
 }
 pre .ruby .class .title,
 pre .css .rules .attribute,
@@ -614,11 +614,11 @@ pre .xml .cdata,
 pre .special,
 pre .number,
 pre .formula {
-  color: #b5bd68;
+  color: #91b859;
 }
 pre .title,
 pre .css .hexcolor {
-  color: #8abeb7;
+  color: #39adb5;
 }
 pre .function,
 pre .python .decorator,
@@ -628,11 +628,11 @@ pre .ruby .title .keyword,
 pre .perl .sub,
 pre .javascript .title,
 pre .coffeescript .title {
-  color: #81a2be;
+  color: #6182b8;
 }
 pre .keyword,
 pre .javascript .function {
-  color: #b294bb;
+  color: #7c4dff;
 }
 .full-image.full-image.full-image {
   border: none;
@@ -1557,7 +1557,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #54fbbd;
+  background: #661fbf;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2440,6 +2440,29 @@ hr {
     width: auto;
     text-align: center;
   }
+}
+code {
+  color: #ff7600;
+  background: #fbf7f8;
+  margin: 2px;
+}
+.highlight,
+pre {
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 3px;
+}
+.highlight,
+code,
+pre {
+  border: 1px solid #d6d6d6;
+}
+.post {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
 }
 ul.search-result-list {
   padding-left: 0px;
