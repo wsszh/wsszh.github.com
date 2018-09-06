@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://ov4rwusuw.bkt.clouddn.com/%E8%99%9A%E6%8B%9F%E6%9C%BAqcow2%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/fdisk4.png">
 <meta property="og:image" content="http://ov4rwusuw.bkt.clouddn.com/%E8%99%9A%E6%8B%9F%E6%9C%BAqcow2%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/fdisk5.png">
 <meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
-<meta property="og:updated_time" content="2018-09-06T13:19:50.063Z">
+<meta property="og:updated_time" content="2018-09-06T13:23:39.951Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="虚拟机qcow2磁盘扩容">
 <meta name="twitter:description" content="这两天在编译Linux内核源码，无奈用的虚拟机是从原先的虚拟机克隆得到的，磁盘可用空间只有8G左右，结果因为磁盘空间不够而导致编译报错，因此有了对磁盘扩容的需求. 虚拟机的分区为vda，虚拟机系统为Ubuntu 16.04，虚拟机磁盘格式为qcow2.">
@@ -444,6 +444,7 @@
 <p>确认磁盘是否扩容成功</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">szh@ubuntu-node3:~$ df -Th</div><div class="line">Filesystem                         Type      Size  Used Avail Use% Mounted on</div><div class="line">udev                               devtmpfs  477M     0  477M   0% /dev</div><div class="line">tmpfs                              tmpfs     100M  3.2M   97M   4% /run</div><div class="line">/dev/mapper/ubuntu--node1--vg-root ext4       14G  1.8G   11G  15% /</div><div class="line">tmpfs                              tmpfs     496M     0  496M   0% /dev/shm</div><div class="line">tmpfs                              tmpfs     5.0M     0  5.0M   0% /run/lock</div><div class="line">tmpfs                              tmpfs     496M     0  496M   0% /sys/fs/cgroup</div><div class="line">/dev/vda1                          ext2      472M   58M  391M  13% /boot</div><div class="line">tmpfs                              tmpfs     100M     0  100M   0% /run/user/1000</div></pre></td></tr></table></figure>
 <p>大功告成！</p>
+<p>参考：<a href="https://www.cnblogs.com/zlzlnet/p/6073817.html" target="_blank" rel="external">qcow2 磁盘在线扩容方法</a></p>
 <hr>
 <p>版权声明</p>
 <p><img src="http://i.imgur.com/fYrbApI.png" alt=""></p>
