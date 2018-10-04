@@ -330,6 +330,224 @@
             
               
                 
+                <a class="post-title-link" href="/2018/10/04/中国科学院大学《计算机算法设计与分析》第二次作业/" itemprop="url">
+                  中国科学院大学《计算机算法设计与分析》第二次作业
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-10-04T20:33:03+08:00" content="2018-10-04">
+              2018-10-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                
+                  <a href="/2018/10/04/中国科学院大学《计算机算法设计与分析》第二次作业/#SOHUCS" itemprop="discussionUrl">
+                    <span id="url::http://hw2007.com/2018/10/04/中国科学院大学《计算机算法设计与分析》第二次作业/" class="cy_cmt_count" data-xid="2018/10/04/中国科学院大学《计算机算法设计与分析》第二次作业/" itemprop="commentsCount" ></span>
+                  </a>
+                      
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/10/04/中国科学院大学《计算机算法设计与分析》第二次作业/" class="leancloud_visitors" data-flag-title="中国科学院大学《计算机算法设计与分析》第二次作业">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>国科大(UCAS)卜东波老师算法课作业答案.</p>
+<h3 id="1-Largest-Divisible-Subset"><a href="#1-Largest-Divisible-Subset" class="headerlink" title="1. Largest Divisible Subset"></a>1. Largest Divisible Subset</h3><p>Given a set of distinct positive integers, find the largest subset such that every pair $(S_i; S_j)$ of elements in this subset satisfies: $S_i \% S_j = 0$ or $S_j \% S_i = 0$.</p>
+<ul>
+<li>the optimal substructure and DP equation</li>
+</ul>
+<p>设 $dp[i]$ 表示最大元素为 $S_i$ 且符合条件的集合中最大集合包含的元素个数</p>
+<script type="math/tex; mode=display">dp[i] = \begin{cases} dp[j] + 1, \quad S_j < S_i ~ and ~ S_i \% S_j = 0 \\
+dp[i], \quad otherwise \end{cases}</script><ul>
+<li>pseudo-code</li>
+</ul>
+<figure class="highlight lua"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></div><div class="code"><pre><div class="line">FindLargestSet(S[<span class="number">1.</span>..n], dp[<span class="number">1.</span>..n])</div><div class="line">	<span class="built_in">max</span> = <span class="number">1</span></div><div class="line">    <span class="built_in">sort</span>(S[<span class="number">1.</span>..n])</div><div class="line">    <span class="keyword">for</span> i = <span class="number">1</span> -&gt; n <span class="keyword">do</span></div><div class="line">    	<span class="keyword">for</span> j = i - <span class="number">1</span> -&gt; <span class="number">0</span> <span class="keyword">do</span></div><div class="line">        	<span class="keyword">if</span> S[i] <span class="built_in">mod</span> S[j] = <span class="number">0</span> <span class="keyword">and</span> dp[i] &lt; dp[j] + <span class="number">1</span> <span class="keyword">then</span></div><div class="line">            	dp[i] = dp[j] + <span class="number">1</span></div><div class="line">            <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">        <span class="keyword">end</span> <span class="keyword">for</span></div><div class="line">        <span class="keyword">if</span> <span class="built_in">max</span> &lt; dp[i] <span class="keyword">then</span></div><div class="line">        	<span class="built_in">max</span> = dp[i]</div><div class="line">        <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">    <span class="keyword">end</span> <span class="keyword">for</span></div><div class="line">    <span class="keyword">return</span> <span class="built_in">max</span>;</div></pre></div></div></figure>
+<ul>
+<li>prove the correctness</li>
+</ul>
+<p>设 数组 $S[1…n]$ 中的元素升序排列， $T_j$ 表示 数组 $S[1…j]$ 中满足条件的最大集合，其中最大元素为 $S_j$，则 $S_j$ 可以被 $T_j$ 中所有比它小的元素整数，若 $S_{j+1} ~ \% ~ S_j = 0$，则 $S_{j+1}$ 可以被 $T_j$ 中所有的元素整除，即将 $S_{j+1}$ 加入 $T_j$ 中得到的集合 $T_{j+1}$ 也是符合条件的集合， 得证.</p>
+<ul>
+<li>the complexity of the algorithm</li>
+</ul>
+<p>将 $S[1…n]$ 排序的时间复杂度为 $O(n\log n)$，计算最大集合的时间复杂度为 $O(n^2)$，得</p>
+<script type="math/tex; mode=display">T(n) = O(n\log n) + O(n^2) = O(n^2)</script><h3 id="2-Money-robbing"><a href="#2-Money-robbing" class="headerlink" title="2. Money robbing"></a>2. Money robbing</h3><p>A robber is planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.</p>
+<ol>
+<li><p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</p>
+</li>
+<li><p>What if all houses are arranged in a circle ?</p>
+</li>
+</ol>
+<p><strong>当房子直线排列时</strong></p>
+<ul>
+<li>the optimal substructure and DP equation</li>
+</ul>
+<p>设 $S[1…n]$ 表示 $1…n$ 个房子存有的金额， $dp[i]$ 表示在前 $1…i$ 个房子中能抢到的最大金额</p>
+<script type="math/tex; mode=display">dp[i] = \max (dp[j] + S[i],dp[i - 1]),\quad j \leq i - 2</script><ul>
+<li>pseudo-code</li>
+</ul>
+<figure class="highlight lua"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></div><div class="code"><pre><div class="line">RobMaxMoney(S[<span class="number">1.</span>..n], dp[<span class="number">1.</span>..n])</div><div class="line">	<span class="keyword">if</span> n = <span class="number">0</span> <span class="keyword">then</span></div><div class="line">    	<span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">    <span class="keyword">if</span> n = <span class="number">1</span> <span class="keyword">then</span></div><div class="line">    	<span class="keyword">return</span> S[<span class="number">1</span>]</div><div class="line">    <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">	res = <span class="built_in">max</span>(S[<span class="number">1</span>], S[<span class="number">2</span>])</div><div class="line">    dp[<span class="number">1</span>] = S[<span class="number">1</span>], dp[<span class="number">2</span>] = <span class="built_in">max</span>(dp[<span class="number">1</span>], S[<span class="number">2</span>])</div><div class="line">    <span class="keyword">for</span> i = <span class="number">2</span> -&gt; n <span class="keyword">do</span></div><div class="line">    	<span class="keyword">for</span> j = <span class="number">0</span> -&gt; i - <span class="number">2</span> <span class="keyword">do</span></div><div class="line">        	dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>], dp[j] + S[i])</div><div class="line">        <span class="keyword">end</span> <span class="keyword">for</span></div><div class="line">        <span class="keyword">if</span> res &lt; dp[i] <span class="keyword">then</span></div><div class="line">        	res = dp[i]</div><div class="line">        <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">    <span class="keyword">end</span> <span class="keyword">for</span></div><div class="line">    <span class="keyword">return</span> res;</div></pre></div></div></figure>
+<ul>
+<li>prove the correctness</li>
+</ul>
+<p>设当前要抢的为第 $i$ 个房子，如果第 $i - 1$ 个房子已经抢过了，那么第 $i$ 个房子就不能抢了，所以前 $i$ 个房子抢到的最大金额等于前 $i - 1$ 个房子抢到的最大金额，记为 $dp[i] = dp[i - 1]$；如果第 $i - 1$ 个房子没有抢，那么前 $i$ 个房子抢到的最大金额等于前 $j$ 个房子抢到的最大金额加上第 $i$ 个房子抢到的金额，记为 $dp[i] = dp[j] + S[i], ~ j \leq i - 2$，取 $dp[j] + S[i], ~ j \leq i - 2$ 和 $dp[i-1]$ 两者的较大值，即为 $dp[i]$ 的最大值.</p>
+<ul>
+<li>the complexity of the algorithm</li>
+</ul>
+<script type="math/tex; mode=display">T(n) = T(\sum_{i=2}^n{(i - 1)}) = O(n^2)</script><p><strong>当房子成环排列时</strong></p>
+<ul>
+<li>the optimal substructure and DP equation</li>
+</ul>
+<p>最优子结构的表达式与房子直线排列时的情况相同：</p>
+<p>设 $S[1…n]$ 表示 $1…n$ 个房子存有的金额， $dp[i]$ 表示在前 $1…i$ 个房子中能抢到的最大金额</p>
+<script type="math/tex; mode=display">dp[i] = \max (dp[j] + S[i],dp[i - 1]),\quad j \leq i - 2</script><ul>
+<li>pseudo-code</li>
+</ul>
+<figure class="highlight coq"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></div><div class="code"><pre><div class="line">RobMaxMoney(S[<span class="number">1.</span>..n], dp[<span class="number">1.</span>..n], <span class="built_in">left</span>, <span class="built_in">right</span>)</div><div class="line">	<span class="keyword">if</span> n = <span class="number">0</span> <span class="keyword">then</span></div><div class="line">    	<span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">    <span class="keyword">if</span> n = <span class="number">1</span> <span class="keyword">then</span></div><div class="line">    	<span class="keyword">return</span> S[<span class="number">1</span>]</div><div class="line">    <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">	res = max(S[<span class="number">1</span>], S[<span class="number">2</span>])</div><div class="line">    dp[<span class="number">1</span>] = S[<span class="number">1</span>], dp[<span class="number">2</span>] = max(dp[<span class="number">1</span>], S[<span class="number">2</span>])</div><div class="line">    <span class="keyword">for</span> i = <span class="built_in">left</span> -&gt; <span class="built_in">right</span> <span class="built_in">do</span></div><div class="line">    	<span class="keyword">for</span> j = <span class="number">0</span> -&gt; i - <span class="number">2</span> <span class="built_in">do</span></div><div class="line">        	dp[i] = max(dp[i - <span class="number">1</span>], dp[j] + S[i])</div><div class="line">        <span class="keyword">end</span> <span class="keyword">for</span></div><div class="line">        <span class="keyword">if</span> res &lt; dp[i] <span class="keyword">then</span></div><div class="line">        	res = dp[i]</div><div class="line">        <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">    <span class="keyword">end</span> <span class="keyword">for</span></div><div class="line">    <span class="keyword">return</span> res;</div><div class="line"></div><div class="line">Main(S[<span class="number">1.</span>..n], dp[<span class="number">1.</span>..n])</div><div class="line">	<span class="keyword">return</span> max(RobMaxMoney(S, dp, <span class="number">0</span>, n - <span class="number">1</span>), RobMaxMoney(S, dp, <span class="number">1</span>, n));</div><div class="line">    </div><div class="line">RobMaxMoney(s[<span class="number">0.</span>..n<span class="number">-1</span>], <span class="built_in">cut</span>[<span class="number">0.</span>..n<span class="number">-1</span>], isPal[n][n])</div><div class="line">	<span class="keyword">for</span> i = <span class="number">0</span> -&gt; n<span class="number">-1</span> <span class="built_in">do</span></div><div class="line">    	<span class="built_in">cut</span>[i] = n - <span class="number">1</span> - i</div><div class="line">    <span class="keyword">for</span> i = n - <span class="number">1</span> -&gt; <span class="number">0</span> <span class="built_in">do</span></div><div class="line">    	<span class="keyword">for</span> j = i -&gt; n - <span class="number">1</span> <span class="built_in">do</span></div><div class="line">        	<span class="keyword">if</span> s[i] = s[j] and (j - i &lt; <span class="number">2</span> or isPal[i + <span class="number">1</span>][j - <span class="number">1</span>] = true) <span class="keyword">then</span></div><div class="line">            	isPal[i][j] = true</div><div class="line">                <span class="keyword">if</span> j = n - <span class="number">1</span> <span class="keyword">then</span></div><div class="line">                	<span class="built_in">cut</span>[i] = <span class="number">0</span></div><div class="line">                <span class="keyword">else</span></div><div class="line">                	<span class="built_in">cut</span>[i] = min(<span class="built_in">cut</span>[i], <span class="number">1</span> + <span class="built_in">cut</span>[j + <span class="number">1</span>])</div><div class="line">            	<span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">            <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">        <span class="keyword">end</span> <span class="keyword">for</span></div><div class="line">    <span class="keyword">end</span> <span class="keyword">for</span></div><div class="line">    <span class="keyword">return</span> <span class="built_in">cut</span>[<span class="number">0</span>];</div></pre></div></div></figure>
+<ul>
+<li>prove the correctness</li>
+</ul>
+<p>只要将环打破，就可以用房子直线排列时的解法做，打破环的方法就是先假设第 $n$ 个房子不抢，那么能抢的房子范围是 $S[1…n - 1]$，再假设第 $1$ 个房子不抢(因为第 $n$ 个房子和第 $1$ 个房子相邻)，那么能抢的房子范围是 $S[2…n]$，这两种情况覆盖的房子范围就是能抢的房子全集 $S[1…n]$，所以取两者的较大值就为所有房子中能抢到的最大金额.</p>
+<ul>
+<li>the complexity of the algorithm</li>
+</ul>
+<script type="math/tex; mode=display">T(n) = 2T(\sum_{i=2}^n{(i - 1)}) = O(n^2)</script><h3 id="3-Partition"><a href="#3-Partition" class="headerlink" title="3. Partition"></a>3. Partition</h3><p>Given a string s, partition s such that every substring of the partition is a palindrome. Return the minimum cuts needed for a palindrome partitioning of s.</p>
+<p>For example, given s = “aab”, return 1 since the palindrome partitioning [“aa”; “b”] could be produced using 1 cut.</p>
+<ul>
+<li>the optimal substructure and DP equation</li>
+</ul>
+<p>设 字符串 $s$ 长度为 $n$， $s[i]$ 表示字符串 $s$ 的第$i$个字符(下标从0开始)，$s[i…j]$ 表示下标从 $i$ 到 $j$ 的子串，$cut[i]$ 表示 $s[i…n-1]$ 最小的分割次数，$isPal[i][j]$ 表示 $s[i…j]$ 是否是回文字符串，是为 $true$，不是为 $false$.</p>
+<script type="math/tex; mode=display">cut[i] = \begin{cases} \min (cut[i], 1 + cut[j]),\quad i < j < n - 1 ~ and ~ isPal[i][j] = true \\
+0, \quad isPal[i][n - 1] = true \end{cases}</script><script type="math/tex; mode=display">isPal[i][j] = \begin{cases} true, \quad s[i] == s[j] ~ and ~ isPal[i + 1][j - 1] = true ~ and ~ 0 <= i < j < n \\
+true, \quad 0 <= i = j < n \\
+false, \quad otherwise \end{cases}</script><ul>
+<li>pseudo-code</li>
+</ul>
+<figure class="highlight coq"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></div><div class="code"><pre><div class="line">RobMaxMoney(s[<span class="number">0.</span>..n<span class="number">-1</span>], <span class="built_in">cut</span>[<span class="number">0.</span>..n<span class="number">-1</span>], isPal[n][n])</div><div class="line">	<span class="keyword">for</span> i = <span class="number">0</span> -&gt; n<span class="number">-1</span> <span class="built_in">do</span></div><div class="line">    	<span class="built_in">cut</span>[i] = n - <span class="number">1</span> - i</div><div class="line">    <span class="keyword">end</span> <span class="keyword">for</span></div><div class="line">    <span class="keyword">for</span> i = n - <span class="number">1</span> -&gt; <span class="number">0</span> <span class="built_in">do</span></div><div class="line">    	<span class="keyword">for</span> j = i -&gt; n - <span class="number">1</span> <span class="built_in">do</span></div><div class="line">        	<span class="keyword">if</span> s[i] = s[j] and (j - i &lt; <span class="number">2</span> or isPal[i + <span class="number">1</span>][j - <span class="number">1</span>] = true) <span class="keyword">then</span></div><div class="line">            	isPal[i][j] = true</div><div class="line">                <span class="keyword">if</span> j = n - <span class="number">1</span> <span class="keyword">then</span></div><div class="line">                	<span class="built_in">cut</span>[i] = <span class="number">0</span></div><div class="line">                <span class="keyword">else</span></div><div class="line">                	<span class="built_in">cut</span>[i] = min(<span class="built_in">cut</span>[i], <span class="number">1</span> + <span class="built_in">cut</span>[j + <span class="number">1</span>])</div><div class="line">            	<span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">            <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">        <span class="keyword">end</span> <span class="keyword">for</span></div><div class="line">    <span class="keyword">end</span> <span class="keyword">for</span></div><div class="line">    <span class="keyword">return</span> <span class="built_in">cut</span>[<span class="number">0</span>]</div></pre></div></div></figure>
+<ul>
+<li>prove the correctness</li>
+</ul>
+<p>字符串 $s[i…j]$ 是一个回文字符串，因此在 $s[j]$ 和 $s[j + 1]$ 直接可以切一刀(即分割次数记为1)，再加上 $s[j + 1…n-1]$ 的分割次数 $cut[j + 1]$ 即为字符串 $s[i…n-1]$ 分割总次数，取符合 $i &lt;= j &lt; n$ 的所有情况中分割次数最小的作为 $cut[i]$ 的值，字符串 $s[0…n-1]$ 的最小分割次数即为 $cut[0]$.</p>
+<ul>
+<li>the complexity of the algorithm</li>
+</ul>
+<script type="math/tex; mode=display">T(n) = O(n) + O(n(\sum_{i = 0}^{n-1}{n - i})) = O(n^2)</script><h3 id="6-Maximum-profit-of-transactions"><a href="#6-Maximum-profit-of-transactions" class="headerlink" title="6. Maximum profit of transactions"></a><strong>6. Maximum profit of transactions</strong></h3><p>You have an array for which the i-th element is the price of a given stock on day i.</p>
+<p>Design an algorithm and implement it to find the maximum profit. You may complete at most two transactions.</p>
+<p>Note: You may not engage in multiple transactions at the same time (ie, you must sell the<br>stock before you buy again).</p>
+<p>C++代码如下</p>
+<figure class="highlight c"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></div><div class="code"><pre><div class="line"><span class="comment">// profits[i][j] 表示第i次交易时，0到j天可以获得的最大收益</span></div><div class="line"><span class="comment">// profits[0][j] = 0，因为0次交易时必然没有收益</span></div><div class="line"><span class="comment">// profits[i][0] = 0，因为只有1天的股票价格时，不能进行一次完整的交易(买和卖)，收益为0</span></div><div class="line"><span class="comment">// profits[i][j] = max(profits[i][j - 1], prices[j] - profits[jj] + profits[i - 1][jj])</span></div><div class="line"><span class="comment">//               = max(profits[i][j - 1], prices[j] + max(profits[i - 1][jj] - profits[jj])), jj &lt; j and j &gt;= 1</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (prices.size() &lt; <span class="number">2</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> maxProf = <span class="number">0</span>;    <span class="comment">// 最大收益</span></div><div class="line">        <span class="keyword">int</span> K = <span class="number">2</span>;  <span class="comment">// K表示最多可交易的次数</span></div><div class="line"></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; profits(K + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(prices.size(), <span class="number">0</span>));</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= K; i++) &#123;</div><div class="line">            <span class="keyword">int</span> tmpMax = profits[i - <span class="number">1</span>][<span class="number">0</span>] - prices[<span class="number">0</span>];</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; prices.size(); j++) &#123;</div><div class="line">                profits[i][j] = max(profits[i][j - <span class="number">1</span>], prices[j] + tmpMax);</div><div class="line">                tmpMax = max(tmpMax, profits[i - <span class="number">1</span>][j] - prices[j]);</div><div class="line">                maxProf = max(profits[i][j], maxProf);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> maxProf;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></div></div></figure>
+<hr>
+<p>版权声明</p>
+<p><img src="http://i.imgur.com/fYrbApI.png" alt=""></p>
+<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2018/10/04/中国科学院大学《计算机算法设计与分析》第二次作业/">http://hw2007.com/2018/10/04/中国科学院大学《计算机算法设计与分析》第二次作业/</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/10/04/中国科学院大学《计算机算法设计与分析》第一次作业/" itemprop="url">
                   中国科学院大学《计算机算法设计与分析》第一次作业
                 </a>
@@ -1513,139 +1731,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/02/用scollector监控进程/" itemprop="url">
-                  用scollector监控进程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-02T17:06:44+08:00" content="2016-12-02">
-              2016-12-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/监控管理/" itemprop="url" rel="index">
-                    <span itemprop="name">监控管理</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                
-                  <a href="/2016/12/02/用scollector监控进程/#SOHUCS" itemprop="discussionUrl">
-                    <span id="url::http://hw2007.com/2016/12/02/用scollector监控进程/" class="cy_cmt_count" data-xid="2016/12/02/用scollector监控进程/" itemprop="commentsCount" ></span>
-                  </a>
-                      
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/12/02/用scollector监控进程/" class="leancloud_visitors" data-flag-title="用scollector监控进程">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>通过在scollector的配置文件中进行配置，就可以让scollector收集你需要的进程的相关数据</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/02/用scollector监控进程/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1691,7 +1776,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">20</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
