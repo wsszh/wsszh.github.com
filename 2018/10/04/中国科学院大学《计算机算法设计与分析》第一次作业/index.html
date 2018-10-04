@@ -1,0 +1,946 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="UCAS,Algorithm," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon_piggy02.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="1 Divide and ConquerYou are interested in analyzing some hard-to-obtain data from two separate databases. Each database contains n numerical values, so there are 2n values total and you may assume tha">
+<meta name="keywords" content="UCAS,Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中国科学院大学《计算机算法设计与分析》第一次作业">
+<meta property="og:url" content="http://hw2007.com/2018/10/04/中国科学院大学《计算机算法设计与分析》第一次作业/index.html">
+<meta property="og:site_name" content="萝卜姓胡">
+<meta property="og:description" content="1 Divide and ConquerYou are interested in analyzing some hard-to-obtain data from two separate databases. Each database contains n numerical values, so there are 2n values total and you may assume tha">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
+<meta property="og:updated_time" content="2018-10-04T04:06:44.135Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="中国科学院大学《计算机算法设计与分析》第一次作业">
+<meta name="twitter:description" content="1 Divide and ConquerYou are interested in analyzing some hard-to-obtain data from two separate databases. Each database contains n numerical values, so there are 2n values total and you may assume tha">
+<meta name="twitter:image" content="http://i.imgur.com/fYrbApI.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    root: '/',
+    algolia: {
+        applicationID: 'UH9KXPVVBW',
+        apiKey: '24b06abc0bbc2df99a5b86549e257b19',
+        indexName: 'hexo_search',
+        hits: {"per_page":10},
+        labels: {"input_placeholder":"搜索...","hits_empty":"未发现与 「${query}」相关的内容","hits_stats":"${hits} 条相关条目，使用了 ${time} 毫秒"}
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://hw2007.com/2018/10/04/中国科学院大学《计算机算法设计与分析》第一次作业/"/>
+
+
+  <title> 中国科学院大学《计算机算法设计与分析》第一次作业 | 萝卜姓胡 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a662bfc3e569bb59a332a1b44dd6dcd7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  
+    
+
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
+  
+  
+  <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+  
+  
+
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><script src="//cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/src/algolia.js?v=5.0.2"></script>
+<div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">萝卜姓胡</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="algolia-popup popup">
+  <div class="algolia-search">
+    <div class="algolia-search-input-icon">
+      <i class="fa fa-search"></i>
+    </div>
+    <div class="algolia-search-input" id="algolia-search-input"></div>
+  </div>
+  <div class="algolia-results">
+    <div id="algolia-stats"></div>
+    <div id="algolia-hits"></div>
+    <div id="algolia-pagination" class="algolia-pagination"></div>
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                中国科学院大学《计算机算法设计与分析》第一次作业
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-10-04T11:26:50+08:00" content="2018-10-04">
+              2018-10-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                
+                  <a href="/2018/10/04/中国科学院大学《计算机算法设计与分析》第一次作业/#SOHUCS" itemprop="discussionUrl">
+                    <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/10/04/中国科学院大学《计算机算法设计与分析》第一次作业/" itemprop="commentsCount"></span>
+                  </a>
+                      
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/10/04/中国科学院大学《计算机算法设计与分析》第一次作业/" class="leancloud_visitors" data-flag-title="中国科学院大学《计算机算法设计与分析》第一次作业">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-Divide-and-Conquer"><a href="#1-Divide-and-Conquer" class="headerlink" title="1 Divide and Conquer"></a>1 Divide and Conquer</h3><p>You are interested in analyzing some hard-to-obtain data from two separate databases. Each database contains n numerical values, so there are 2n values total and you may assume that no two values are the same. You’d like to determine the median of this set of 2n values, which we will define here to be the n th smallest value.</p>
+<a id="more"></a>
+<p>However, the only way you can access these values is through queries to the databases. In<br>a single query, you can specify a value k to one of the two databases, and the chosen database will return the k th smallest value that it contains. Since queries are expensive, you would like to compute the median using as few queries as possible.</p>
+<p>Give an algorithm that finds the median value using at most O(log n) queries.</p>
+<ul>
+<li>The desciption of algorithm and the pseudo-code</li>
+</ul>
+<p>算法的思路是在第一个数据库中找出一个元素$a_i$，在第二个数据库中找出一个元素$b_j$，并保证小于等于$a_i$和$b_j$的元素总数为$N$个，然后在所有小于$a_i$的元素中找出最大的元素$a_m$，在所有小于$b_j$的元素中找出最大的元素$b_n$，两个数据库所有的元素中第$n$小的元素就是$max(a_m,b_n)$.</p>
+<p>伪代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">FindMedianValue(a[<span class="number">1.</span>..n], b[<span class="number">1.</span>..n])</div><div class="line">	<span class="built_in">i</span> = <span class="number">1</span>, <span class="built_in">j</span> = n;</div><div class="line">    <span class="keyword">if</span> a[n] &lt;= b[<span class="number">1</span>] then</div><div class="line">    	<span class="keyword">return</span> a[n];</div><div class="line">    <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">    <span class="keyword">if</span> a[<span class="number">1</span>] &gt;= b[n] then</div><div class="line">    	<span class="keyword">return</span> b[n];</div><div class="line">	<span class="keyword">end</span> <span class="keyword">if</span>        </div><div class="line">	<span class="keyword">while</span> <span class="built_in">j</span> - <span class="number">1</span> &gt;= <span class="number">2</span> do</div><div class="line">    	k = (<span class="built_in">i</span> + <span class="built_in">j</span>) / <span class="number">2</span></div><div class="line">        flag = a[k] - b[n - k + <span class="number">1</span>];</div><div class="line">        <span class="keyword">if</span> flag &gt; <span class="number">0</span> then</div><div class="line">        	<span class="built_in">j</span> = k;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> flag &lt; <span class="number">0</span> then</div><div class="line">        	<span class="built_in">i</span> = k;</div><div class="line">        <span class="keyword">else</span> </div><div class="line">        	<span class="keyword">return</span> a[k];</div><div class="line">        <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">	<span class="keyword">end</span> <span class="keyword">while</span></div><div class="line">    <span class="keyword">return</span> max(a[k], b[n - k]);</div></pre></td></tr></table></figure>
+<ul>
+<li>Subproblem reduction graph</li>
+</ul>
+<center>![img](http://ov4rwusuw.bkt.clouddn.com/%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%E9%99%A2%E5%A4%A7%E5%AD%A6%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E3%80%8B%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A/1-1.png)</center>
+
+<ul>
+<li>Prove the correctness</li>
+</ul>
+<p>设第一个数据库中第k小的元素为$a_k$，第二个数据库中第k小的元素为$b_k$，$f(k)$是关于$k$的单调递增函数，定义如下：</p>
+<script type="math/tex; mode=display">f(k) = a_{k} - b_{n - k + 1}</script><p>特别地，当$f(1) \geq 0$时，$b_n$就是第n小的元素；当$f(n) \leq 0$时，$a_n$就是第n小的元素. 若能找到一个$k$，使得：</p>
+<script type="math/tex; mode=display">{f(k) \leq 0}</script><script type="math/tex; mode=display">f(k + 1) \geq 0</script><p>这表明：</p>
+<script type="math/tex; mode=display">a_1 \leq ... \leq a_k \leq b_{n - k + 1}</script><script type="math/tex; mode=display">b_1 \leq ... \leq b_{n-k} \leq a_{k+1}</script><p>设集合$S=\{a_1,a_2,…,a_k,b_1,b_2,…,b_{n-k}\}$，S的元素个数为$n$，由上可知，$max(a_k,b_{n-k})$就是第$n$小的元素.</p>
+<ul>
+<li>The complexity of the algorithm</li>
+</ul>
+<script type="math/tex; mode=display">T(n) = T(n/2) + cn = O(n\log n)</script><h3 id="2-Divide-and-Conquer"><a href="#2-Divide-and-Conquer" class="headerlink" title="2 Divide and Conquer"></a>2 Divide and Conquer</h3><p>Find the $k^{th}$ largest element in an unsorted array. Note that it is the $k^{th}$ largest element in the sorted order, not the $k^{th}$ distinct element.</p>
+<p>INPUT: An unsorted array A and k.</p>
+<p>OUTPUT: The $k^{th}$ largest element in the unsorted array A.</p>
+<ul>
+<li>The desciption of algorithm and the pseudo-code</li>
+</ul>
+<p>算法的思路是利用快速排序的思想，每次从当前序列中找出一个<code>pivot</code>，把比<code>pivot</code>大的元素都放左边，比<code>pivot</code>小的元素放右边，然后将<code>pivot</code>所在位置<code>pos</code>与<code>k-1</code>比较，若相等，则<code>pivot</code>就是第k大的元素；若<code>pos</code>大于<code>k-1</code>，则第k大的元素必然在<code>pos</code>的左边；若<code>pos</code>小于<code>k-1</code>，则第k大的元素必然在<code>pos</code>的右边.</p>
+<p>伪代码如下：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">FindKthLargest(A, k)</div><div class="line">	<span class="built_in">left</span> = <span class="number">0</span>, <span class="built_in">right</span> = A.length - <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></div><div class="line">    	pos = partion(A, <span class="built_in">left</span>, <span class="built_in">right</span>)</div><div class="line">        <span class="keyword">if</span> pos == k - <span class="number">1</span> <span class="keyword">then</span></div><div class="line">        	return A[pos];</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> pos &gt; k - <span class="number">1</span> <span class="keyword">then</span></div><div class="line">        	<span class="built_in">right</span> = pos - <span class="number">1</span>;</div><div class="line">        <span class="keyword">else</span> </div><div class="line">        	<span class="built_in">left</span> = pos + <span class="number">1</span>;</div><div class="line">        <span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">	<span class="keyword">end</span> <span class="keyword">while</span></div></pre></td></tr></table></figure>
+<ul>
+<li>Subproblem reduction graph</li>
+</ul>
+<center>![img](http://ov4rwusuw.bkt.clouddn.com/%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%E9%99%A2%E5%A4%A7%E5%AD%A6%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E3%80%8B%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A/1-1.png)</center>
+
+<ul>
+<li>Prove the correctness</li>
+</ul>
+<p>设A的元素个数为<code>n</code>(下标从0开始)，第k大的元素为<code>t</code>，第一次选择的<code>pivot</code>的位置为<code>p</code>，则大于<code>pivot</code>的元素个数为<code>p</code>，小于<code>pivot</code>的元素个数为<code>n - p - 1</code>；若$p = k-1$，则<code>pivot</code>就是第k大的元素；若$p &gt; k-1$，则$pivot \leq t$，<code>t</code>必然在<code>pivot</code>的左边；若$p &lt; k - 1$，则$pivot \geq t$，<code>t</code>必然在<code>pivot</code>的右边. 因此，递归搜索可以找到第k大的元素<code>t</code>.</p>
+<ul>
+<li>The complexity of the algorithm</li>
+</ul>
+<script type="math/tex; mode=display">Average: T(n) = T(n/2) + cn = O(n\log n)</script><script type="math/tex; mode=display">Worst: T(n) = T(n-1) + cn = O(n^2)</script><h3 id="3-Divide-and-Conquer"><a href="#3-Divide-and-Conquer" class="headerlink" title="3 Divide and Conquer"></a>3 Divide and Conquer</h3><p>Consider an n-node complete binary tree $T$ , where $n = 2^d − 1$ for some $d$. Each node $v$ of T is labeled with a real number $x_v$ . You may assume that the real numbers labeling the nodes are all distinct. A node $v$ of $T$ is a local minimum if the label $x_v$ is less than the label $x_w$ for all nodes $w$ that are joined to $v$ by an edge.</p>
+<p>You are given such a complete binary tree $T$ , but the labeling is only specified in the following implicit way: for each node $v$, you can determine the value $x_v$ by probing the node $v$. Show how to find a local minimum of $T$ using only $O(\log n)$ probes to the nodes of $T$ .</p>
+<ul>
+<li>The desciption of algorithm and the pseudo-code</li>
+</ul>
+<p>算法的思路是，先比较根节点和它的两个孩子节点，若根节点最小，则直接返回根节点，否则，递归查找较小的孩子节点对应的子树.</p>
+<p>伪代码如下：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">FindLocalMin(T)</div><div class="line">	<span class="attr">v</span> == probe(T.root());</div><div class="line">    <span class="attr">v_l</span> = probe(T.leftChild());</div><div class="line">    <span class="attr">v_r</span> = probe(T.rightChild());</div><div class="line">    <span class="keyword">if</span> v &lt; v_l <span class="literal">and</span> v &lt; v_r <span class="keyword">then</span></div><div class="line">    	return T.root()</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> v_l &lt; v_r <span class="keyword">then</span></div><div class="line">    	FindLocalMin(T.leftChild());</div><div class="line">    <span class="keyword">else</span> <span class="keyword">then</span></div><div class="line">    	FindLocalMin(T.rightChild());</div><div class="line">    end <span class="keyword">if</span></div></pre></td></tr></table></figure>
+<ul>
+<li>Subproblem reduction graph</li>
+</ul>
+<center>![img](http://ov4rwusuw.bkt.clouddn.com/%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%E9%99%A2%E5%A4%A7%E5%AD%A6%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E3%80%8B%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A/1-1.png)</center>
+
+<ul>
+<li>Prove the correctness</li>
+</ul>
+<p>设当前二叉树为<code>T</code>，其根节点为<code>T.root</code>，根节点的左右孩子节点分别为<code>T.left</code>，<code>T.right</code>，若<code>T.root &lt; T.left</code> 且 <code>T.root &lt; T.right</code>，则<code>T.root</code>就为局部最小节点，否则，选择左右孩子节点中较小的那个对应的子树，作为新的二叉树<code>T</code>，重复上述操作，必能找到局部最小节点.</p>
+<ul>
+<li>The complexity of the algorithm</li>
+</ul>
+<script type="math/tex; mode=display">T(n) = T(n/2) + cn = O(n\log n)</script><h3 id="8-Divide-and-Conquer"><a href="#8-Divide-and-Conquer" class="headerlink" title="8 Divide and Conquer"></a>8 Divide and Conquer</h3><p>The attached file Q8.txt contains 100,000 integers between 1 and 100,000 (each row has a<br>single integer), the order of these integers is random and no integer is repeated.</p>
+<ol>
+<li>Write a program to implement the Sort-and-Count algorithms in your favorite language, find the number of inversions in the given file.</li>
+<li>In the lecture, we count the number of inversions in O(n log n) time, using the Merge-Sort idea. Is it possible to use the Quick-Sort idea instead ? If possible, implement the algorithm in your favourite language, run it over the given file, and compare its running time with the one above. If not, give a explanation.</li>
+</ol>
+<p>1.Java源码如下：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.BufferedReader;</div><div class="line"><span class="keyword">import</span> java.io.<span class="built_in">File</span>;</div><div class="line"><span class="keyword">import</span> java.io.FileInputStream;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Created by Shi Zhonghao on 17-10-5.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> class Main &#123;</div><div class="line"></div><div class="line">    final <span class="keyword">static</span> <span class="keyword">int</span> LEN = <span class="number">100000</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> count = <span class="number">0</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] <span class="keyword">array</span> = <span class="keyword">new</span> <span class="keyword">int</span>[LEN];</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] tempArr = <span class="keyword">new</span> <span class="keyword">int</span>[LEN];</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line">        <span class="comment">// 读取Q8.txt中的数据存入array数组中，这里使用了文件的相对路径</span></div><div class="line">        <span class="built_in">try</span> &#123;</div><div class="line">            <span class="keyword">String</span> pathName = <span class="string">"Q8.txt"</span>;</div><div class="line">            <span class="built_in">File</span> fileName = <span class="keyword">new</span> <span class="built_in">File</span>(pathName);</div><div class="line">            InputStreamReader reader = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(fileName));</div><div class="line">            BufferedReader buf = <span class="keyword">new</span> BufferedReader(reader);</div><div class="line">            <span class="keyword">String</span> <span class="built_in">line</span>;</div><div class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">            <span class="built_in">while</span> ((<span class="built_in">line</span> = buf.readLine()) != null) &#123;</div><div class="line">                <span class="comment">// System.out.println(line);</span></div><div class="line">                <span class="keyword">array</span>[i++] = Integer.<span class="built_in">parseInt</span>(<span class="built_in">line</span>);</div><div class="line">            &#125;</div><div class="line">            count = <span class="number">0</span>;</div><div class="line">            mergeSort(<span class="number">0</span>, <span class="keyword">array</span>.length - <span class="number">1</span>);</div><div class="line">            System.out.<span class="built_in">println</span>(count);</div><div class="line">        &#125; <span class="built_in">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 归并排序的递归调用</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> mergeSort(<span class="keyword">int</span> low, <span class="keyword">int</span> high) &#123;</div><div class="line">        <span class="built_in">if</span> (low &gt;= high) &#123;</div><div class="line">            <span class="built_in">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> mid = low + (high - low) / <span class="number">2</span>;</div><div class="line">        mergeSort(low, mid);</div><div class="line">        mergeSort(mid + <span class="number">1</span>, high);</div><div class="line">        mergeAndSort(low, mid, high);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 将两个升序排列的数组合并成一个升序排列的数组，并计算两个数组直接首尾拼接的情况下包含多少个逆序对</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> mergeAndSort(<span class="keyword">int</span> low, <span class="keyword">int</span> mid, <span class="keyword">int</span> high) &#123;</div><div class="line">        <span class="keyword">int</span> temp = low;</div><div class="line">        <span class="keyword">int</span> idx = low;</div><div class="line">        <span class="keyword">int</span> center = mid + <span class="number">1</span>;</div><div class="line">        <span class="built_in">while</span> (low &lt;= mid &amp;&amp; center &lt;= high) &#123;</div><div class="line">            <span class="built_in">if</span> (<span class="keyword">array</span>[low] &lt;= <span class="keyword">array</span>[center])</div><div class="line">                tempArr[idx++] = <span class="keyword">array</span>[low++];</div><div class="line">            <span class="built_in">else</span> &#123;</div><div class="line">                tempArr[idx++] = <span class="keyword">array</span>[center++];</div><div class="line">                <span class="comment">// 如果array[low]大于array[center]，则[low,mid]这个区间内的元素都大于array[center]</span></div><div class="line">                count += mid - low + <span class="number">1</span>; </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">while</span> (low &lt;= mid) &#123;</div><div class="line">            tempArr[idx++] = <span class="keyword">array</span>[low++];</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">while</span> (center &lt;= high) &#123;</div><div class="line">            tempArr[idx++] = <span class="keyword">array</span>[center++];</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">while</span> (temp &lt;= high) &#123;</div><div class="line">            <span class="keyword">array</span>[temp] = tempArr[temp++];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2.不能用快排，因为在快排的过程中，每次选择的pivot两侧的数组都是乱序的，如果计算这两个数组包含的逆序对个数，时间复杂度为$O(n^2)$.</p>
+<h3 id="9-Divide-and-Conquer"><a href="#9-Divide-and-Conquer" class="headerlink" title="9 Divide and Conquer"></a>9 Divide and Conquer</h3><p>Implement the algorithm for the closest pair problem in your favourite language.</p>
+<p>INPUT: n points in a plane.</p>
+<p>OUTPUT: The pair with the least Euclidean distance.</p>
+<p>Java源码如下：</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.<span class="keyword">BufferedReader</span>;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"><span class="keyword">import</span> java.io.StreamTokenizer;</div><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"><span class="keyword">import</span> java.util.Comparator;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * User: szh</span></div><div class="line"><span class="comment"> * Date: 2017-10-09</span></div><div class="line"><span class="comment"> * Time: 下午10:09</span></div><div class="line"><span class="comment"> */</span></div><div class="line"></div><div class="line">class <span class="built_in">point</span> &#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">double</span> x;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">double</span> y;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">double</span> getX() &#123;</div><div class="line">        <span class="keyword">return</span> x;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> setX(<span class="keyword">double</span> x) &#123;</div><div class="line">        <span class="keyword">this</span>.x = x;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">double</span> getY() &#123;</div><div class="line">        <span class="keyword">return</span> y;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> setY(<span class="keyword">double</span> y) &#123;</div><div class="line">        <span class="keyword">this</span>.y = y;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class XComparator implements Comparator&lt;<span class="built_in">point</span>&gt; &#123;</div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> <span class="built_in">int</span> compare(<span class="built_in">point</span> o1, <span class="built_in">point</span> o2) &#123;</div><div class="line">        <span class="keyword">return</span> (<span class="built_in">int</span>) (o1.getX() - o2.getX());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class YComparator implements Comparator&lt;<span class="built_in">point</span>&gt; &#123;</div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> <span class="built_in">int</span> compare(<span class="built_in">point</span> o1, <span class="built_in">point</span> o2) &#123;</div><div class="line">        <span class="keyword">return</span> (<span class="built_in">int</span>) (o1.getY() - o2.getY());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> class Main &#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">point</span>[] points;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">int</span> MAX = Integer.MAX_VALUE;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">int</span> n;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) <span class="keyword">throws</span> Exception &#123;</div><div class="line">        StreamTokenizer st = <span class="keyword">new</span> StreamTokenizer(<span class="keyword">new</span> <span class="keyword">BufferedReader</span>(<span class="keyword">new</span> InputStreamReader(System.in)));</div><div class="line">        <span class="keyword">while</span> (st.nextToken() != StreamTokenizer.TT_EOF) &#123;</div><div class="line">            n = (<span class="built_in">int</span>) st.nval;</div><div class="line">            <span class="comment">// n表示要输入n个点的坐标</span></div><div class="line">            <span class="keyword">if</span> (<span class="number">0</span> == n)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="comment">// 这句代码只是创建了一个长度为n的对象数组，里面的元素都还是空的！！！</span></div><div class="line">            points = <span class="keyword">new</span> <span class="built_in">point</span>[n];</div><div class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">                <span class="built_in">point</span> p = <span class="keyword">new</span> <span class="built_in">point</span>();</div><div class="line">                st.nextToken();</div><div class="line">                p.setX(st.nval);</div><div class="line">                st.nextToken();</div><div class="line">                p.setY(st.nval);</div><div class="line">                points[i] = p;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 将所有点按照x坐标从小到大排序</span></div><div class="line">            Arrays.<span class="built_in">sort</span>(points, <span class="keyword">new</span> XComparator());</div><div class="line">            System.out.<span class="built_in">println</span>(<span class="keyword">String</span>.format(<span class="string">"%.2f"</span>, closestPairDis(<span class="number">0</span>, n<span class="number">-1</span>)).toString());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">	<span class="comment">// 计算两点之间的距离</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> dis(<span class="built_in">point</span> p1, <span class="built_in">point</span> p2) &#123;</div><div class="line">        <span class="keyword">return</span> Math.<span class="built_in">sqrt</span>(Math.<span class="built_in">pow</span>((p1.getX() - p2.getX()), <span class="number">2</span>) + Math.<span class="built_in">pow</span>((p1.getY() - p2.getY()), <span class="number">2</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> closestPairDis(<span class="built_in">int</span> left, <span class="built_in">int</span> right) &#123;</div><div class="line">        <span class="keyword">if</span> (left == right)</div><div class="line">            <span class="keyword">return</span> MAX;</div><div class="line">        <span class="keyword">if</span> (left + <span class="number">1</span> == right) &#123;</div><div class="line">            <span class="keyword">return</span> dis(points[left], points[right]);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">int</span> mid;</div><div class="line">        <span class="keyword">double</span> left_dis, right_dis, min_dis;</div><div class="line">        mid = left + (right - left) / <span class="number">2</span>;</div><div class="line">        left_dis = closestPairDis(left, mid);	<span class="comment">// 左边一半点对的最小距离</span></div><div class="line">        right_dis = closestPairDis(mid + <span class="number">1</span>, right);	<span class="comment">// 右边一半点对的最小距离</span></div><div class="line">        min_dis = Math.<span class="built_in">min</span>(left_dis, right_dis);</div><div class="line">        <span class="built_in">point</span>[] temp = <span class="keyword">new</span> <span class="built_in">point</span>[n];</div><div class="line">        <span class="built_in">int</span> j = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = left; i &lt;= right; i++) &#123;</div><div class="line">            <span class="keyword">if</span> (Math.<span class="built_in">abs</span>(points[i].getX() - points[mid].getX()) &lt;= min_dis)</div><div class="line">                temp[j++] = points[i];</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 将所有点按照y坐标从小到大排序</span></div><div class="line">        Arrays.<span class="built_in">sort</span>(temp, <span class="number">0</span>, j, <span class="keyword">new</span> YComparator());</div><div class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; j; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> k = i + <span class="number">1</span>, m = <span class="number">0</span>; k &lt; j &amp;&amp; m &lt; <span class="number">11</span>; k++) &#123;</div><div class="line">                min_dis = Math.<span class="built_in">min</span>(min_dis, dis(temp[i], temp[k]));</div><div class="line">                m++;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> min_dis;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>版权声明</p>
+<p><img src="http://i.imgur.com/fYrbApI.png" alt=""></p>
+<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2018/10/04/中国科学院大学《计算机算法设计与分析》第一次作业/">http://hw2007.com/2018/10/04/中国科学院大学《计算机算法设计与分析》第一次作业/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/UCAS/" rel="tag">#UCAS</a>
+          
+            <a href="/tags/Algorithm/" rel="tag">#Algorithm</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/03/采用CFS调度算法的Linux内核中获取进程时间片长度/" rel="next" title="采用CFS调度算法的Linux内核中获取进程时间片长度">
+                <i class="fa fa-chevron-left"></i> 采用CFS调度算法的Linux内核中获取进程时间片长度
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+      
+        <script type="text/javascript">
+          (function(){
+            var appid = 'cytaVkM4l';
+            var conf = 'b4b0fd43ee0338e4247fe398974ad1aa';
+            var width = window.innerWidth || document.documentElement.clientWidth;
+            if (width < 960) {
+              window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+               window.changyan.api.config({appid:appid,conf:conf})});
+              }
+          })();
+        </script>
+        <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+      
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar_Teddy.jpg"
+               alt="萝卜姓胡" />
+          <p class="site-author-name" itemprop="name">萝卜姓胡</p>
+          <p class="site-description motion-element" itemprop="description">If you really want it！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Divide-and-Conquer"><span class="nav-number">1.</span> <span class="nav-text">1 Divide and Conquer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Divide-and-Conquer"><span class="nav-number">2.</span> <span class="nav-text">2 Divide and Conquer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Divide-and-Conquer"><span class="nav-number">3.</span> <span class="nav-text">3 Divide and Conquer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Divide-and-Conquer"><span class="nav-number">4.</span> <span class="nav-text">8 Divide and Conquer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Divide-and-Conquer"><span class="nav-number">5.</span> <span class="nav-text">9 Divide and Conquer</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">萝卜姓胡</span>
+</div>
+
+<div class="powered-by">  
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+
+<div class="theme-info">
+    <span id="busuanzi_container_site_pv">
+        &nbsp; | &nbsp; Total visited <span id="busuanzi_value_site_pv"></span> times.
+    </span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("72cFjAylbVbzsh9SAOVcrm93-gzGzoHsz", "MYdbmBGVETkoOFgUsRAUnYTF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</body>
+</html>
