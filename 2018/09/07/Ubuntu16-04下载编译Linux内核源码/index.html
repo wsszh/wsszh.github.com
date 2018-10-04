@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Ubuntu,Linux," />
+  <meta name="keywords" content="Linux,Ubuntu," />
 
 
 
@@ -85,7 +85,7 @@
 
 
 <meta name="description" content="下载内核源码搜索可下载的源码包 1apt-cache search linux-source 查看系统当前的内核版本 123szh@ubuntu-node3:~$ uname -r4.4.0-87-generic">
-<meta name="keywords" content="Ubuntu,Linux">
+<meta name="keywords" content="Linux,Ubuntu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu16.04下载编译Linux内核源码">
 <meta property="og:url" content="http://hw2007.com/2018/09/07/Ubuntu16-04下载编译Linux内核源码/index.html">
@@ -409,30 +409,30 @@
 
       
         <h3 id="下载内核源码"><a href="#下载内核源码" class="headerlink" title="下载内核源码"></a>下载内核源码</h3><p>搜索可下载的源码包</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-cache search linux-source</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">apt-cache search linux-source</div></pre></div></div></figure>
 <p>查看系统当前的内核版本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">szh@ubuntu-node3:~$ uname -r</div><div class="line"></div><div class="line">4.4.0-87-generic</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></div><div class="code"><pre><div class="line">szh@ubuntu-node3:~$ uname -r</div><div class="line"></div><div class="line">4.4.0-87-generic</div></pre></div></div></figure>
 <a id="more"></a>
 <p>一开始我采用下面的命令下载的源码，但是在执行<code>make modules_install</code>时报错，而且这个错误竟然都Google不到</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install linux-source-4.4.0</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">sudo apt-get install linux-source-4.4.0</div></pre></div></div></figure>
 <p>因此改为去<a href="https://www.kernel.org/" target="_blank" rel="external">官网</a>下载对应版本的最新源码包，系统原来的内核版本是<code>4.4.0-87-generic</code>，因此我下载的是<code>4.4.154</code>的源码包，在<code>/usr/src</code>目录下解压</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo tar -Jxf linux-3.12.tar.xz</div></pre></td></tr></table></figure>
-<h3 id="编译和安装"><a href="#编译和安装" class="headerlink" title="编译和安装"></a>编译和安装</h3><h4 id="安装相关依赖"><a href="#安装相关依赖" class="headerlink" title="安装相关依赖"></a>安装相关依赖</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install libncurses5-dev libncursesw5-dev</div><div class="line">sudo apt-get install libssl-dev</div><div class="line">sudo apt-get install bc</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">sudo tar -Jxf linux-3.12.tar.xz</div></pre></div></div></figure>
+<h3 id="编译和安装"><a href="#编译和安装" class="headerlink" title="编译和安装"></a>编译和安装</h3><h4 id="安装相关依赖"><a href="#安装相关依赖" class="headerlink" title="安装相关依赖"></a>安装相关依赖</h4><figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></div><div class="code"><pre><div class="line">sudo apt-get install libncurses5-dev libncursesw5-dev</div><div class="line">sudo apt-get install libssl-dev</div><div class="line">sudo apt-get install bc</div></pre></div></div></figure>
 <h4 id="拷贝配置文件"><a href="#拷贝配置文件" class="headerlink" title="拷贝配置文件"></a>拷贝配置文件</h4><p>进入源码目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/src/linux-4.4.154/</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/src/linux-4.4.154/</div></pre></div></div></figure>
 <p>把系统原有的配置文件拷贝到当前源码目录下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp /boot/config-4.4.0-87-generic .config</div></pre></td></tr></table></figure>
-<h4 id="加载配置文件"><a href="#加载配置文件" class="headerlink" title="加载配置文件"></a>加载配置文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make menuconfig</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">cp /boot/config-4.4.0-87-generic .config</div></pre></div></div></figure>
+<h4 id="加载配置文件"><a href="#加载配置文件" class="headerlink" title="加载配置文件"></a>加载配置文件</h4><figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">make menuconfig</div></pre></div></div></figure>
 <p>先load，再save，然后exit</p>
-<h4 id="编译内核"><a href="#编译内核" class="headerlink" title="编译内核"></a>编译内核</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make -j4</div></pre></td></tr></table></figure>
+<h4 id="编译内核"><a href="#编译内核" class="headerlink" title="编译内核"></a>编译内核</h4><figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">make -j4</div></pre></div></div></figure>
 <p><code>-j4</code>表示启动4个编译线程，理论上来说，启动的线程数等于CPU核(core)数是最佳情况，每个线程独立运行在一个CPU核上. 而根据网上的资料，因为编译过程需要大量的I/O操作，当某个编译线程在等待数据时，任务调度器将会先调度其他job运行，所以可以将线程数指定为稍多于CPU核数(比如1.5倍). 我的虚拟机有4个vCPU，经过实验，发现<code>make -j4</code>速度比<code>make -j6</code>快，暂时不清楚是为什么.</p>
-<h4 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make modules_install</div></pre></td></tr></table></figure>
-<h4 id="安装内核"><a href="#安装内核" class="headerlink" title="安装内核"></a>安装内核</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo make install</div></pre></td></tr></table></figure>
+<h4 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h4><figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">make modules_install</div></pre></div></div></figure>
+<h4 id="安装内核"><a href="#安装内核" class="headerlink" title="安装内核"></a>安装内核</h4><figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">sudo make install</div></pre></div></div></figure>
 <p>无报错即可.</p>
-<h3 id="更新grub引导"><a href="#更新grub引导" class="headerlink" title="更新grub引导"></a>更新grub引导</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">szh@ubuntu-node3:~$ <span class="built_in">cd</span> /boot/grub/</div><div class="line"></div><div class="line">szh@ubuntu-node3:/boot/grub$ sudo update-grub2</div></pre></td></tr></table></figure>
-<h3 id="重启系统"><a href="#重启系统" class="headerlink" title="重启系统"></a>重启系统</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo reboot</div></pre></td></tr></table></figure>
+<h3 id="更新grub引导"><a href="#更新grub引导" class="headerlink" title="更新grub引导"></a>更新grub引导</h3><figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></div><div class="code"><pre><div class="line">szh@ubuntu-node3:~$ <span class="built_in">cd</span> /boot/grub/</div><div class="line"></div><div class="line">szh@ubuntu-node3:/boot/grub$ sudo update-grub2</div></pre></div></div></figure>
+<h3 id="重启系统"><a href="#重启系统" class="headerlink" title="重启系统"></a>重启系统</h3><figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">sudo reboot</div></pre></div></div></figure>
 <p>一开始发现竟然不能正常开机了，根据报错信息</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">End</span> kernel panic <span class="keyword">not</span> syncing <span class="keyword">out</span> <span class="keyword">of</span> <span class="keyword">memory</span> <span class="keyword">and</span> <span class="keyword">no</span> killable processes</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line"><span class="keyword">End</span> kernel panic <span class="keyword">not</span> syncing <span class="keyword">out</span> <span class="keyword">of</span> <span class="keyword">memory</span> <span class="keyword">and</span> <span class="keyword">no</span> killable processes</div></pre></div></div></figure>
 <p>找到了解决方案，罪魁祸首是<code>/boot</code>目录下的<code>initrd.img-4.4.154</code>文件太大了，是原先<code>initrd.img-4.4.0-87-generic</code>文件的十倍.</p>
 <blockquote>
 <p>initrd 的含义是initialized ram disk. ram disk是用一部分内存模拟成磁盘，让操作系统访问，initrd.img文件就是个ram disk的映像文件，在系统启动时需要用到.</p>
@@ -442,16 +442,16 @@
 <li>方法一</li>
 </ul>
 <p>适用于我现在这种情况，已经编译完内核了. 首先，我们先选择原来的内核进入系统(通过开机界面的<code>Advanced options for Ubuntu</code>). 执行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /lib/modules/&lt;version&gt;</div><div class="line">sudo find . -name *.ko -<span class="built_in">exec</span> strip --strip-unneeded &#123;&#125; +</div><div class="line">sudo update-initramfs -c -k &lt;version&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></div><div class="code"><pre><div class="line"><span class="built_in">cd</span> /lib/modules/&lt;version&gt;</div><div class="line">sudo find . -name *.ko -<span class="built_in">exec</span> strip --strip-unneeded &#123;&#125; +</div><div class="line">sudo update-initramfs -c -k &lt;version&gt;</div></pre></div></div></figure>
 <p>我这里的<code>version</code>即为<code>4.4.154</code>，然后重启系统就可以了.</p>
 <ul>
 <li>方法二</li>
 </ul>
 <p>在编译安装阶段就便避免这种情况发生：</p>
 <p>将安装模块命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make modules_install</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">make modules_install</div></pre></div></div></figure>
 <p>改为</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make INSTALL_MOD_STRIP=1 modules_install</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">make INSTALL_MOD_STRIP=1 modules_install</div></pre></div></div></figure>
 <hr>
 <p>版权声明</p>
 <p><img src="http://i.imgur.com/fYrbApI.png" alt=""></p>
@@ -478,9 +478,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Ubuntu/" rel="tag">#Ubuntu</a>
-          
             <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/Ubuntu/" rel="tag">#Ubuntu</a>
           
         </div>
       
