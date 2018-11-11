@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="CentOS,HBase,Zookeeper," />
+  <meta name="keywords" content="Distributed System," />
 
 
 
@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="之前在进行OpenTSDB到时候，以为HBase自带的Zookeeper出了问题，就尝试自己安装独立的ZookeeperZookeeper 分布式服务框架是 Apache Hadoop 下的一个子项目，它主要用来解决分布式应用中经常遇到的一些数据管理问题，如：统一命名服务、状态同步服务、集群管理、分布式应用配置项的管理等。">
-<meta name="keywords" content="CentOS,HBase,Zookeeper">
+<meta name="description" content="不愧是MIT，课程质量确实非常高，每节课都明确列出了preparation，读完preparation再读lecture，学习效率高了很多。别看lecture就是简单的txt文件，里面可以说都是浓缩的精华，条理很清晰。后悔没早点学习这个课程！ 本文主要对Lab 1做一个总结，所有代码均通过测试，可以在这里查看.">
+<meta name="keywords" content="Distributed System">
 <meta property="og:type" content="article">
-<meta property="og:title" content="禁用HBase自带的Zookeeper - 独立安装Zookeeper（单机）">
-<meta property="og:url" content="http://hw2007.com/2016/11/23/禁用HBase自带的Zookeeper - 独立安装Zookeeper（单机）/index.html">
+<meta property="og:title" content="MIT 6.824 2018 Lab 1: MapReduce">
+<meta property="og:url" content="http://hw2007.com/2018/11/10/MIT-6-824-2018-Lab-1-MapReduce/index.html">
 <meta property="og:site_name" content="萝卜姓胡">
-<meta property="og:description" content="之前在进行OpenTSDB到时候，以为HBase自带的Zookeeper出了问题，就尝试自己安装独立的ZookeeperZookeeper 分布式服务框架是 Apache Hadoop 下的一个子项目，它主要用来解决分布式应用中经常遇到的一些数据管理问题，如：统一命名服务、状态同步服务、集群管理、分布式应用配置项的管理等。">
+<meta property="og:description" content="不愧是MIT，课程质量确实非常高，每节课都明确列出了preparation，读完preparation再读lecture，学习效率高了很多。别看lecture就是简单的txt文件，里面可以说都是浓缩的精华，条理很清晰。后悔没早点学习这个课程！ 本文主要对Lab 1做一个总结，所有代码均通过测试，可以在这里查看.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
-<meta property="og:updated_time" content="2017-08-20T10:58:18.039Z">
+<meta property="og:updated_time" content="2018-11-11T02:59:04.211Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="禁用HBase自带的Zookeeper - 独立安装Zookeeper（单机）">
-<meta name="twitter:description" content="之前在进行OpenTSDB到时候，以为HBase自带的Zookeeper出了问题，就尝试自己安装独立的ZookeeperZookeeper 分布式服务框架是 Apache Hadoop 下的一个子项目，它主要用来解决分布式应用中经常遇到的一些数据管理问题，如：统一命名服务、状态同步服务、集群管理、分布式应用配置项的管理等。">
+<meta name="twitter:title" content="MIT 6.824 2018 Lab 1: MapReduce">
+<meta name="twitter:description" content="不愧是MIT，课程质量确实非常高，每节课都明确列出了preparation，读完preparation再读lecture，学习效率高了很多。别看lecture就是简单的txt文件，里面可以说都是浓缩的精华，条理很清晰。后悔没早点学习这个课程！ 本文主要对Lab 1做一个总结，所有代码均通过测试，可以在这里查看.">
 <meta name="twitter:image" content="http://i.imgur.com/fYrbApI.png">
 
 
@@ -126,10 +126,10 @@
 
 
 
-  <link rel="canonical" href="http://hw2007.com/2016/11/23/禁用HBase自带的Zookeeper - 独立安装Zookeeper（单机）/"/>
+  <link rel="canonical" href="http://hw2007.com/2018/11/10/MIT-6-824-2018-Lab-1-MapReduce/"/>
 
 
-  <title> 禁用HBase自带的Zookeeper - 独立安装Zookeeper（单机） | 萝卜姓胡 </title>
+  <title> MIT 6.824 2018 Lab 1: MapReduce | 萝卜姓胡 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -331,7 +331,7 @@
             
             
               
-                禁用HBase自带的Zookeeper - 独立安装Zookeeper（单机）
+                MIT 6.824 2018 Lab 1: MapReduce
               
             
           </h1>
@@ -343,8 +343,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-23T09:57:56+08:00" content="2016-11-23">
-              2016-11-23
+            <time itemprop="dateCreated" datetime="2018-11-10T17:09:22+08:00" content="2018-11-10">
+              2018-11-10
             </time>
           </span>
 
@@ -357,8 +357,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/监控管理/" itemprop="url" rel="index">
-                    <span itemprop="name">监控管理</span>
+                  <a href="/categories/分布式系统/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式系统</span>
                   </a>
                 </span>
 
@@ -374,8 +374,8 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 
-                  <a href="/2016/11/23/禁用HBase自带的Zookeeper - 独立安装Zookeeper（单机）/#SOHUCS" itemprop="discussionUrl">
-                    <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/11/23/禁用HBase自带的Zookeeper - 独立安装Zookeeper（单机）/" itemprop="commentsCount"></span>
+                  <a href="/2018/11/10/MIT-6-824-2018-Lab-1-MapReduce/#SOHUCS" itemprop="discussionUrl">
+                    <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/11/10/MIT-6-824-2018-Lab-1-MapReduce/" itemprop="commentsCount"></span>
                   </a>
                       
               </span>
@@ -386,7 +386,7 @@
 
           
           
-             <span id="/2016/11/23/禁用HBase自带的Zookeeper - 独立安装Zookeeper（单机）/" class="leancloud_visitors" data-flag-title="禁用HBase自带的Zookeeper - 独立安装Zookeeper（单机）">
+             <span id="/2018/11/10/MIT-6-824-2018-Lab-1-MapReduce/" class="leancloud_visitors" data-flag-title="MIT 6.824 2018 Lab 1: MapReduce">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -408,25 +408,44 @@
       
 
       
-        <p>之前在进行OpenTSDB到时候，以为HBase自带的Zookeeper出了问题，就尝试自己安装独立的Zookeeper<br>Zookeeper 分布式服务框架是 Apache Hadoop 下的一个子项目，它主要用来解决分布式应用中经常遇到的一些数据管理问题，如：统一命名服务、状态同步服务、集群管理、分布式应用配置项的管理等。</p>
+        <p>不愧是MIT，课程质量确实非常高，每节课都明确列出了preparation，读完preparation再读lecture，学习效率高了很多。别看lecture就是简单的txt文件，里面可以说都是浓缩的精华，条理很清晰。后悔没早点学习这个课程！</p>
+<p>本文主要对Lab 1做一个总结，所有代码均通过测试，可以在<a href="https://dev.tencent.com/u/wsszh/p/MIT-6.824-2018/git" target="_blank" rel="external">这里</a>查看.</p>
 <a id="more"></a>
-<h2 id="禁用HBase自带的Zookeeper"><a href="#禁用HBase自带的Zookeeper" class="headerlink" title="禁用HBase自带的Zookeeper"></a>禁用HBase自带的Zookeeper</h2><p>修改 ./conf/hbase-env.sh<br><figure class="highlight routeros"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></div><div class="code"><pre><div class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/usr/java/jdk1.8.0_111</div><div class="line"><span class="builtin-name">export</span> <span class="attribute">HBASE_MANAGES_ZK</span>=<span class="literal">false</span>（如果值为true，则使用自带的Zookeeper，会随着HBase一起启动）</div></pre></div></div></figure></p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>Zookeeper最新的版本可以通过<a href="http://zookeeper.apache.org/" target="_blank" rel="external">官网</a>获取，这里以Zookeeper 3.4.9 release版本为例</p>
-<figure class="highlight stylus"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></div><div class="code"><pre><div class="line">wget http:<span class="comment">//apache.fayea.com/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz</span></div><div class="line">tar xfz zookeeper-<span class="number">3.4</span>.<span class="number">9</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></div></pre></div></div></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="拷贝配置文件"><a href="#拷贝配置文件" class="headerlink" title="拷贝配置文件"></a>拷贝配置文件</h3><figure class="highlight vim"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></div><div class="code"><pre><div class="line"><span class="keyword">cd</span> zookeeper-<span class="number">3.4</span>.<span class="number">9</span>/<span class="keyword">conf</span>/</div><div class="line"><span class="keyword">cp</span> zoo_sample.cfg zoo.cfg</div></pre></div></div></figure>
-<h3 id="修改配置项"><a href="#修改配置项" class="headerlink" title="修改配置项"></a>修改配置项</h3><figure class="highlight ini"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line"><span class="attr">dataDir</span>=/root/zookeeper</div></pre></div></div></figure>
-<p>dataDir：Zookeeper保存节点数据的目录，同时写数据的日志也保存在这个目录当中<br>其他暂时使用默认值</p>
-<h3 id="拷贝-zoo-cfg-到-hbase-conf-目录下"><a href="#拷贝-zoo-cfg-到-hbase-conf-目录下" class="headerlink" title="拷贝 zoo.cfg 到 hbase/conf/ 目录下"></a>拷贝 zoo.cfg 到 hbase/conf/ 目录下</h3><figure class="highlight awk"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">cp zoo.cfg <span class="regexp">/root/</span>local<span class="regexp">/hbase-1.0.3/</span>conf<span class="regexp">/</span></div></pre></div></div></figure>
-<p>这是官方文档推荐的做法，如果不拷贝 zoo.cfg，在 hbase-site.xml 中也可以对Zookeeper进行相关配置，但HBase会优先使用 zoo.cfg（如果有的话）的配置</p>
-<h3 id="修改-hbase-site-xml"><a href="#修改-hbase-site-xml" class="headerlink" title="修改 hbase-site.xml"></a>修改 hbase-site.xml</h3><p>在<a href="https://wsszh.github.io/2016/11/07/CentOS%207%E9%83%A8%E7%BD%B2OpenTSDB%20-%20RPM%E6%96%B9%E5%BC%8F/" target="_blank" rel="external">原先的基础</a>上加入：<br><figure class="highlight xml"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></div><div class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.cluster.distributed<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></div></div></figure></p>
-<p>如果不加的话，在启动独立安装的Zookeeper后，HBase不能正常启动</p>
-<h2 id="启动Zookeeper"><a href="#启动Zookeeper" class="headerlink" title="启动Zookeeper"></a>启动Zookeeper</h2><h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight stylus"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">./bin/zkServer<span class="selector-class">.sh</span> start</div></pre></div></div></figure>
-<h3 id="检查服务是否启动"><a href="#检查服务是否启动" class="headerlink" title="检查服务是否启动"></a>检查服务是否启动</h3><figure class="highlight vim"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line"><span class="keyword">ps</span> -ef | <span class="keyword">grep</span> zookeeper</div></pre></div></div></figure>
-<h2 id="启动HBase"><a href="#启动HBase" class="headerlink" title="启动HBase"></a>启动HBase</h2><p>在成功启动Zookeeper后，就可以启动HBase了：<br><figure class="highlight jboss-cli"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></div><div class="code"><pre><div class="line"><span class="keyword">cd</span> <span class="string">/root/local/hbase-1.0.3</span></div><div class="line"><span class="string">./bin/start-hbase.sh</span></div></pre></div></div></figure></p>
+<h3 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h3><p>MapReduce的目标是让那些没有并行和分布式系统经验的程序员，可以轻松地写出可以在多台机器上并行处理大规模数据的程序. 程序员不需要关心划分数据、程序调度、故障恢复和机器间通讯等细节，只需要编写<code>Map</code>和<code>Reduce</code>的顺序代码，就可以利用大规模分布式系统并行执行程序进行数据处理.</p>
+<p>MapReduce就是一个编程模型.</p>
+<p><code>Map</code>函数接收一组键值对，处理后输出另一组键值对作为中间结果，MapReduce库会将同一个键的中间值合并到一起，然后传给<code>Reduce</code>函数. </p>
+<p><code>Reduce</code>函数接收一个键及其值的集合，然后对值进行处理，得到最终结果.</p>
+<p>抽象出来如下所示：</p>
+<script type="math/tex; mode=display">map \quad (k1, v1) \quad \rightarrow \quad list(k2, v2)</script><script type="math/tex; mode=display">reduce \quad (k2, list(v2)) \quad \rightarrow \quad list(k2, v3)</script><p>现实生活中有很多场景适用于MapReduce编程模型，最经典的就是WordCount了，其他还有建立倒排索引、统计URL访问次数、匹配模式等场景.</p>
+<h3 id="Lab-1"><a href="#Lab-1" class="headerlink" title="Lab 1"></a>Lab 1</h3><h4 id="Part-I-Map-Reduce-input-and-output"><a href="#Part-I-Map-Reduce-input-and-output" class="headerlink" title="Part I: Map/Reduce input and output"></a>Part I: Map/Reduce input and output</h4><p>这部分需要完成doMap()和doReduce()函数的代码编写.</p>
+<p>doMap()对应一个map task，一个map task对应一个输入文件，流程如下：</p>
+<ul>
+<li>读取输入文件的内容</li>
+<li>调用mapF()得到中间结果的键值对集合</li>
+<li>设reduce task的个数为R，每个map task都要将中间结果分为R个中间文件保存，调用reduceName()得到R个中间文件的文件名</li>
+<li>根据hash值，将每个键分配给对应的中间文件</li>
+<li>将R个中间文件编码为SON格式并保存到文件系统中</li>
+</ul>
+<p>doReduce()对应一个reduce task，每个map task的R个中间文件中，都有一个中间文件作为当前的reduce task的输入文件，设map task有M个，则一个reduce task有M个输入文件流程如下：</p>
+<ul>
+<li>调用reduceName()得到M个中间文件的文件名</li>
+<li>读取并解码M个JSON格式的中间文件，得到中间结果的键值对</li>
+<li>根据键排序</li>
+<li>对每个键调用reduceF()得到最终结果，编码为JSON格式保存到文件系统</li>
+</ul>
+<h4 id="Part-II-Single-worker-word-count"><a href="#Part-II-Single-worker-word-count" class="headerlink" title="Part II: Single-worker word count"></a>Part II: Single-worker word count</h4><p>这一部分需要实现WordCount的mapF()和ReduceF()函数.</p>
+<p>mapF()将文件内容分割为单词集合，每个单词作为键，值都为1，将键值对集合作为结果返回.</p>
+<p>reduceF()将一个键对应的值的集合相加，作为结果返回.</p>
+<h4 id="Part-III-Distributing-MapReduce-tasks"><a href="#Part-III-Distributing-MapReduce-tasks" class="headerlink" title="Part III: Distributing MapReduce tasks"></a>Part III: Distributing MapReduce tasks</h4><p>前面两部分是顺序执行map和reduce任务的，这一部分要实现并行执行map和reduce任务，先并行执行map task，再并行执行reduce task.</p>
+<p>schedule()负责为map和reduce任务启动一个goroutine，用RPC框架调用worker执行任务，这里用channel获得worker的RPC地址，worker利用单机的多核CPU并行执行任务.</p>
+<h4 id="Part-IV-Handling-worker-failures"><a href="#Part-IV-Handling-worker-failures" class="headerlink" title="Part IV: Handling worker failures"></a>Part IV: Handling worker failures</h4><p>Part IV就是在Part III的基础上增加了worker执行失败时的处理逻辑，如果call()返回<code>false</code>，那么就继续循环等待下一个可用的worker继续执行，直到call()返回<code>true</code>，<code>schedule.go</code>的完整代码如下所示，将代码中<code>for</code>循环中的代码改为无论执行成功与否，都只执行一次，就是Part III部分的代码.</p>
+<figure class="highlight go"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></div><div class="code"><pre><div class="line"><span class="keyword">package</span> mapreduce</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"sync"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// schedule() starts and waits for all tasks in the given phase (mapPhase</span></div><div class="line"><span class="comment">// or reducePhase). the mapFiles argument holds the names of the files that</span></div><div class="line"><span class="comment">// are the inputs to the map phase, one per map task. nReduce is the</span></div><div class="line"><span class="comment">// number of reduce tasks. the registerChan argument yields a stream</span></div><div class="line"><span class="comment">// of registered workers; each item is the worker's RPC address,</span></div><div class="line"><span class="comment">// suitable for passing to call(). registerChan will yield all</span></div><div class="line"><span class="comment">// existing registered workers (if any) and new ones as they register.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">schedule</span><span class="params">(jobName <span class="keyword">string</span>, mapFiles []<span class="keyword">string</span>, nReduce <span class="keyword">int</span>, phase jobPhase, registerChan <span class="keyword">chan</span> <span class="keyword">string</span>)</span></span> &#123;</div><div class="line">	<span class="keyword">var</span> ntasks <span class="keyword">int</span></div><div class="line">	<span class="keyword">var</span> n_other <span class="keyword">int</span> <span class="comment">// number of inputs (for reduce) or outputs (for map)</span></div><div class="line">	<span class="keyword">switch</span> phase &#123;</div><div class="line">	<span class="keyword">case</span> mapPhase:</div><div class="line">		ntasks = <span class="built_in">len</span>(mapFiles)</div><div class="line">		n_other = nReduce</div><div class="line">	<span class="keyword">case</span> reducePhase:</div><div class="line">		ntasks = nReduce</div><div class="line">		n_other = <span class="built_in">len</span>(mapFiles)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Printf(<span class="string">"Schedule: %v %v tasks (%d I/Os)\n"</span>, ntasks, phase, n_other)</div><div class="line"></div><div class="line">	<span class="comment">// All ntasks tasks have to be scheduled on workers. Once all tasks</span></div><div class="line">	<span class="comment">// have completed successfully, schedule() should return.</span></div><div class="line">	<span class="comment">//</span></div><div class="line">	<span class="comment">// Your code here (Part III, Part IV).</span></div><div class="line">	<span class="comment">//</span></div><div class="line"></div><div class="line">	<span class="keyword">var</span> wg sync.WaitGroup</div><div class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; ntasks; i++ &#123;</div><div class="line">		wg.Add(<span class="number">1</span>)</div><div class="line">		args := DoTaskArgs&#123;JobName: jobName, Phase: phase, TaskNumber: i, NumOtherPhase: n_other&#125;</div><div class="line">		<span class="keyword">if</span> phase == mapPhase &#123;</div><div class="line">			args.File = mapFiles[i]</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(registerChan <span class="keyword">chan</span> <span class="keyword">string</span>, args DoTaskArgs)</span></span> &#123;</div><div class="line">			<span class="keyword">defer</span> wg.Done()</div><div class="line">			<span class="comment">// the worker may fails, so keep looping until the task complete</span></div><div class="line">			<span class="keyword">for</span> &#123;</div><div class="line">				worker := &lt;-registerChan</div><div class="line">				msg := call(worker, <span class="string">"Worker.DoTask"</span>, &amp;args, <span class="literal">nil</span>)</div><div class="line">				<span class="keyword">if</span> msg &#123;</div><div class="line">					<span class="comment">// must use `go` statement(why???)</span></div><div class="line">					<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">						registerChan &lt;- worker</div><div class="line">					&#125;()</div><div class="line">					<span class="keyword">break</span></div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;(registerChan, args)</div><div class="line">	&#125;</div><div class="line">	wg.Wait()</div><div class="line">	fmt.Printf(<span class="string">"Schedule: %v done\n"</span>, phase)</div><div class="line">&#125;</div></pre></div></div></figure>
+<p><strong>这里要特别注意，当worker成功执行完任务后，要将其RPC地址再次加入channel中，但是这一步必须用另启一个goroutine执行，不然会导致最后一个任务的goroutine卡在<code>registerChan &lt;- worker</code>这一步，导致map phase的WaitGroup一直处于等待状态. 这是因为存在这样一种情况：worker是并行执行的，当倒数第二个任务调用的worker执行完之前，最后一个任务就能从channel里得到另一个worker开始执行，这样当倒数第二个任务执行完时，已经向channel里输入了对应的worker，但是这时已经没有任务需要调用worker了，所以当最后一个任务执行完时，想要将对应的worker输入到channel时，必须等待channel输出之前的worker，所以因为channel的阻塞导致最后一个任务的goroutine一直处于阻塞状态.</strong></p>
+<h4 id="Part-V-Inverted-index-generation"><a href="#Part-V-Inverted-index-generation" class="headerlink" title="Part V: Inverted index generation"></a>Part V: Inverted index generation</h4><p>这一部分需要实现倒排索引的生成，要编写<code>main/ii.go</code>中的mapF()和reduceF()函数，理解了WordCount的处理流程，就很简单，原理是一样的，只不过mapF()生成的键值对中，键是单词，值是单词所在文档的文档名，reduceF()的返回值是包含当前单词的文档数以及这些文档名构成的字符串.</p>
 <hr>
 <p>版权声明</p>
 <p><img src="http://i.imgur.com/fYrbApI.png" alt=""></p>
-<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2016/11/23/禁用HBase自带的Zookeeper">http://hw2007.com/2016/11/23/禁用HBase自带的Zookeeper</a> - 独立安装Zookeeper（单机）/</p>
+<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2018/11/10/MIT-6-824-2018-Lab-1-MapReduce/">http://hw2007.com/2018/11/10/MIT-6-824-2018-Lab-1-MapReduce/</a></p>
 
       
     </div>
@@ -449,11 +468,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CentOS/" rel="tag">#CentOS</a>
-          
-            <a href="/tags/HBase/" rel="tag">#HBase</a>
-          
-            <a href="/tags/Zookeeper/" rel="tag">#Zookeeper</a>
+            <a href="/tags/Distributed-System/" rel="tag">#Distributed System</a>
           
         </div>
       
@@ -462,17 +477,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/21/OpenTSDB之tcollector的安装使用/" rel="next" title="OpenTSDB之tcollector的安装使用">
-                <i class="fa fa-chevron-left"></i> OpenTSDB之tcollector的安装使用
+              <a href="/2018/10/09/中国科学院大学《计算机算法设计与分析》第三次作业/" rel="next" title="中国科学院大学《计算机算法设计与分析》第三次作业">
+                <i class="fa fa-chevron-left"></i> 中国科学院大学《计算机算法设计与分析》第三次作业
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/23/监控报警之Bosun的安装使用/" rel="prev" title="监控报警之Bosun的安装使用">
-                监控报警之Bosun的安装使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -602,7 +613,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用HBase自带的Zookeeper"><span class="nav-number">1.</span> <span class="nav-text">禁用HBase自带的Zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载"><span class="nav-number">2.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝配置文件"><span class="nav-number">3.1.</span> <span class="nav-text">拷贝配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改配置项"><span class="nav-number">3.2.</span> <span class="nav-text">修改配置项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝-zoo-cfg-到-hbase-conf-目录下"><span class="nav-number">3.3.</span> <span class="nav-text">拷贝 zoo.cfg 到 hbase/conf/ 目录下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-hbase-site-xml"><span class="nav-number">3.4.</span> <span class="nav-text">修改 hbase-site.xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动Zookeeper"><span class="nav-number">4.</span> <span class="nav-text">启动Zookeeper</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动服务"><span class="nav-number">4.1.</span> <span class="nav-text">启动服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查服务是否启动"><span class="nav-number">4.2.</span> <span class="nav-text">检查服务是否启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动HBase"><span class="nav-number">5.</span> <span class="nav-text">启动HBase</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MapReduce"><span class="nav-number">1.</span> <span class="nav-text">MapReduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-1"><span class="nav-number">2.</span> <span class="nav-text">Lab 1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-I-Map-Reduce-input-and-output"><span class="nav-number">2.1.</span> <span class="nav-text">Part I: Map/Reduce input and output</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-II-Single-worker-word-count"><span class="nav-number">2.2.</span> <span class="nav-text">Part II: Single-worker word count</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-III-Distributing-MapReduce-tasks"><span class="nav-number">2.3.</span> <span class="nav-text">Part III: Distributing MapReduce tasks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-IV-Handling-worker-failures"><span class="nav-number">2.4.</span> <span class="nav-text">Part IV: Handling worker failures</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-V-Inverted-index-generation"><span class="nav-number">2.5.</span> <span class="nav-text">Part V: Inverted index generation</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
