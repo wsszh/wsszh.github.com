@@ -93,7 +93,7 @@
 <meta property="og:description" content="本篇文章主要是对阅读《The Google File System》论文后做一个总结. 介绍《The Google File System》是非常经典的一篇论文，HDFS 就是基于这篇论文设计实现的。GFS 是谷歌为满足大型分布式的数据敏感型应用而开发的分布式文件系统，论文就是介绍了 GFS 的设计模型和原理。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
-<meta property="og:updated_time" content="2018-11-27T14:24:01.070Z">
+<meta property="og:updated_time" content="2018-11-27T14:29:28.952Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT 6.824 2018 Lec 3: GFS">
 <meta name="twitter:description" content="本篇文章主要是对阅读《The Google File System》论文后做一个总结. 介绍《The Google File System》是非常经典的一篇论文，HDFS 就是基于这篇论文设计实现的。GFS 是谷歌为满足大型分布式的数据敏感型应用而开发的分布式文件系统，论文就是介绍了 GFS 的设计模型和原理。">
@@ -422,6 +422,7 @@
 <li><p>但是运行情况复杂，出问题时比较难搞清楚。</p>
 </li>
 </ul>
+<p><br></p>
 <p>强一致性:</p>
 <ul>
 <li><p>读取的数据总是最新的。</p>
@@ -439,11 +440,13 @@
 <li>节点故障，在节点上的任何操作都有失败的可能</li>
 <li>网络分割，不是所有的机器/磁盘都是可达的</li>
 </ul>
+<p><br></p>
 <p>要解决这些问题，需要花费的代价是很高的：</p>
 <ul>
 <li>客户端与服务端的频繁通信会对性能造成很大的影响</li>
 <li>维持系统一致性的协议复杂，难以实现</li>
 </ul>
+<p><br></p>
 <p>所以很多系统实际上都没有实现理想的一致性，GFS 也是如此。</p>
 <h2 id="GFS-实现目标"><a href="#GFS-实现目标" class="headerlink" title="GFS 实现目标"></a>GFS 实现目标</h2><p>分布式系统在节点众多的情况下，故障是很常见的，因此 GFS 必须有容错性。</p>
 <p>GFS 要是高性能的，使用场景中有许多并发的读写任务。</p>
@@ -465,12 +468,14 @@
 <li>接收到数据的块副本向客户端发送 ack</li>
 <li>客户端收到 ack 后，向 primary 发出写命令，primary 确定写操作的顺序，开始写操作，并告诉其他块副本以相同的顺序进行写操作，写操作完成后发送 ack 给客户端</li>
 </ul>
+<p><br></p>
 <p>如果有另一个客户端并发地对统一文件进行写操作，那么有以下几种情况：</p>
 <ul>
 <li>客户端B在客户端A写完后进行写操作，将客户端A写的内容覆盖</li>
 <li>客户端B被调度到客户端A之前开始写，因为客户端A可能运行速度较慢</li>
 <li>客户端A在客户端B写完后进行写操作，将客户端B写的内容覆盖</li>
 </ul>
+<p><br></p>
 <p>以上三种情况，所有的块副本都包含相同的数据，即是一致的，但是数据可能混合了客户端A和客户端B写入的数据，即是 undefined。</p>
 <p>客户端 append 流程：</p>
 <ul>
@@ -491,6 +496,7 @@
 <li>primary 在本地进行 append</li>
 <li>primary 将 append 操作传递给其他块副本</li>
 </ul>
+<p><br></p>
 <p>如果写操作失败，假设第三个块副本 R3 失败了，那么客户端要重新尝试：</p>
 <ul>
 <li>master 选择另一个块副本 R4 替代 R3，或者 R3 已经恢复正常，还是选择R3</li>
@@ -498,6 +504,7 @@
 <li>primary 和其他块副本进行写操作</li>
 <li>primary 在收到所有副本的 ack 后，向客户端返回写入成功的信息</li>
 </ul>
+<p><br></p>
 <p>如果写操作失败后，经过重试才成功，那么块副本中是存在重复的数据的，record append 只保证所有数据至少写入一次。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对于文件来说，GFS 不是理想的一致性模型，为了性能牺牲了一些一致性，但在它的使用场景里是可以接受的，如使用 GFS 的应用，存在大量并发地对同一个文件进行 append 操作，record append 可以提供很好的写入性能，虽然可能会导致部分块副本有重复的数据而不一致，但这是后续通过程序处理的，所以可以接受这部分的不一致性。</p>
 <p>对于目录来说，GFS 是强一致性的，因为只保存在 master 上，但 master 不是高可用的，且扩展性有限。</p>
