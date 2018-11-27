@@ -93,7 +93,7 @@
 <meta property="og:description" content="本篇文章主要是对阅读《The Google File System》论文后做一个总结. 介绍《The Google File System》是非常经典的一篇论文，HDFS 就是基于这篇论文设计实现的。GFS 是谷歌为满足大型分布式的数据敏感型应用而开发的分布式文件系统，论文就是介绍了 GFS 的设计模型和原理。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
-<meta property="og:updated_time" content="2018-11-27T14:29:28.952Z">
+<meta property="og:updated_time" content="2018-11-27T14:31:04.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT 6.824 2018 Lec 3: GFS">
 <meta name="twitter:description" content="本篇文章主要是对阅读《The Google File System》论文后做一个总结. 介绍《The Google File System》是非常经典的一篇论文，HDFS 就是基于这篇论文设计实现的。GFS 是谷歌为满足大型分布式的数据敏感型应用而开发的分布式文件系统，论文就是介绍了 GFS 的设计模型和原理。">
@@ -504,7 +504,7 @@
 <li>primary 和其他块副本进行写操作</li>
 <li>primary 在收到所有副本的 ack 后，向客户端返回写入成功的信息</li>
 </ul>
-<p><br></p>
+<p>&nbsp;</p>
 <p>如果写操作失败后，经过重试才成功，那么块副本中是存在重复的数据的，record append 只保证所有数据至少写入一次。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对于文件来说，GFS 不是理想的一致性模型，为了性能牺牲了一些一致性，但在它的使用场景里是可以接受的，如使用 GFS 的应用，存在大量并发地对同一个文件进行 append 操作，record append 可以提供很好的写入性能，虽然可能会导致部分块副本有重复的数据而不一致，但这是后续通过程序处理的，所以可以接受这部分的不一致性。</p>
 <p>对于目录来说，GFS 是强一致性的，因为只保存在 master 上，但 master 不是高可用的，且扩展性有限。</p>
