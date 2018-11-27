@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Ubuntu,VMware," />
+  <meta name="keywords" content="Distributed System," />
 
 
 
@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8，却成了导致 VMware 创建虚拟机失败的罪魁祸首！">
-<meta name="keywords" content="Ubuntu,VMware">
+<meta name="description" content="本篇文章主要是对阅读《The Google File System》论文后做一个总结. 介绍《The Google File System》是非常经典的一篇论文，HDFS 就是基于这篇论文设计实现的。GFS 是谷歌为满足大型分布式的数据敏感型应用而开发的分布式文件系统，论文就是介绍了 GFS 的设计模型和原理。">
+<meta name="keywords" content="Distributed System">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu 16.04 安装 VMware Workstation 14">
-<meta property="og:url" content="http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/index.html">
+<meta property="og:title" content="MIT 6.824 2018 Lec 3: GFS">
+<meta property="og:url" content="http://hw2007.com/2018/11/27/MIT-6-824-2018-Lec-3-GFS/index.html">
 <meta property="og:site_name" content="萝卜姓胡">
-<meta property="og:description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8，却成了导致 VMware 创建虚拟机失败的罪魁祸首！">
+<meta property="og:description" content="本篇文章主要是对阅读《The Google File System》论文后做一个总结. 介绍《The Google File System》是非常经典的一篇论文，HDFS 就是基于这篇论文设计实现的。GFS 是谷歌为满足大型分布式的数据敏感型应用而开发的分布式文件系统，论文就是介绍了 GFS 的设计模型和原理。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
-<meta property="og:updated_time" content="2017-11-14T16:13:07.196Z">
+<meta property="og:updated_time" content="2018-11-27T14:16:42.238Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu 16.04 安装 VMware Workstation 14">
-<meta name="twitter:description" content="最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了4.13.8，却成了导致 VMware 创建虚拟机失败的罪魁祸首！">
+<meta name="twitter:title" content="MIT 6.824 2018 Lec 3: GFS">
+<meta name="twitter:description" content="本篇文章主要是对阅读《The Google File System》论文后做一个总结. 介绍《The Google File System》是非常经典的一篇论文，HDFS 就是基于这篇论文设计实现的。GFS 是谷歌为满足大型分布式的数据敏感型应用而开发的分布式文件系统，论文就是介绍了 GFS 的设计模型和原理。">
 <meta name="twitter:image" content="http://i.imgur.com/fYrbApI.png">
 
 
@@ -126,10 +126,10 @@
 
 
 
-  <link rel="canonical" href="http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/"/>
+  <link rel="canonical" href="http://hw2007.com/2018/11/27/MIT-6-824-2018-Lec-3-GFS/"/>
 
 
-  <title> Ubuntu 16.04 安装 VMware Workstation 14 | 萝卜姓胡 </title>
+  <title> MIT 6.824 2018 Lec 3: GFS | 萝卜姓胡 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -331,7 +331,7 @@
             
             
               
-                Ubuntu 16.04 安装 VMware Workstation 14
+                MIT 6.824 2018 Lec 3: GFS
               
             
           </h1>
@@ -343,8 +343,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-11-14T23:32:35+08:00" content="2017-11-14">
-              2017-11-14
+            <time itemprop="dateCreated" datetime="2018-11-27T19:17:57+08:00" content="2018-11-27">
+              2018-11-27
             </time>
           </span>
 
@@ -357,8 +357,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">Ubuntu</span>
+                  <a href="/categories/分布式系统/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式系统</span>
                   </a>
                 </span>
 
@@ -374,8 +374,8 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 
-                  <a href="/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/#SOHUCS" itemprop="discussionUrl">
-                    <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/" itemprop="commentsCount"></span>
+                  <a href="/2018/11/27/MIT-6-824-2018-Lec-3-GFS/#SOHUCS" itemprop="discussionUrl">
+                    <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/11/27/MIT-6-824-2018-Lec-3-GFS/" itemprop="commentsCount"></span>
                   </a>
                       
               </span>
@@ -386,7 +386,7 @@
 
           
           
-             <span id="/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/" class="leancloud_visitors" data-flag-title="Ubuntu 16.04 安装 VMware Workstation 14">
+             <span id="/2018/11/27/MIT-6-824-2018-Lec-3-GFS/" class="leancloud_visitors" data-flag-title="MIT 6.824 2018 Lec 3: GFS">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -408,25 +408,102 @@
       
 
       
-        <p>最近想要用虚拟机搭个基于 Ubuntu 系统的 Hadoop 集群，就在 Ubuntu 16.04 系统上装了 VMware Workstation 14，但是安装过程并不顺利，因为之前系统偶尔会有关机卡死的情况，我就把系统内核换成了<code>4.13.8</code>，却成了导致 VMware 创建虚拟机失败的罪魁祸首！</p>
+        <p>本篇文章主要是对阅读《The Google File System》论文后做一个总结.</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>《The Google File System》是非常经典的一篇论文，HDFS 就是基于这篇论文设计实现的。GFS 是谷歌为满足大型分布式的数据敏感型应用而开发的分布式文件系统，论文就是介绍了 GFS 的设计模型和原理。</p>
 <a id="more"></a>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">sudo apt install build-essential</div></pre></div></div></figure>
-<h3 id="下载-VMware"><a href="#下载-VMware" class="headerlink" title="下载 VMware"></a>下载 VMware</h3><p>从<a href="http://www.vmware.com/go/tryworkstation-linux-64" target="_blank" rel="external">这里</a>下载，我下的是最新的 VMware Workstation 14.</p>
-<h3 id="安装-VMware"><a href="#安装-VMware" class="headerlink" title="安装 VMware"></a>安装 VMware</h3><p>转到存放 VMware 安装包的目录下</p>
-<figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></div><div class="code"><pre><div class="line">chmod +x VMware-Workstation-Full-14.0.0-6661328.x86_64.bundle</div><div class="line">sudo ./VMware-Workstation-Full-14.0.0-6661328.x86_64.bundle</div></pre></div></div></figure>
-<p>根据提示完成安装即可，不过 VMware Workstation 是商业软件，激活需要 license key，请自行解决.</p>
-<h2 id="问题及解决方法"><a href="#问题及解决方法" class="headerlink" title="问题及解决方法"></a>问题及解决方法</h2><p>在创建 Ubuntu 虚拟机的过程中，出现了如下的错误提示：</p>
-<blockquote>
-<p>Not enough physical memory is available to power on this virtual machine with its configured settings. To fix this problem, increase the amount of physical memory for all virtual machines to 1035 MB or adjust the additional memory settings to allow more virtual machine memory to be swapped.</p>
-</blockquote>
-<p>我的笔记本由16G的内存，不可能是因为物理内存不足的缘故，经过一番搜索，终于找到了解决方法，事实证明错误提示的内容没有任何指导性作用，因为这是因为内核版本过高(我的内核版本为 <code>4.13.8</code>)，导致与 VMware Workstation 14 不兼容的缘故.</p>
-<p>解决方法就是根据<a href="https://github.com/mkubecek/vmware-host-modules/commit/770c7ffe611520ac96490d235399554c64e87d9f" target="_blank" rel="external">这里</a>的修改信息，修改本地源码，注意必须是仅仅修改有变动的地方，不能直接将整份代码copy过来，因为网上的代码据网友说仅仅适配 VMware Workstation 12.5. 具体操作如下：</p>
-<figure class="highlight bash"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></div><div class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/lib/vmware/modules/<span class="built_in">source</span></div><div class="line">tar xf vmmon.tar</div><div class="line"><span class="built_in">cd</span> vmmon-only/linux</div><div class="line">vim hostif.c <span class="comment"># 修改这个文件里的代码</span></div><div class="line"><span class="built_in">cd</span> ../..</div><div class="line">tar cf vmmon.tar vmmon-only</div><div class="line">rm -rf vmmon-only <span class="comment"># cleanup</span></div><div class="line"></div><div class="line"><span class="comment"># Lastly, we need to rebuild the patched module</span></div><div class="line">sudo vmware-modconfig --console --install-all</div></pre></div></div></figure>
-<p>重新启动 VMware，就能顺利创建虚拟机了！</p>
+<h2 id="一致性"><a href="#一致性" class="headerlink" title="一致性"></a>一致性</h2><p>在分布式系统中，节点由于各种因素发生故障是很常见的问题，如果数据只存放在单个节点上，那么一旦节点发生故障，很容易因为单点故障而造成数据丢失。因此给一份数据复制几个副本是很普遍的做法，即数据冗余。但是这又引出了数据一致性的问题，尤其是不同的应用通常会并发地对数据进行读写，如何保证数据冗余中每一份副本的内容是完全一致的，这是个难题。</p>
+<p>一致性有两种，各有优劣：</p>
+<ul>
+<li>弱一致性：</li>
+</ul>
+<p>读取的数据可能是过期的，即不是最近一次写入的最新数据。</p>
+<p>系统有较好的性能，扩展到多台服务器比较容易。</p>
+<p>但是运行情况复杂，出问题时比较难搞清楚。</p>
+<ul>
+<li>强一致性</li>
+</ul>
+<p>读取的数据总是最新的。</p>
+<p>实现应用的写操作比较简单。</p>
+<p>但是会影响系统性能。</p>
+<h2 id="一致性模型"><a href="#一致性模型" class="headerlink" title="一致性模型"></a>一致性模型</h2><p>根据实际情况，我们必须对系统的一些特性做取舍，这也就产生了不同的一致性模型，理想的一致性模型就是，当我们使用有数据冗余的分布式文件系统时，感觉就像是在一台机器上使用没有数据冗余的普通文件系统，即不会有读写数据不一致的情况。</p>
+<p>在一台机器上，在写入数据后，就能读取最新写入的数据。如果两个应用并发地对一个文件进行写操作，那么这个文件就是<code>undefined</code>状态，因为文件中可能混合了两个应用写入的数据。如果两个应用并发地对一个目录进行写操作，目录会被加锁，一个应用先写，然后再是另一个应用。</p>
+<p>在分布式系统中，实现理想的一致性模型有很多的问题：</p>
+<ul>
+<li>并发操作</li>
+<li>节点故障，在节点上的任何操作都有失败的可能</li>
+<li>网络分割，不是所有的机器/磁盘都是可达的</li>
+</ul>
+<p>要解决这些问题，需要花费的代价是很高的：</p>
+<ul>
+<li>客户端与服务端的频繁通信会对性能造成很大的影响</li>
+<li>维持系统一致性的协议复杂，难以实现</li>
+</ul>
+<p>所以很多系统实际上都没有实现理想的一致性，GFS 也是如此。</p>
+<h2 id="GFS-实现目标"><a href="#GFS-实现目标" class="headerlink" title="GFS 实现目标"></a>GFS 实现目标</h2><p>分布式系统在节点众多的情况下，故障是很常见的，因此 GFS 必须有容错性。</p>
+<p>GFS 要是高性能的，使用场景中有许多并发的读写任务。</p>
+<p>GFS 要有效利用网络，节省带宽。</p>
+<h2 id="GFS-读操作"><a href="#GFS-读操作" class="headerlink" title="GFS 读操作"></a>GFS 读操作</h2><p>文件的命名空间以目录树的形式保存在 master 上，每个文件都分为固定大小（64MB）的块保存在 chunkserver 上，每个块都默认有三个副本保存在不同的 chunkserver 上，这不仅提高了可用性，也能对热点文件的读取进行更好的负载均衡。</p>
+<p>master 将操作日志保存在本地磁盘中，可以从电源故障中快速恢复。如果 master 不可用，那么选定一个 shadow master 作为新的 master。</p>
+<p>客户端读取文件的过程：</p>
+<ul>
+<li>将文件名和块索引发送给 master</li>
+<li>master 返回保存对应块的服务器集合，包括块的版本号</li>
+<li>客户端将返回的信息放入缓存</li>
+<li>客户端访问最近的 chunkserver，如果块的版本号出错，就再次请求 master</li>
+</ul>
+<h2 id="GFS-写操作"><a href="#GFS-写操作" class="headerlink" title="GFS 写操作"></a>GFS 写操作</h2><p>客户端随机写的流程：</p>
+<ul>
+<li>客户端询问 master 块的位置和当前哪个块是 primary，primary 决定对块写操作的顺序，其他块的副本都以这个顺序执行写操作</li>
+<li>客户端根据网络拓扑结构，确定传输数据的链路，即数据在不同 chunkserver 间传输的先后顺序</li>
+<li>客户端根据确定的传输链路，先将数据传输给第一个块副本，与此同时，块副本将接收到的数据传给下一个块副本，这个传输方式可以充分利用每个 chunkserver 的带宽，提高数据传输的效率</li>
+<li>接收到数据的块副本向客户端发送 ack</li>
+<li>客户端收到 ack 后，向 primary 发出写命令，primary 确定写操作的顺序，开始写操作，并告诉其他块副本以相同的顺序进行写操作，写操作完成后发送 ack 给客户端</li>
+</ul>
+<p>如果有另一个客户端并发地对统一文件进行写操作，那么有以下几种情况：</p>
+<ul>
+<li>客户端B在客户端A写完后进行写操作，将客户端A写的内容覆盖</li>
+<li>客户端B被调度到客户端A之前开始写，因为客户端A可能运行速度较慢</li>
+<li>客户端A在客户端B写完后进行写操作，将客户端B写的内容覆盖</li>
+</ul>
+<p>以上三种情况，所有的块副本都包含相同的数据，即是一致的，但是数据可能混合了客户端A和客户端B写入的数据，即是 undefined。</p>
+<p>客户端 append 流程：</p>
+<ul>
+<li><p>流程与上述一致，但是客户端A和客户端B append 的内容可能是任意顺序的（因为并发）</p>
+</li>
+<li><p>所有块副本是一致的，但是也是 undefined</p>
+</li>
+<li><p>如果只有一个客户端，那数据就是一致且确定的（defined）</p>
+</li>
+</ul>
+<h2 id="Record-Append"><a href="#Record-Append" class="headerlink" title="Record Append"></a>Record Append</h2><p>在上述的两种写操作中，数据的写入位置是由客户端指定的，但是 GFS 提供了另一种叫做 record append 的写操作，是原子操作，数据的写入位置是由 GFS 而不是客户端确定的。</p>
+<p>record append 的流程如下：</p>
+<ul>
+<li>客户端将数据传给所有的块副本后，与 primary 通信</li>
+<li>primary 确定写操作顺序</li>
+<li>primary 检查块大小是否满足 append 的数据，如果不满足，就先将块写满，并告诉客户端需要将剩余数据写到另一个块中</li>
+<li>primary 选择 append 的位置</li>
+<li>primary 在本地进行 append</li>
+<li>primary 将 append 操作传递给其他块副本</li>
+</ul>
+<p>如果写操作失败，假设第三个块副本 R3 失败了，那么客户端要重新尝试：</p>
+<ul>
+<li>master 选择另一个块副本 R4 替代 R3，或者 R3 已经恢复正常，还是选择R3</li>
+<li>因为另外两个副本已经 append 成功，所以必须选择一个所有块都能 append 的新位置</li>
+<li>primary 和其他块副本进行写操作</li>
+<li>primary 在收到所有副本的 ack 后，向客户端返回写入成功的信息</li>
+</ul>
+<p>如果写操作失败后，经过重试才成功，那么块副本中是存在重复的数据的，record append 只保证所有数据至少写入一次。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对于文件来说，GFS 不是理想的一致性模型，为了性能牺牲了一些一致性，但在它的使用场景里是可以接受的，如使用 GFS 的应用，存在大量并发地对同一个文件进行 append 操作，record append 可以提供很好的写入性能，虽然可能会导致部分块副本有重复的数据而不一致，但这是后续通过程序处理的，所以可以接受这部分的不一致性。</p>
+<p>对于目录来说，GFS 是强一致性的，因为只保存在 master 上，但 master 不是高可用的，且扩展性有限。</p>
+<p>客户端可能会在以下情况读到过期的数据：</p>
+<ul>
+<li>primary chunkserver 在更新块之后发生故障，其他块副本还没来得及进行相同的更新操作。</li>
+<li>因为客户端在读操作是，会缓存 master 返回的信息，所以可能会因为缓存的信息过期而读到过期的块</li>
+</ul>
 <hr>
 <p>版权声明</p>
 <p><img src="http://i.imgur.com/fYrbApI.png" alt=""></p>
-<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/">http://hw2007.com/2017/11/14/Ubuntu-16-04-安装-VMware-Workstation-14/</a></p>
+<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2018/11/27/MIT-6-824-2018-Lec-3-GFS/">http://hw2007.com/2018/11/27/MIT-6-824-2018-Lec-3-GFS/</a></p>
 
       
     </div>
@@ -449,9 +526,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Ubuntu/" rel="tag">#Ubuntu</a>
-          
-            <a href="/tags/VMware/" rel="tag">#VMware</a>
+            <a href="/tags/Distributed-System/" rel="tag">#Distributed System</a>
           
         </div>
       
@@ -460,17 +535,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/24/《统计学习方法》-第4章-朴素贝叶斯/" rel="next" title="《统计学习方法》- 第4章 朴素贝叶斯">
-                <i class="fa fa-chevron-left"></i> 《统计学习方法》- 第4章 朴素贝叶斯
+              <a href="/2018/11/10/MIT-6-824-2018-Lab-1-MapReduce/" rel="next" title="MIT 6.824 2018 Lab 1: MapReduce">
+                <i class="fa fa-chevron-left"></i> MIT 6.824 2018 Lab 1: MapReduce
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/08/本地Ubuntu-16-04虚拟机中利用kubeadm安装kubernetes-v1-10-0集群/" rel="prev" title="本地Ubuntu 16.04虚拟机中利用kubeadm安装kubernetes v1.10.0集群">
-                本地Ubuntu 16.04虚拟机中利用kubeadm安装kubernetes v1.10.0集群 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -600,7 +671,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装"><span class="nav-number">1.</span> <span class="nav-text">下载安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装依赖"><span class="nav-number">1.1.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载-VMware"><span class="nav-number">1.2.</span> <span class="nav-text">下载 VMware</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-VMware"><span class="nav-number">1.3.</span> <span class="nav-text">安装 VMware</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题及解决方法"><span class="nav-number">2.</span> <span class="nav-text">问题及解决方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性"><span class="nav-number">2.</span> <span class="nav-text">一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性模型"><span class="nav-number">3.</span> <span class="nav-text">一致性模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GFS-实现目标"><span class="nav-number">4.</span> <span class="nav-text">GFS 实现目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GFS-读操作"><span class="nav-number">5.</span> <span class="nav-text">GFS 读操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GFS-写操作"><span class="nav-number">6.</span> <span class="nav-text">GFS 写操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Record-Append"><span class="nav-number">7.</span> <span class="nav-text">Record Append</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
