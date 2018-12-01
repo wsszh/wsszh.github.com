@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Windows,Sublime Text 3," />
+  <meta name="keywords" content="Distributed System," />
 
 
 
@@ -84,26 +84,20 @@
 
 
 
-<meta name="description" content="想找一款好用的Python的编辑器，网上很多人推荐Sublime Text 3，因此入坑，但我下载的是绿色汉化破解版，直接解压就可以运行，如果想要右键用Sublime Text 3打开文本文件，就必须自己进行系统设置，步骤如下： 我的操作系统是Win10">
-<meta name="keywords" content="Windows,Sublime Text 3">
+<meta name="description" content="本篇文章主要是对阅读《The Design of a Practical System for Fault-Tolerant Virtual Machines》论文后做一个总结. Primary/Backup Replication这篇论文主要介绍了 VMware 实现的能提供容错虚拟机的企业级商用系统所涉及的技术和原理。所谓容错性，就是在出现故障时，服务能继续运行，用户不会感知到故障的存在，理想">
+<meta name="keywords" content="Distributed System">
 <meta property="og:type" content="article">
-<meta property="og:title" content="将Sublime Text 3添加至右键菜单">
-<meta property="og:url" content="http://hw2007.com/2016/11/19/将Sublime Text 3添加至右键菜单/index.html">
+<meta property="og:title" content="MIT 6.824 2018 Lec 4: Primary&#x2F;Backup Replication">
+<meta property="og:url" content="http://hw2007.com/2018/11/29/MIT-6-824-2018-Lec-4-Primary-Backup-Replication/index.html">
 <meta property="og:site_name" content="萝卜姓胡">
-<meta property="og:description" content="想找一款好用的Python的编辑器，网上很多人推荐Sublime Text 3，因此入坑，但我下载的是绿色汉化破解版，直接解压就可以运行，如果想要右键用Sublime Text 3打开文本文件，就必须自己进行系统设置，步骤如下： 我的操作系统是Win10">
+<meta property="og:description" content="本篇文章主要是对阅读《The Design of a Practical System for Fault-Tolerant Virtual Machines》论文后做一个总结. Primary/Backup Replication这篇论文主要介绍了 VMware 实现的能提供容错虚拟机的企业级商用系统所涉及的技术和原理。所谓容错性，就是在出现故障时，服务能继续运行，用户不会感知到故障的存在，理想">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.imgur.com/gBDAfJ8.png">
-<meta property="og:image" content="http://i.imgur.com/lD5uo2m.jpg">
-<meta property="og:image" content="http://i.imgur.com/cXVgmCV.jpg">
-<meta property="og:image" content="http://i.imgur.com/FHkY6Qa.jpg">
-<meta property="og:image" content="http://i.imgur.com/FAnFS2X.jpg">
-<meta property="og:image" content="http://i.imgur.com/SGKgnzr.jpg">
 <meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
-<meta property="og:updated_time" content="2017-08-20T10:58:18.039Z">
+<meta property="og:updated_time" content="2018-12-01T12:26:57.425Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="将Sublime Text 3添加至右键菜单">
-<meta name="twitter:description" content="想找一款好用的Python的编辑器，网上很多人推荐Sublime Text 3，因此入坑，但我下载的是绿色汉化破解版，直接解压就可以运行，如果想要右键用Sublime Text 3打开文本文件，就必须自己进行系统设置，步骤如下： 我的操作系统是Win10">
-<meta name="twitter:image" content="http://i.imgur.com/gBDAfJ8.png">
+<meta name="twitter:title" content="MIT 6.824 2018 Lec 4: Primary&#x2F;Backup Replication">
+<meta name="twitter:description" content="本篇文章主要是对阅读《The Design of a Practical System for Fault-Tolerant Virtual Machines》论文后做一个总结. Primary/Backup Replication这篇论文主要介绍了 VMware 实现的能提供容错虚拟机的企业级商用系统所涉及的技术和原理。所谓容错性，就是在出现故障时，服务能继续运行，用户不会感知到故障的存在，理想">
+<meta name="twitter:image" content="http://i.imgur.com/fYrbApI.png">
 
 
 
@@ -132,10 +126,10 @@
 
 
 
-  <link rel="canonical" href="http://hw2007.com/2016/11/19/将Sublime Text 3添加至右键菜单/"/>
+  <link rel="canonical" href="http://hw2007.com/2018/11/29/MIT-6-824-2018-Lec-4-Primary-Backup-Replication/"/>
 
 
-  <title> 将Sublime Text 3添加至右键菜单 | 萝卜姓胡 </title>
+  <title> MIT 6.824 2018 Lec 4: Primary/Backup Replication | 萝卜姓胡 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -337,7 +331,7 @@
             
             
               
-                将Sublime Text 3添加至右键菜单
+                MIT 6.824 2018 Lec 4: Primary/Backup Replication
               
             
           </h1>
@@ -349,8 +343,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-19T17:32:04+08:00" content="2016-11-19">
-              2016-11-19
+            <time itemprop="dateCreated" datetime="2018-11-29T19:15:19+08:00" content="2018-11-29">
+              2018-11-29
             </time>
           </span>
 
@@ -363,8 +357,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/文本编辑器/" itemprop="url" rel="index">
-                    <span itemprop="name">文本编辑器</span>
+                  <a href="/categories/分布式系统/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式系统</span>
                   </a>
                 </span>
 
@@ -380,8 +374,8 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 
-                  <a href="/2016/11/19/将Sublime Text 3添加至右键菜单/#SOHUCS" itemprop="discussionUrl">
-                    <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/11/19/将Sublime Text 3添加至右键菜单/" itemprop="commentsCount"></span>
+                  <a href="/2018/11/29/MIT-6-824-2018-Lec-4-Primary-Backup-Replication/#SOHUCS" itemprop="discussionUrl">
+                    <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/11/29/MIT-6-824-2018-Lec-4-Primary-Backup-Replication/" itemprop="commentsCount"></span>
                   </a>
                       
               </span>
@@ -392,7 +386,7 @@
 
           
           
-             <span id="/2016/11/19/将Sublime Text 3添加至右键菜单/" class="leancloud_visitors" data-flag-title="将Sublime Text 3添加至右键菜单">
+             <span id="/2018/11/29/MIT-6-824-2018-Lec-4-Primary-Backup-Replication/" class="leancloud_visitors" data-flag-title="MIT 6.824 2018 Lec 4: Primary/Backup Replication">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -414,25 +408,95 @@
       
 
       
-        <p>想找一款好用的Python的编辑器，网上很多人推荐Sublime Text 3，因此入坑，但我下载的是绿色汉化破解版，直接解压就可以运行，如果想要右键用Sublime Text 3打开文本文件，就必须自己进行系统设置，步骤如下：</p>
-<p>我的操作系统是Win10</p>
+        <p>本篇文章主要是对阅读《The Design of a Practical System for Fault-Tolerant Virtual Machines》论文后做一个总结.</p>
+<h2 id="Primary-Backup-Replication"><a href="#Primary-Backup-Replication" class="headerlink" title="Primary/Backup Replication"></a>Primary/Backup Replication</h2><p>这篇论文主要介绍了 VMware 实现的能提供容错虚拟机的企业级商用系统所涉及的技术和原理。所谓容错性，就是在出现故障时，服务能继续运行，用户不会感知到故障的存在，理想的容错服务有以下几个特性：</p>
+<ul>
+<li>可用性，在（某些）故障发生后，服务仍可用</li>
+<li>强一致性：对客户端来说，服务就好像运行在一台服务器上，不会有数据不一致的情况</li>
+<li>服务容错能力的实现对客户端和服务器上其他软件都是透明的</li>
+<li>高效</li>
+</ul>
 <a id="more"></a>
-<h3 id="打开注册表"><a href="#打开注册表" class="headerlink" title="打开注册表"></a>打开注册表</h3><p>Win + R打开运行窗口，输入regedit，回车：</p>
-<p><img src="http://i.imgur.com/gBDAfJ8.png" alt=""></p>
-<h3 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h3><p>在注册表编辑器中找到 <strong>/计算机/HKEY_CLASSES_ROOT/*/shell</strong></p>
-<p><img src="http://i.imgur.com/lD5uo2m.jpg" alt=""></p>
-<h3 id="新建节点"><a href="#新建节点" class="headerlink" title="新建节点"></a>新建节点</h3><p>在 <strong>/计算机/HKEY_CLASSES_ROOT/*/shell</strong> 中新建项命名为 <strong>Edit with Sublime Text 3</strong></p>
-<p><img src="http://i.imgur.com/cXVgmCV.jpg" alt=""></p>
-<p>在新建项中新建字符串值，命名为 <strong>Icon</strong>，右键Icon，点击“修改”，将数值数据修改为 <strong>D:\software\SublimeText3_ha\Sublime Text 3.3126x64\sublime_text.exe,0</strong> （逗号前为系统中Sublime Text 3的exe文件的路径）</p>
-<p><img src="http://i.imgur.com/FHkY6Qa.jpg" alt=""></p>
-<p>然后在新建项中新建项命名为 <strong>Command</strong> （必须为这个名称），修改右侧窗口“（默认）”的数据为 <strong>D:\software\SublimeText3_ha\Sublime Text 3.3126x64\sublime_text.exe %1</strong><br>这里要注意 % 和 1 之间不能有空格</p>
-<p><img src="http://i.imgur.com/FAnFS2X.jpg" alt=""></p>
-<h3 id="检验结果"><a href="#检验结果" class="headerlink" title="检验结果"></a>检验结果</h3><p>选择一个txt文件，点击右键，菜单中会出现：</p>
-<p><img src="http://i.imgur.com/SGKgnzr.jpg" alt=""></p>
+<p>&lt;/br&gt;</p>
+<p>当然，分布式系统的容错性是相对而言的，不可能应对所有类型的错误，我们主要关注这几类故障的处理：</p>
+<ul>
+<li>Fail-stop 故障，某个节点发生故障后，就停止运行，其他节点都能感知到这个节点的故障</li>
+<li>Independent 故障</li>
+<li>网络传输丢失了一些/全部数据包</li>
+<li>网络分区（个人觉得翻译成“分裂”更好）</li>
+</ul>
+<p>提高容错能力的核心思想：复制（Replication）</p>
+<ul>
+<li>每台服务器至少有一个副本</li>
+<li>每个副本都保持着能够运行服务的状态</li>
+<li>如果一个副本失败了，另一个副本继续工作</li>
+</ul>
+<p>实现复制又需要考虑很多问题：</p>
+<ul>
+<li>服务器的哪些状态信息需要复制？</li>
+<li>在复制过程中，主服务器是否需要等待复制的完成？</li>
+<li>什么时候从主服务器切换到副本？</li>
+<li>在切换过程中异常是否可见？</li>
+<li>如何快速完成切换过程？</li>
+</ul>
+<p>实现复制主要有两种方法：</p>
+<ul>
+<li>状态传输，主服务器执行服务任务，将最新状态传输给其他副本</li>
+<li>复制状态机，所有副本执行都执行所有操作，如果起始状态相同，所有操作相同，执行顺序相同，操作的结果是确定的，那么所有副本最终能保持在相同的状态</li>
+</ul>
+<p>状态传输相对简单，但是需要传输的状态信息量可能很大，导致传输速度慢。</p>
+<p>复制状态机较为复杂，但更高效，适合执行操作付出的代价小于传输大量状态数据的场景，论文中实现的 VMware vSphere Fault Tolerance （以下简称 VM-FT）就是采用的这个方法。</p>
+<h2 id="VM-FT-系统"><a href="#VM-FT-系统" class="headerlink" title="VM-FT 系统"></a>VM-FT 系统</h2><p>VM-FT 的实现目标主要有三个：</p>
+<ul>
+<li>为服务器上的软件提供容错能力</li>
+<li>客户端不会感知到故障的存在</li>
+<li>不需要修改客户端或服务端的软件</li>
+</ul>
+<p>主服务器（primary）和其他副本（backup）产生分歧（divergence）的意思就是，如果主服务器发生故障，客户端会从其他副本那里得到和主服务器上不一样的响应结果。</p>
+<p>如果主服务器被客户端A锁定，那么服务器就会拒绝客户端B的请求，但是如果副本不知道主服务器被客户端A锁定了，那么当主服务器发生故障后，副本会允许被客户端B锁定，从而拒绝客户端A的请求（客户端A：？？？）</p>
+<p>如果服务器被锁定的时限为一分钟，假设一分钟的锁定时间快到了，此时是客户端A锁定了主服务器，主服务器可能在时钟中断前收到客户端B的请求，于是拒绝了该请求，而其他副本可能在时钟中断后收到客户端B的请求，于是接收了该请求。</p>
+<p>以上是两种产生分歧的情况，因此要想不产生分歧，副本必须在指令流相同的位置以相同的顺序观察到相同的事件才行。</p>
+<h3 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h3><p>VM-FT 为了保证主服务器和副本在执行过程中相同的位置得到中断，处理流程如下，以时钟中断为例：</p>
+<p>主服务器：</p>
+<ul>
+<li>FT 暂时保留时钟中断</li>
+<li>FT 从 CPU 读取指令编号，设为 X</li>
+<li>FT 发送“时钟中断在指令X处”的信息到 logging channel</li>
+<li>FT 将时钟中断分发给主服务器</li>
+</ul>
+<p>副本：</p>
+<ul>
+<li>忽略自己本地的定时器</li>
+<li>FT 在副本执行指令X之前得到 log entry</li>
+<li>FT 在指令X处模拟一个时钟中断</li>
+</ul>
+<h3 id="磁盘-网络输入"><a href="#磁盘-网络输入" class="headerlink" title="磁盘/网络输入"></a>磁盘/网络输入</h3><p>主服务器：</p>
+<ul>
+<li>FT 告诉硬件直接从内存中将数据读取到 FT 的 “bounce buffer”</li>
+<li>硬件要执行 DMA 命令后，产生中断</li>
+<li>FT 得到中断</li>
+<li>FT 暂停主服务器</li>
+<li>FT 将 “bounce buffer” 拷贝到主服务器的内存中</li>
+<li>FT 在主服务器中模拟一个中断</li>
+<li>FT 将数据和指令编号发送到副本</li>
+</ul>
+<p>副本：</p>
+<ul>
+<li>FT 从日志流中得到数据和指令编号</li>
+<li>FT 告诉 CPU 在指令X处产生中断</li>
+<li>FT 在中断期间拷贝数据</li>
+</ul>
+<p>为什么要使用 bounce buffer 呢？因为我们希望在主服务器和副本的执行过程中，数据载入到内存的时间点是相同的，否则可能会产生分歧。</p>
+<p>这里还要注意，副本必须在得到第一个 log entry 后才能开始执行命令，这样就能保证副本的执行过程始终比主服务器要慢一个事件，同理，在重启副本前也要先得到下一个 log entry 才能重启。如果不这样做，假设主服务器在指令X后得到中断或者输入，而副本在得到输入时已经执行完指令X（正在执行指令X后的指令），这样副本就不能正确地处理输入。</p>
+<h3 id="磁盘-网络输出"><a href="#磁盘-网络输出" class="headerlink" title="磁盘/网络输出"></a>磁盘/网络输出</h3><p>主服务器和副本执行指令后有相同的结果，但是只有主服务器的结果会输出，副本的结果会被丢弃。</p>
+<p>根据 Output Rule，主服务器在输出结果前，必须先告知副本，并且要等到副本返回确认已收到 log entry 的消息后，再输出结果。</p>
+<p>如果没有 Output Rule，假设主服务器在得到输入<code>I1 I2 I3</code>后，直接输出结果，此时，副本只收到了<code>I1 I2</code>，<code>I3</code>在网络传输过程中丢失了，主服务器又碰巧发生故障不能再重新发送<code>I3</code>，那么副本就没有机会得到输入<code>I3</code>，但主服务器已经输出了<code>I1 I2 I3</code>的执行结果，某些客户端得到了这个输出结果，当再次请求该服务时，由于副本没有收到<code>I3</code>，不能输出相同的结果，导致异常。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>VM-FT 是 Primary-backup replication 的一个很好的范例，是系统层面的复制状态机，开销较大，适合重要但低强度的服务，比如域名服务器。</p>
+<p>而数据库则是应用层面的复制状态机，开销较小，适合高吞吐量的应用，复制到状态仅仅是数据库，不用涉及内存和磁盘，关心的事件仅仅是数据库命令，不需要关心数据包和中断，GFS 也是应用层面的复制。</p>
 <hr>
 <p>版权声明</p>
 <p><img src="http://i.imgur.com/fYrbApI.png" alt=""></p>
-<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2016/11/19/将Sublime">http://hw2007.com/2016/11/19/将Sublime</a> Text 3添加至右键菜单/</p>
+<p>作者：<a href="www.hw2007.com">萝卜姓胡</a><br>许可协议：<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>本文永久链接：<a href="http://hw2007.com/2018/11/29/MIT-6-824-2018-Lec-4-Primary-Backup-Replication/">http://hw2007.com/2018/11/29/MIT-6-824-2018-Lec-4-Primary-Backup-Replication/</a></p>
 
       
     </div>
@@ -455,9 +519,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Windows/" rel="tag">#Windows</a>
-          
-            <a href="/tags/Sublime-Text-3/" rel="tag">#Sublime Text 3</a>
+            <a href="/tags/Distributed-System/" rel="tag">#Distributed System</a>
           
         </div>
       
@@ -466,17 +528,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/19/CentOS 7部署OpenTSDB - 源码编译安装/" rel="next" title="CentOS 7部署OpenTSDB - 源码编译安装">
-                <i class="fa fa-chevron-left"></i> CentOS 7部署OpenTSDB - 源码编译安装
+              <a href="/2018/11/27/MIT-6-824-2018-Lec-3-GFS/" rel="next" title="MIT 6.824 2018 Lec 3: GFS">
+                <i class="fa fa-chevron-left"></i> MIT 6.824 2018 Lec 3: GFS
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/21/OpenTSDB之tcollector的安装使用/" rel="prev" title="OpenTSDB之tcollector的安装使用">
-                OpenTSDB之tcollector的安装使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -606,7 +664,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#打开注册表"><span class="nav-number">1.</span> <span class="nav-text">打开注册表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找节点"><span class="nav-number">2.</span> <span class="nav-text">查找节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建节点"><span class="nav-number">3.</span> <span class="nav-text">新建节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检验结果"><span class="nav-number">4.</span> <span class="nav-text">检验结果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Primary-Backup-Replication"><span class="nav-number">1.</span> <span class="nav-text">Primary/Backup Replication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VM-FT-系统"><span class="nav-number">2.</span> <span class="nav-text">VM-FT 系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中断"><span class="nav-number">2.1.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘-网络输入"><span class="nav-number">2.2.</span> <span class="nav-text">磁盘/网络输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘-网络输出"><span class="nav-number">2.3.</span> <span class="nav-text">磁盘/网络输出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
