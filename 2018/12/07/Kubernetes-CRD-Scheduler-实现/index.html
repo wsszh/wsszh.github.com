@@ -93,7 +93,7 @@
 <meta property="og:description" content="Kubernetes SchedulerKubernetes Scheduler 会从 Kubernetes API server 那里获取还没有分配节点的那些 Pod，根据调度策略选择一个合适的节点给 Pod。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
-<meta property="og:updated_time" content="2018-12-07T07:35:31.768Z">
+<meta property="og:updated_time" content="2018-12-07T07:48:58.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes CRD Scheduler 实现">
 <meta name="twitter:description" content="Kubernetes SchedulerKubernetes Scheduler 会从 Kubernetes API server 那里获取还没有分配节点的那些 Pod，根据调度策略选择一个合适的节点给 Pod。">
@@ -357,8 +357,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/分布式系统/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式系统</span>
+                  <a href="/categories/云计算/" itemprop="url" rel="index">
+                    <span itemprop="name">云计算</span>
                   </a>
                 </span>
 
@@ -426,7 +426,7 @@
 <figure class="highlight yaml"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></div><div class="code"><pre><div class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></div><div class="line"><span class="attr">kind:</span> <span class="string">Pod</span></div><div class="line"><span class="attr">metadata:</span></div><div class="line"><span class="attr">  name:</span> <span class="string">annotation-second-scheduler</span></div><div class="line"><span class="attr">  labels:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">multischeduler-example</span></div><div class="line"><span class="attr">spec:</span></div><div class="line"><span class="attr">  schedulerName:</span> <span class="string">my-scheduler</span></div><div class="line"><span class="attr">  containers:</span></div><div class="line"><span class="attr">  - name:</span> <span class="string">pod-with-second-annotation-container</span></div><div class="line"><span class="attr">    image:</span> <span class="string">k8s.gcr.io/pause:2.0</span></div></pre></div></div></figure>
 <h2 id="CRD-Scheduler"><a href="#CRD-Scheduler" class="headerlink" title="CRD Scheduler"></a>CRD Scheduler</h2><h3 id="CRD"><a href="#CRD" class="headerlink" title="CRD"></a>CRD</h3><p>自定义资源是对 Kubernetes API 的扩展，当创建一个新的自定义资源定义（CRD）时，Kubernetes API Server 通过创建一个新的RESTful资源路径进行应答，Kubernetes 中的每种资源都是对应该资源类型的 API 对象的一个集合。比如，Kubernetes 内置的 pods 资源就是 Pod 对象的集合。</p>
 <h3 id="Custom-Scheduler"><a href="#Custom-Scheduler" class="headerlink" title="Custom Scheduler"></a>Custom Scheduler</h3><p>自定义的 scheduler 可以用任何语言编写，<a href="https://kubernetes.io/blog/2017/03/advanced-scheduling-in-kubernetes/" target="_blank" rel="external">官方</a>给了一个用 Bash 脚本写的 scheduler。在原生的 Kubernetes 中，Pod 是 scheduler 的调度单元，而在我们的场景中，因为需要部署非容器化的应用，所以用 CRD 抽象了一个新的资源类型，需要将这个新资源类型的对象作为调度单元，这个调度流程实际上是根据自定义 scheduler 的调度算法，选定一个 Node，然后将 Node 名称更新到 CRD 对象的状态信息中（更新 nodeName 字段）。</p>
-<p>因为 Pod 包含了 binding 这个 subresource，所以在 scheduler 调度 Pod 的过程中，直接通过 binding 对应的 API（<a href="http://$SERVER/api/v1/namespaces/default/pods/$PODNAME/binding/），以" target="_blank" rel="external">http://$SERVER/api/v1/namespaces/default/pods/$PODNAME/binding/），以</a> POST 方式就可以将 scheduler 选择的 Node 与 Pod 绑定，具体代码可在<a href="https://github.com/wsszh/k8s-nckubelet/blob/master/crd-scheduler/pod-scheduler.sh" target="_blank" rel="external">这里</a>查看。</p>
+<p>因为 Pod 包含了 binding 这个 subresource，所以在 scheduler 调度 Pod 的过程中，直接通过 binding 对应的 API（<code>http://$SERVER/api/v1/namespaces/default/pods/$PODNAME/binding/</code>），以 POST 方式就可以将 scheduler 选择的 Node 与 Pod 绑定，具体代码可在<a href="https://github.com/wsszh/k8s-nckubelet/blob/master/crd-scheduler/pod-scheduler.sh" target="_blank" rel="external">这里</a>查看。</p>
 <p>但是 CRD 没有包含 binding 这个 subresource，我们需要借助 kubectl patch 将 Node 与 CRD 对象绑定。kubectl patch 分为 strategic merge patch 和 JSON merge patch 两种，只有 Kubernetes 原生的资源类型和 Aggregated APIs 支持 strategic merge patch，CRD 目前还不支持，所以我们通过 JSON merge patch 更新 CRD 对象绑定的 Node 信息。</p>
 <p>假设我们自定义了一个叫做 myapp 的资源类型，并创建了一个名为 test-app1 的对象，类型为 myapp，通过 JSON merge patch 命令，就可以将 test-app1 对象 spec 中 nodeName 字段的值更新为 node1，这样就可以实现 CRD 对象与 Node 的绑定，相关信息都存在 etcd 中，我们实现的 nckubelet 通过 API Server 可以找到与其所在 Node 绑定的所有 CRD 对象。</p>
 <p>执行命令前，先看一下 test-app1 对象当前的状态信息：</p>
