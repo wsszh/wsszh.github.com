@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="Kubernetes SchedulerKubernetes Scheduler 会从 Kubernetes API server 那里获取还没有分配节点的那些 Pod，根据调度策略选择一个合适的节点给 Pod。 Configure Multiple Schedulers如果在 yaml 文件中，没有指定任何 scheduler name，那么 Kubernetes 会默认用自带的 kube-sc">
+<meta name="description" content="Kubernetes SchedulerKubernetes Scheduler 会从 Kubernetes API server 那里获取还没有分配节点的那些 Pod，根据调度策略选择一个合适的节点给 Pod。">
 <meta name="keywords" content="Kubernetes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kubernetes CRD Scheduler 实现">
 <meta property="og:url" content="http://hw2007.com/2018/12/07/Kubernetes-CRD-Scheduler-实现/index.html">
 <meta property="og:site_name" content="萝卜姓胡">
-<meta property="og:description" content="Kubernetes SchedulerKubernetes Scheduler 会从 Kubernetes API server 那里获取还没有分配节点的那些 Pod，根据调度策略选择一个合适的节点给 Pod。 Configure Multiple Schedulers如果在 yaml 文件中，没有指定任何 scheduler name，那么 Kubernetes 会默认用自带的 kube-sc">
+<meta property="og:description" content="Kubernetes SchedulerKubernetes Scheduler 会从 Kubernetes API server 那里获取还没有分配节点的那些 Pod，根据调度策略选择一个合适的节点给 Pod。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/fYrbApI.png">
-<meta property="og:updated_time" content="2018-12-07T07:33:35.587Z">
+<meta property="og:updated_time" content="2018-12-07T07:35:31.768Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes CRD Scheduler 实现">
-<meta name="twitter:description" content="Kubernetes SchedulerKubernetes Scheduler 会从 Kubernetes API server 那里获取还没有分配节点的那些 Pod，根据调度策略选择一个合适的节点给 Pod。 Configure Multiple Schedulers如果在 yaml 文件中，没有指定任何 scheduler name，那么 Kubernetes 会默认用自带的 kube-sc">
+<meta name="twitter:description" content="Kubernetes SchedulerKubernetes Scheduler 会从 Kubernetes API server 那里获取还没有分配节点的那些 Pod，根据调度策略选择一个合适的节点给 Pod。">
 <meta name="twitter:image" content="http://i.imgur.com/fYrbApI.png">
 
 
@@ -409,6 +409,7 @@
 
       
         <h2 id="Kubernetes-Scheduler"><a href="#Kubernetes-Scheduler" class="headerlink" title="Kubernetes Scheduler"></a>Kubernetes Scheduler</h2><p>Kubernetes Scheduler 会从 Kubernetes API server 那里获取还没有分配节点的那些 Pod，根据调度策略选择一个合适的节点给 Pod。</p>
+<a id="more"></a>
 <h2 id="Configure-Multiple-Schedulers"><a href="#Configure-Multiple-Schedulers" class="headerlink" title="Configure Multiple Schedulers"></a>Configure Multiple Schedulers</h2><p>如果在 yaml 文件中，没有指定任何 scheduler name，那么 Kubernetes 会默认用自带的 kube-scheduler 对 Pod 进行调度。如果在 yaml 文件中指定了 <code>spec.schedulerName</code>，那么 Kubernetes 会用名称与 <code>spec.schedulerName</code> 的值对应的 scheduler 对 Pod 进行调度。</p>
 <p>以下是三种指定 scheduler 的情况：</p>
 <ul>
