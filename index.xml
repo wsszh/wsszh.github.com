@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>苟Zǐ</title>
+        <link>https://example.com/</link>
+        <description>Recent content on 苟Zǐ</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Mon, 21 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>用scollector监控进程</title>
+        <link>https://example.com/p/%E7%94%A8scollector%E7%9B%91%E6%8E%A7%E8%BF%9B%E7%A8%8B/</link>
+        <pubDate>Fri, 02 Dec 2016 17:06:44 +0800</pubDate>
+        
+        <guid>https://example.com/p/%E7%94%A8scollector%E7%9B%91%E6%8E%A7%E8%BF%9B%E7%A8%8B/</guid>
+        <description>&lt;p&gt;通过在scollector的配置文件中进行配置，就可以让scollector收集你需要的进程的相关数据&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;监控进程&#34;&gt;监控进程&lt;/h2&gt;
+&lt;h3 id=&#34;配置项&#34;&gt;配置项&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Command：指定可执行程序的路径，如&amp;quot;/bin/java&amp;quot;，可以用正则表达式匹配；也可以直接是某个可执行程序的名称（应该是路径已经存在于环境变量中了）&lt;/li&gt;
+&lt;li&gt;Name：用作&lt;code&gt;linux.proc.*&lt;/code&gt;和&lt;code&gt;os.proc.*&lt;/code&gt;这些metric中&lt;code&gt;name&lt;/code&gt;这个tag对应的value，在Bosun的&lt;code&gt;Graph&lt;/code&gt;页面，通过指定&lt;code&gt;tag = Name&lt;/code&gt;，就可以查询&lt;code&gt;Command&lt;/code&gt;对应进程（一个或者多个）的一系列数据，包括：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;linux.proc.char_io
+linux.proc.cpu
+linux.proc.io_bytes
+linux.proc.mem.fault
+linux.proc.mem.rss
+linux.proc.mem.virtual
+linux.proc.num_fds
+linux.proc.num_fds_hlim
+linux.proc.num_fds_slim
+linux.proc.start_time
+linux.proc.syscall
+linux.proc.uptime
+linux.processes
+linux.procs_blocked
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;Args：可选项，可以用正则表达式从&lt;code&gt;Command&lt;/code&gt;对应的多个进程中选出某个特定的进程（比如从多个java进程中，选出tomcat对应的进程），当&lt;code&gt;Command&lt;/code&gt;对应多个进程，又没有用&lt;code&gt;Args&lt;/code&gt;筛选出某个特定进程时，系统会给每个进程分配一个id，从1开始递增，作为&lt;code&gt;id&lt;/code&gt;这个tag的value，可以在Bosun的&lt;code&gt;Graph&lt;/code&gt;页面，通过指定&lt;code&gt;tag = Name&lt;/code&gt;和&lt;code&gt;id = n&lt;/code&gt;（n为进程分配到的id的值），查询&lt;code&gt;Command&lt;/code&gt;对应的某个特定进程的值（个人觉得这没啥意义，搞不清id = 1, 2, 3&amp;hellip;分别是哪个进程，所以还是配置&lt;code&gt;Args&lt;/code&gt;参数比较好，参数值可以是进程对应的arguments的全部或者一部分，最后的注意点会提到）&lt;/li&gt;
+&lt;li&gt;IncludeCount：可选项，不配置的话，默认是false，&lt;code&gt;linux.proc.count&lt;/code&gt;这个metric也不会被创建，但一旦配置为true，系统就会创建出&lt;code&gt;linux.proc.count&lt;/code&gt;这个metric作为进程计数器，我们可以查询&lt;code&gt;linux.proc.count tag=Name&lt;/code&gt;对应的进程数量（&lt;code&gt;Name&lt;/code&gt;就是第一个配置项&lt;code&gt;Name&lt;/code&gt;的值）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;监控command参数对应的所有进程&#34;&gt;监控Command参数对应的所有进程&lt;/h3&gt;
+&lt;p&gt;在scollector的配置文件中添加：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;p&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Command&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;/bin/java&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Name&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;java&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样就可以让scollector收集所有java进程的数据&lt;/p&gt;
+&lt;h3 id=&#34;监控commad参数对应的某一个进程&#34;&gt;监控Commad参数对应的某一个进程&lt;/h3&gt;
+&lt;p&gt;在scollector的配置文件中添加：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;p&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Command&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;/bin/java&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Name&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;tomcat&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Args&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;tomcat&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;Args&lt;/code&gt;这个参数可以理解为查询条件，筛选出某个特定的进程，这个就是从java进程中选出了tomcat对应的进程&lt;/p&gt;
+&lt;h3 id=&#34;监控commad参数对应的进程的个数&#34;&gt;监控Commad参数对应的进程的个数&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;p&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Command&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;/bin/java&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Name&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;java&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;IncludeCount&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样就可以实时监控java进程的个数&lt;/p&gt;
+&lt;h2 id=&#34;监控systemd-services&#34;&gt;监控Systemd Services&lt;/h2&gt;
+&lt;p&gt;scollector通过D-Bus API判断systemd services（不知道怎么翻译比较好，反正就是在centos中可以通过&lt;code&gt;systemctl&lt;/code&gt;命令管理和查看的那些服务单元）的状态，我们也可以通过修改配置文件对它们进行监控&lt;/p&gt;
+&lt;h3 id=&#34;配置项-1&#34;&gt;配置项&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Name：一个正则表达式，匹配服务单元的名称（可以一次匹配多个），被匹配到的名称作为&lt;code&gt;linux.systemd.unit.*&lt;/code&gt;和&lt;code&gt;os.service.*&lt;/code&gt;这些metric中&lt;code&gt;name&lt;/code&gt;这个tag对应的value&lt;/li&gt;
+&lt;li&gt;WatchProc：可选项，默认false，如果配置为true，服务单元的名称也会作为&lt;code&gt;linux.proc.*&lt;/code&gt;和&lt;code&gt;os.proc.*&lt;/code&gt;这些metric中&lt;code&gt;name&lt;/code&gt;这个tag对应的value，scollector就开始收集服务单元对应以下metric的数据：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;linux.proc.char_io
+linux.proc.cpu
+linux.proc.io_bytes
+linux.proc.mem.fault
+linux.proc.mem.rss
+linux.proc.mem.virtual
+linux.proc.num_fds
+linux.proc.num_fds_hlim
+linux.proc.num_fds_slim
+linux.proc.start_time
+linux.proc.syscall
+linux.proc.uptime
+linux.processes
+linux.procs_blocked
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;举个例子&#34;&gt;举个例子&lt;/h3&gt;
+&lt;p&gt;我在系统中安装了docker，可以用命令查看状态：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;systemctl status docker
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后修改配置文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;p&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;SystemdService&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Name&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;^docker$&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;WatchProc&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里&lt;code&gt;WatchProc&lt;/code&gt;设置为true，不仅可以查询docker对应&lt;code&gt;linux.systemd.unit.*&lt;/code&gt;这些metric的数据，还可以查询docker对应&lt;code&gt;linux.proc.*&lt;/code&gt;和&lt;code&gt;os.proc.*&lt;/code&gt;这些metric的数据&lt;/p&gt;
+&lt;h2 id=&#34;注意点&#34;&gt;注意点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;在配置要监控的进程前，可以通过命令查看当前所有处于运行状态的进程以及它们的参数：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;ps -ef
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;根据官方文档的说明，scollector是通过读取文件&lt;code&gt;/proc/pid/cmdline&lt;/code&gt;（进程的PID）来区分进程对应的command和arguments，默认是以&lt;strong&gt;0x00&lt;/strong&gt;作为分隔符，第一个分隔符前的是command，第一个分隔符后的是一系列用分隔符隔开的arguments&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有些进程修改了&lt;code&gt;/proc/pid/cmdline&lt;/code&gt;中的内容，如官网举的例子：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;cat /proc/80156/cmdline | hexdump -C
+00000000  2f 75 73 72 2f 62 69 6e  2f 72 65 64 69 73 2d 73  |/usr/bin/redis-s|
+00000010  65 72 76 65 72 20 2a 3a  36 33 37 39 00 00 00 00  |erver *:6379....|
+00000020  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+00000030  00                                                |.|
+00000031
+
+#Example for cmdline without NUL (00) delimiters between args (using \ to escape * in regex)
+[[Process]]
+  Command = &#39;redis-server \*:6379&#39;
+  Name = &amp;quot;redis-core&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个例子中，&lt;code&gt;/usr/bin/redis-server&lt;/code&gt;是command，&lt;code&gt;*:6379&lt;/code&gt;是arguments，但两者之间是以&lt;strong&gt;0x20&lt;/strong&gt;作为分隔符的，所以要修改&lt;code&gt;Command&lt;/code&gt;配置项的写法（注意要用单引号），&lt;code&gt;\*:6379&lt;/code&gt;可以让scollector在读取cmdline文件时，忽略&lt;code&gt;*:6379&lt;/code&gt;，避免将其作为command的一部分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;配置项&lt;code&gt;Args&lt;/code&gt;可以只是进程对应arguments的一部分，只要能确保作为该进程的筛选条件即可，比如tomcat进程的PID为13665，查看对应的cmdline文件：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;cat /proc/13665/cmdline | hexdump -C&#39;
+
+00000000  2f 75 73 72 2f 6a 61 76  61 2f 6a 64 6b 31 2e 38  |/usr/java/jdk1.8|
+00000010  2e 30 5f 31 31 31 2f 62  69 6e 2f 6a 61 76 61 00  |.0_111/bin/java.|
+00000020  2d 44 6a 61 76 61 2e 75  74 69 6c 2e 6c 6f 67 67  |-Djava.util.logg|
+00000030  69 6e 67 2e 63 6f 6e 66  69 67 2e 66 69 6c 65 3d  |ing.config.file=|
+00000040  2f 72 6f 6f 74 2f 6c 6f  63 61 6c 2f 61 70 61 63  |/root/local/apac|
+00000050  68 65 2d 74 6f 6d 63 61  74 2d 38 2e 35 2e 38 2f  |he-tomcat-8.5.8/|
+00000060  63 6f 6e 66 2f 6c 6f 67  67 69 6e 67 2e 70 72 6f  |conf/logging.pro|
+00000070  70 65 72 74 69 65 73 00  2d 44 6a 61 76 61 2e 75  |perties.-Djava.u|
+00000080  74 69 6c 2e 6c 6f 67 67  69 6e 67 2e 6d 61 6e 61  |til.logging.mana|
+00000090  67 65 72 3d 6f 72 67 2e  61 70 61 63 68 65 2e 6a  |ger=org.apache.j|
+000000a0  75 6c 69 2e 43 6c 61 73  73 4c 6f 61 64 65 72 4c  |uli.ClassLoaderL|
+000000b0  6f 67 4d 61 6e 61 67 65  72 00 2d 44 6a 64 6b 2e  |ogManager.-Djdk.|
+000000c0  74 6c 73 2e 65 70 68 65  6d 65 72 61 6c 44 48 4b  |tls.ephemeralDHK|
+000000d0  65 79 53 69 7a 65 3d 32  30 34 38 00 2d 44 6a 61  |eySize=2048.-Dja|
+000000e0  76 61 2e 70 72 6f 74 6f  63 6f 6c 2e 68 61 6e 64  |va.protocol.hand|
+000000f0  6c 65 72 2e 70 6b 67 73  3d 6f 72 67 2e 61 70 61  |ler.pkgs=org.apa|
+00000100  63 68 65 2e 63 61 74 61  6c 69 6e 61 2e 77 65 62  |che.catalina.web|
+00000110  72 65 73 6f 75 72 63 65  73 00 2d 63 6c 61 73 73  |resources.-class|
+00000120  70 61 74 68 00 2f 72 6f  6f 74 2f 6c 6f 63 61 6c  |path./root/local|
+00000130  2f 61 70 61 63 68 65 2d  74 6f 6d 63 61 74 2d 38  |/apache-tomcat-8|
+00000140  2e 35 2e 38 2f 62 69 6e  2f 62 6f 6f 74 73 74 72  |.5.8/bin/bootstr|
+00000150  61 70 2e 6a 61 72 3a 2f  72 6f 6f 74 2f 6c 6f 63  |ap.jar:/root/loc|
+00000160  61 6c 2f 61 70 61 63 68  65 2d 74 6f 6d 63 61 74  |al/apache-tomcat|
+00000170  2d 38 2e 35 2e 38 2f 62  69 6e 2f 74 6f 6d 63 61  |-8.5.8/bin/tomca|
+00000180  74 2d 6a 75 6c 69 2e 6a  61 72 00 2d 44 63 61 74  |t-juli.jar.-Dcat|
+00000190  61 6c 69 6e 61 2e 62 61  73 65 3d 2f 72 6f 6f 74  |alina.base=/root|
+000001a0  2f 6c 6f 63 61 6c 2f 61  70 61 63 68 65 2d 74 6f  |/local/apache-to|
+000001b0  6d 63 61 74 2d 38 2e 35  2e 38 00 2d 44 63 61 74  |mcat-8.5.8.-Dcat|
+000001c0  61 6c 69 6e 61 2e 68 6f  6d 65 3d 2f 72 6f 6f 74  |alina.home=/root|
+000001d0  2f 6c 6f 63 61 6c 2f 61  70 61 63 68 65 2d 74 6f  |/local/apache-to|
+000001e0  6d 63 61 74 2d 38 2e 35  2e 38 00 2d 44 6a 61 76  |mcat-8.5.8.-Djav|
+000001f0  61 2e 69 6f 2e 74 6d 70  64 69 72 3d 2f 72 6f 6f  |a.io.tmpdir=/roo|
+00000200  74 2f 6c 6f 63 61 6c 2f  61 70 61 63 68 65 2d 74  |t/local/apache-t|
+00000210  6f 6d 63 61 74 2d 38 2e  35 2e 38 2f 74 65 6d 70  |omcat-8.5.8/temp|
+00000220  00 6f 72 67 2e 61 70 61  63 68 65 2e 63 61 74 61  |.org.apache.cata|
+00000230  6c 69 6e 61 2e 73 74 61  72 74 75 70 2e 42 6f 6f  |lina.startup.Boo|
+00000240  74 73 74 72 61 70 00 73  74 61 72 74 00           |tstrap.start.|
+0000024d
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;不同于官方文档举的那个例子，这里还是以&lt;strong&gt;0x00&lt;/strong&gt;作为分隔符的，我们可以看到，第一个分隔符位于第二行的最后一个字节，在其前面的就是tomcat进程的command：&lt;code&gt;/usr/java/jdk1.8.0_111/bin/java&lt;/code&gt;，在其后面的就是一大串arguments&lt;/p&gt;
+&lt;p&gt;然后我们用命令查看当前处于运行状态并且arguments中带有&lt;code&gt;tomcat&lt;/code&gt;的进程：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ps -ef | grep tomcat
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;发现只有tomcat这一个进程，所以我们在上面的操作中仅仅将配置项指定为&lt;code&gt;Args = &amp;quot;tomcat&amp;quot;&lt;/code&gt;是可以放心的，已经足够精确地筛选出tomcat这个进程了，否则的话我们就要考虑从tomcat进程的arguments中选取更多部分赋值给配置项&lt;code&gt;Args&lt;/code&gt;，以保证筛选结果的唯一性&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>种下一棵树</title>
+        <link>https://example.com/p/%E7%A7%8D%E4%B8%8B%E4%B8%80%E6%A3%B5%E6%A0%91/</link>
+        <pubDate>Wed, 19 Oct 2016 00:17:00 +0800</pubDate>
+        
+        <guid>https://example.com/p/%E7%A7%8D%E4%B8%8B%E4%B8%80%E6%A3%B5%E6%A0%91/</guid>
+        <description>&lt;p&gt;博客终于搭建的差不多了，种一棵树最好的时间就是现在，希望日后能伴我成长，我尽量能记录下一些有意义的文字，不求多，贵在精。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

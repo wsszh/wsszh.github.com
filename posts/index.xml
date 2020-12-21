@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 苟Zǐ</title>
+    <link>https://example.com/posts/</link>
+    <description>Recent content in Posts on 苟Zǐ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Oct 2016 00:17:00 +0800</lastBuildDate><atom:link href="https://example.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>种下一棵树</title>
+      <link>https://example.com/posts/%E7%A7%8D%E4%B8%8B%E4%B8%80%E6%A3%B5%E6%A0%91/%E7%A7%8D%E4%B8%8B%E4%B8%80%E6%A3%B5%E6%A0%91/</link>
+      <pubDate>Wed, 19 Oct 2016 00:17:00 +0800</pubDate>
+      
+      <guid>https://example.com/posts/%E7%A7%8D%E4%B8%8B%E4%B8%80%E6%A3%B5%E6%A0%91/%E7%A7%8D%E4%B8%8B%E4%B8%80%E6%A3%B5%E6%A0%91/</guid>
+      <description>博客终于搭建的差不多了，种一棵树最好的时间就是现在，希望日后能伴我成长，我尽量能记录下一些有意义的文字，不求多，贵在精。</description>
+    </item>
+    
+  </channel>
+</rss>
