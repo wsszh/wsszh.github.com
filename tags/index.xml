@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 苟Zǐ</title>
-    <link>https://example.com/tags/</link>
+    <link>https://sgouz.com/tags/</link>
     <description>Recent content in Tags on 苟Zǐ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Dec 2016 17:06:44 +0800</lastBuildDate><atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Dec 2016 17:06:44 +0800</lastBuildDate><atom:link href="https://sgouz.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bosun</title>
-      <link>https://example.com/tags/bosun/</link>
+      <link>https://sgouz.com/tags/bosun/</link>
       <pubDate>Fri, 02 Dec 2016 17:06:44 +0800</pubDate>
       
-      <guid>https://example.com/tags/bosun/</guid>
+      <guid>https://sgouz.com/tags/bosun/</guid>
       <description></description>
     </item>
     
     <item>
       <title>CentOS</title>
-      <link>https://example.com/tags/centos/</link>
+      <link>https://sgouz.com/tags/centos/</link>
       <pubDate>Fri, 02 Dec 2016 17:06:44 +0800</pubDate>
       
-      <guid>https://example.com/tags/centos/</guid>
+      <guid>https://sgouz.com/tags/centos/</guid>
       <description></description>
     </item>
     
     <item>
       <title>scollector</title>
-      <link>https://example.com/tags/scollector/</link>
+      <link>https://sgouz.com/tags/scollector/</link>
       <pubDate>Fri, 02 Dec 2016 17:06:44 +0800</pubDate>
       
-      <guid>https://example.com/tags/scollector/</guid>
+      <guid>https://sgouz.com/tags/scollector/</guid>
       <description></description>
     </item>
     
     <item>
       <title>diary</title>
-      <link>https://example.com/tags/diary/</link>
+      <link>https://sgouz.com/tags/diary/</link>
       <pubDate>Wed, 19 Oct 2016 00:17:00 +0800</pubDate>
       
-      <guid>https://example.com/tags/diary/</guid>
+      <guid>https://sgouz.com/tags/diary/</guid>
       <description></description>
     </item>
     

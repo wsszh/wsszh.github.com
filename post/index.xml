@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 苟Zǐ</title>
-    <link>https://example.com/post/</link>
+    <link>https://sgouz.com/post/</link>
     <description>Recent content in Posts on 苟Zǐ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Dec 2016 17:06:44 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Dec 2016 17:06:44 +0800</lastBuildDate><atom:link href="https://sgouz.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>用scollector监控进程</title>
-      <link>https://example.com/p/%E7%94%A8scollector%E7%9B%91%E6%8E%A7%E8%BF%9B%E7%A8%8B/</link>
+      <link>https://sgouz.com/p/%E7%94%A8scollector%E7%9B%91%E6%8E%A7%E8%BF%9B%E7%A8%8B/</link>
       <pubDate>Fri, 02 Dec 2016 17:06:44 +0800</pubDate>
       
-      <guid>https://example.com/p/%E7%94%A8scollector%E7%9B%91%E6%8E%A7%E8%BF%9B%E7%A8%8B/</guid>
+      <guid>https://sgouz.com/p/%E7%94%A8scollector%E7%9B%91%E6%8E%A7%E8%BF%9B%E7%A8%8B/</guid>
       <description>通过在scollector的配置文件中进行配置，就可以让scollector收集你需要的进程的相关数据
 监控进程 配置项  Command：指定可执行程序的路径，如&amp;quot;/bin/java&amp;quot;，可以用正则表达式匹配；也可以直接是某个可执行程序的名称（应该是路径已经存在于环境变量中了） Name：用作linux.proc.*和os.proc.*这些metric中name这个tag对应的value，在Bosun的Graph页面，通过指定tag = Name，就可以查询Command对应进程（一个或者多个）的一系列数据，包括：  linux.proc.char_iolinux.proc.cpulinux.proc.io_byteslinux.proc.mem.faultlinux.proc.mem.rsslinux.proc.mem.virtuallinux.proc.num_fdslinux.proc.num_fds_hlimlinux.proc.num_fds_slimlinux.proc.start_timelinux.proc.syscalllinux.proc.uptimelinux.processeslinux.procs_blocked Args：可选项，可以用正则表达式从Command对应的多个进程中选出某个特定的进程（比如从多个java进程中，选出tomcat对应的进程），当Command对应多个进程，又没有用Args筛选出某个特定进程时，系统会给每个进程分配一个id，从1开始递增，作为id这个tag的value，可以在Bosun的Graph页面，通过指定tag = Name和id = n（n为进程分配到的id的值），查询Command对应的某个特定进程的值（个人觉得这没啥意义，搞不清id = 1, 2, 3&amp;hellip;分别是哪个进程，所以还是配置Args参数比较好，参数值可以是进程对应的arguments的全部或者一部分，最后的注意点会提到） IncludeCount：可选项，不配置的话，默认是false，linux.proc.count这个metric也不会被创建，但一旦配置为true，系统就会创建出linux.proc.count这个metric作为进程计数器，我们可以查询linux.proc.count tag=Name对应的进程数量（Name就是第一个配置项Name的值）  监控Command参数对应的所有进程 在scollector的配置文件中添加：
 [[Process]] Command = &amp;#34;/bin/java&amp;#34; Name = &amp;#34;java&amp;#34; 这样就可以让scollector收集所有java进程的数据
@@ -23,10 +23,10 @@
     
     <item>
       <title>种下一棵树</title>
-      <link>https://example.com/p/%E7%A7%8D%E4%B8%8B%E4%B8%80%E6%A3%B5%E6%A0%91/</link>
+      <link>https://sgouz.com/p/%E7%A7%8D%E4%B8%8B%E4%B8%80%E6%A3%B5%E6%A0%91/</link>
       <pubDate>Wed, 19 Oct 2016 00:17:00 +0800</pubDate>
       
-      <guid>https://example.com/p/%E7%A7%8D%E4%B8%8B%E4%B8%80%E6%A3%B5%E6%A0%91/</guid>
+      <guid>https://sgouz.com/p/%E7%A7%8D%E4%B8%8B%E4%B8%80%E6%A3%B5%E6%A0%91/</guid>
       <description>博客终于搭建的差不多了，种一棵树最好的时间就是现在，希望日后能伴我成长，我尽量能记录下一些有意义的文字，不求多，贵在精。</description>
     </item>
     
